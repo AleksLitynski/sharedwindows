@@ -1,3 +1,5 @@
+SET SQL_SAFE_UPDATES=0;
+
 create database if not exists sharedWindows;
 use sharedWindows;
 
@@ -6,7 +8,7 @@ create table if not exists lists (
 	id int not null auto_increment,
 	createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	createdBy varchar(2083),
-	currentPostId int,
+	currentListId int,
 	name varchar(2083),
 	PRIMARY KEY (id)
 );
@@ -19,7 +21,7 @@ create table if not exists items (
     url VARCHAR(2083),
     title VARCHAR(2083),
     thumbnail blob,
-	pageId int,
+	listId int,
 	PRIMARY KEY (id)
 );
 
@@ -30,5 +32,5 @@ insert into items(createdBy, latitude, longitude, url, title) values (
 	"Sample!",
 	"Sample"
 );
-update posts set pageId = (select id from pages where name = "global") where title = "global";
+update items set listId = (select id from lists where name = "global") where title = "Sample";
 
