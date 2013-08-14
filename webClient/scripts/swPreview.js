@@ -4,12 +4,11 @@ sw.preview.current = "";
 
 //called when a message image is clicked
 sw.preview.itemClicked = function(node){
-    sw.loadPreviewOf(node);
-    
+    sw.preview.display(node);
 }
 
 //loads a preview of a given node (currently only loads via http).
-sw.preview.set = function(node) {
+sw.preview.display = function(node) {
 
     console.log(node);
     for(child in document.querySelector("#rollingLinks").children){child = document.querySelector("#rollingLinks").children[child];
