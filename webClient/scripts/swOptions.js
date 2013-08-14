@@ -1,6 +1,9 @@
 sw.options = {};
 sw.options.lastClick = "";
 
+/*sw.options.followTheLeader = false;
+sw.options.*/
+
 sw.options.showViewOptions = function(){
     sw.options.enableView();
     

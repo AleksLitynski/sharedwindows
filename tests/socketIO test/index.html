@@ -5,7 +5,7 @@
         <title>Socket Test</title>
         <script src="/socket.io/socket.io.js"></script>
         <script>
-            var socket = io.connect('http://129.21.142.144');
+            var socket = io.connect('http://129.21.142.144:103030');
             socket.on('formData', function (data) {
                 document.querySelector("#" + data.form).value = data.value;
             });

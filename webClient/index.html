@@ -3,22 +3,26 @@
     <head>
         <meta charset="utf-8" />
         <title>Shared Windows</title>
-        <link rel="stylesheet" type="text/css" href="../css/main.css" />
-        <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="../css/options.css" />
-		<script src='../scripts/main.js'></script>
-		<script src='../scripts/options.js'></script>
-		<script src='../scripts/postAndLoad.js'></script>
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+        <link rel="stylesheet" type="text/css" href="css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="css/options.css" />
+        
+        <script src="http://129.21.142.144:10303/socket.io/socket.io.js"></script>
+		<script src='scripts/main.js'></script>
+		<script src='scripts/swOptions.js'></script>
+		<script src='scripts/swPost.js'></script>
+		<script src='scripts/swIndex.js'></script>
+		<script src='scripts/swPreview.js'></script>
     </head>
 	
 	<body>
         <div id="controlPanel">
             
             <div id="postLink">
-                <textarea id="postBox" placeholder="Drop files here" onkeydown="Javascript: if (event.keyCode==13) sw.post()" ondrop="Javascript: sw.post()"></textarea>
+                <textarea id="postBox" placeholder="Drop files here" onkeydown="Javascript: if (event.keyCode==13) sw.post.send()" ondrop="Javascript: sw.post.send()"></textarea>
             </div>
             
-            <div id="rollingLinks"></div>
+            <div id="page"></div>
             
             <div id="optionsBar">
                 
@@ -49,9 +53,7 @@
         </div>
         
         <div id="preview">
-        
             <iframe src="" id="previewImage"></iframe>
-            <!--button onclick="testJson()">TEST JSON</button-->
         </div>
 	</body>
 
