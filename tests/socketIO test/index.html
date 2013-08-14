@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Socket Test</title>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io.connect('http://129.21.142.144');
+            socket.on('formData', function (data) {
+                document.querySelector("#" + data.form).value = data.value;
+            });
+            
+            function sendData(caller){
+                socket.emit("formData", { "form": caller.id, "value": caller.value });
+            }
+            /*window.onload = function(){
+            for(var i = 0; i < 15; i++)
+            {
+                //document.querySelector("#testInputs").innerHTML += "<input id='a"+i+"' onkeyup='sendData(this)' style='width:600px'></input> </br>";
+            }*/
+           //}
+            
+        </script>
+    
+	</head>
+	<body>
+        <div id='testInputs'>
+            <input id='a1' onkeyup='sendData(this)' style='width:600px'></input> </br>
+            <input id='a2' onkeyup='sendData(this)' style='width:600px'></input> </br>
+            <input id='a3' onkeyup='sendData(this)' style='width:600px'></input> </br>
+            <input id='a4' onkeyup='sendData(this)' style='width:600px'></input> </br>
+            <input id='a5' onkeyup='sendData(this)' style='width:600px'></input> </br>
+        </div>
+			
+	</body>
+
+
+</html>
+
+
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Shared Windows</title>
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
+        <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="../css/options.css" />
+		<script src='../scripts/main.js'></script>
+		<script src='../scripts/options.js'></script>
+		<script src='../scripts/postAndLoad.js'></script>
+    </head>
+	
+	<body>
+        <div id="controlPanel">
+            
+            <div id="postLink">
+                <textarea id="postBox" placeholder="Drop files here" onkeydown="Javascript: if (event.keyCode==13) sw.post()" ondrop="Javascript: sw.post()"></textarea>
+            </div>
+            
+            <div id="rollingLinks"></div>
+            
+            <div id="optionsBar">
+                
+                <span class="option" id="showViewBtn" onclick="sw.options.showViewOptions()">View</span>
+                <div id="viewOptions" class="expandedOption"> <h2>View Options</h2>
+                    <button>mini mode</button>
+                    <button>bottom bar</button>
+                    <button>left bar</button>
+                    <button>Very large preview mode</button>
+                </div>
+                <span class="option" id="showNewBtn" onclick="sw.options.showCreateNew()">New</span>
+                <div id="createNew" class="expandedOption"> <h2>Create New</h2>
+                    <input placeholder="name"></input>
+                    <input type="checkbox" id="postToCurrent" value="post to current?"> post to current?</input>
+                    <button>create</button>
+                </div>
+                <span class="option" id="showMoreBtn" onclick="sw.options.showMoreOptions()">More</span>
+                <div id="moreOptions" class="expandedOption"> <h2>Extra Options</h2>
+                    <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow the leader?</input>
+                    <input type="checkbox" id="jumpToCurrent" value="Always load most recent?" checked>Always load most recent?</input>
+                    <span>Distance (miles): </span><input id="radius" value="2"></input>
+                </div>
+                
+                
+            </div>
+            
+            
+        </div>
+        
+        <div id="preview">
+        
+            <iframe src="" id="previewImage"></iframe>
+            <!--button onclick="testJson()">TEST JSON</button-->
+        </div>
+	</body>
+
+
+</html>
+
+
