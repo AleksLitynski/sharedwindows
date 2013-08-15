@@ -1,6 +1,8 @@
 var io      = require('socket.io').listen(10303, { log: false })                //require socketio and start it listening
+var fs      = require('fs');
+var config  = JSON.parse(fs.readFileSync('../config.json'));
 var sqlite3 = new require('sqlite3').verbose();
-var db = new sqlite3.Database('../database/db.sqlite');
+var db      = new sqlite3.Database('../' + config.databaseFile);
 
 
 io.sockets.on('connection', function (socket) {                 //when somebody connects...

@@ -4,7 +4,28 @@ sw.options.lastClick = "";
 /*sw.options.followTheLeader = false;
 sw.options.*/
 
+document.onclick = function(){
+    console.log("hey");
+    sw.options.lastClick = "";
+    sw.options.disableNew();
+    sw.options.disableOption();
+    sw.options.disableView();
+}
+
+sw.onload.push(function(){
+    for(option in document.querySelectorAll(".expandedOption")){
+        document.querySelectorAll(".expandedOption")[option].onclick = function(){
+            window.event.cancelBubble = true;
+            window.event.stopPropagation();
+        };
+    }
+});
+
+
+
 sw.options.showViewOptions = function(){
+    window.event.cancelBubble = true;
+    window.event.stopPropagation();
     sw.options.enableView();
     
     sw.options.disableNew();
@@ -20,6 +41,8 @@ sw.options.showViewOptions = function(){
     
 }
 sw.options.showCreateNew = function(){
+    window.event.cancelBubble = true;
+    window.event.stopPropagation();
     sw.options.enableNew();
     
     sw.options.disableOption();
@@ -35,6 +58,8 @@ sw.options.showCreateNew = function(){
     
 }
 sw.options.showMoreOptions = function(node){
+    window.event.cancelBubble = true;
+    window.event.stopPropagation();
     sw.options.enableOption();
     
     sw.options.disableNew();

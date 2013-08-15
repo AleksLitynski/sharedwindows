@@ -1,0 +1,93 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>Tree Demo</title>
+        <!--link rel="stylesheet" type="text/css" href="main.css" /-->
+        
+        <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
+        <script type="text/javascript" src="scripts/gettheme.js"></script>
+        <script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+        <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+        <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+        <script type="text/javascript" src="jqwidgets/jqxpanel.js"></script>
+        <script type="text/javascript" src="jqwidgets/jqxdragdrop.js"></script>
+        <script type="text/javascript" src="jqwidgets/jqxtree.js"></script>
+        
+        <script src="http://129.21.142.144:10303/socket.io/socket.io.js"></script>
+		<script>
+        /*(function update(){
+            //console.log("woo");
+            requestAnimationFrame(update);
+        })();*/
+        
+        $(document).ready(function () {
+            $('#tree').jqxTree({   allowDrag: true, 
+                                    allowDrop: true, 
+                                    height: '300px', 
+                                    width: '220px', 
+                                    theme: getDemoTheme()
+                               });
+            $("#tree").on('dragEnd', function (event) {
+                sendState();
+            });
+        });
+        
+        function addElement(){
+            /*console.log( "hey" + document.querySelector("#dropField").value);
+            document.querySelector("#treeList").innerHTML += "<l1>"+document.querySelector("#dropField").value+"</li>";
+            
+            tree.jqxTree('addTo', items, $element[0]);
+                            tree.jqxTree('removeItem', loaderItem.element);
+
+             $('#tree').jqxTree('addTo', items, 
+            sendState();*/
+        }
+        var socket = io.connect('http://129.21.142.144:10303');     //connect to socket io.
+
+        function sendState(){
+            socket.emit("change", {page: "" });
+        }
+        
+        socket.on("change", function(data){
+            console.log($("#tree").jqxTree("getItems"));
+            $("#tree").jqxTree("destroy");
+            
+            document.querySelector("#treeParent").innerHTML = "";
+            console.log(data.page);
+            document.querySelector("#treeParent").innerHTML = data.page;
+            
+            $('#tree').jqxTree({    source : JSON.parse(data.page),
+                                    allowDrag: true, 
+                                    allowDrop: true, 
+                                    height: '300px', 
+                                    width: '220px', 
+                                    theme: getDemoTheme()
+                               });
+        });
+        
+        </script>
+    </head>
+
+    <body>
+            
+            <input  id="dropField" 
+                    onkeydown="Javascript: if (event.keyCode==13) addElement()" 
+                    ondrop="Javascript: addElement();"></input>
+            
+            <div id='treeParent'>
+                <div id='tree'>
+                    <ul id='treeList'>
+                        <li>One</li>
+                        <li>Two</li>
+                        <li>Three</li>
+                        <li>Four</li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+    
+    </body>
+</html>

@@ -1,0 +1,6 @@
+{
+    "syncServerLoc" : "nodeServer/",
+    "fileServerLoc" : "webServer/",
+    "webClientLoc"  : "webClient/",
+    "databaseFile"  : "database/db.sqlite"
+}

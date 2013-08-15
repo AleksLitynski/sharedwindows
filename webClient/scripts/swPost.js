@@ -16,7 +16,6 @@ sw.post.display = function(data){
     }
     document.querySelector("#page").innerHTML = htmlPosts;
     if(document.querySelector("#jumpToCurrent").checked){
-        console.log( document.querySelector("#page").children[0] );
         sw.preview.itemClicked( document.querySelector("#page").children[0] );
     }
 };

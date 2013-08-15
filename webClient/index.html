@@ -19,7 +19,7 @@
         <div id="controlPanel">
             
             <div id="postLink">
-                <textarea id="postBox" placeholder="Drop files here" onkeydown="Javascript: if (event.keyCode==13) sw.post.send()" ondrop="Javascript: sw.post.send()"></textarea>
+                <textarea id="postBox" placeholder="Drop files here" onkeydown="Javascript: if (event.keyCode==13) sw.post.send()" ondrop="Javascript: sw.post.send();"></textarea>
             </div>
             
             <div id="page"></div>
@@ -40,9 +40,10 @@
                     <button>create</button>
                 </div>
                 <span class="option" id="showMoreBtn" onclick="sw.options.showMoreOptions()">More</span>
-                <div id="moreOptions" class="expandedOption"> <h2>Extra Options</h2>
-                    <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow the leader?</input>
-                    <input type="checkbox" id="jumpToCurrent" value="Always load most recent?" checked>Always load most recent?</input>
+                <div id="moreOptions" class="expandedOption"> 
+                    <h2>Extra Options</h2>
+                    <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow the leader?</input> </br>
+                    <input type="checkbox" id="jumpToCurrent" value="Always load most recent?" checked>Always load most recent?</input> </br>
                     <span>Distance (miles): </span><input id="radius" value="2"></input>
                 </div>
                 
