@@ -3,7 +3,7 @@ sw.post = {};
 sw.onload.push(function(){
     
     sw.socket.on('items', function (data) {
-        console.log(data);
+        console.log("who are we?");
         sw.post.display(data);
     });
     
@@ -11,7 +11,7 @@ sw.onload.push(function(){
 
 //loads all posts since a given post. Just pass in 0 to get all posts to date.
 sw.post.display = function(data){
-    var htmlPosts = "";
+    var htmlPosts = document.querySelector("#page").innerHTML;
     for(post in data){ post = data[post];
         htmlPosts = "<div class='message text' onclick='sw.preview.itemClicked(this)'>"+ post.url +"</div>" + htmlPosts;
     }
@@ -23,6 +23,7 @@ sw.post.display = function(data){
 
 //submits a new post
 sw.post.send = function() {
+    
     navigator.geolocation.getCurrentPosition(function(pos){
         var msg = document.querySelector("#postBox").value;
         document.querySelector("#postBox").value = "";

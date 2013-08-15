@@ -5,10 +5,11 @@ sw.onload = [];
 
 window.onload = function() {
     
-    sw.socket = io.connect('http://129.21.142.144:10303');     //connect to socket io.
+    //var page = document.URL.split("/");   page[page.length-2];                      //get the name of the page.
+    sw.listName = "global";
     
-    var page = document.URL.split("/");                         //get the name of the page.
-    sw.listName = page[page.length-2];
+    sw.socket = io.connect('http://129.21.142.144:10303');     //connect to socket io.
+    sw.socket.emit("page", {list: sw.listName});
     
     for(toLoad in sw.onload){                                   //call all onload functions.
         sw.onload[toLoad]();

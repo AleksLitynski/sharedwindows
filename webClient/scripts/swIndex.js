@@ -1,23 +1,24 @@
 sw.index = {};
 sw.index.current = 0;
 
-//poll for current page from the server.
-sw.index.get = function(){
-    sw.ajax("../changeCurrentPost.php?setOrGet=get&val=" + sw.current, function(res){
+sw.onload.push(function(){
+    sw.socket.on('index', function (data) {
+        sw.index.display(data[0].currentListId);
+    });
+    
+});
 
-            if(sw.current != res && document.querySelector("#followTheLeader").checked){
-                sw.loadPreviewOf(document.querySelector("#rollingLinks").children[res]);
-                sw.current = res;
-            }
-            console.log("node should be: " + res);
-            sw.gotoCurrent();
-        });
+//poll for current page from the server.
+sw.index.display = function(newIndex){
+    if(sw.index.current != newIndex && document.querySelector("#followTheLeader").checked) {
+        sw.index.current = newIndex;
+        sw.preview.display( document.querySelector("#page").children[sw.index.current] );
+    }
 }
 
 //sends the current page to the server
-sw.index.set = function(current){
-    sw.index.current = 0;
-    sw.ajax("../changeCurrentPost.php?setOrGet=set&val=" + current, function(res){ });
+sw.index.send = function(current){
+    sw.socket.emit('index', {index: current} );
 }
 
 

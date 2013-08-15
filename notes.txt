@@ -38,3 +38,9 @@ give defaults instead of forcing lots of options up front (naming pages)
 list have items.
 
 http://www.jqwidgets.com/jquery-widgets-demo/demos/jqxtree/index.htm#demos/jqxtree/ajaxloading.htm
+
+
+
+NODE MODULES:
+npm install sqlite3
+npm install socket.io
