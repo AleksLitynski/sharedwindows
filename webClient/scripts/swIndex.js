@@ -1,18 +1,18 @@
 sw.index = {};
-sw.index.current = 0;
+sw.index.current = NaN;
 
 sw.onload.push(function(){
     sw.socket.on('index', function (data) {
-        sw.index.display(data[0].currentListId);
+        sw.index.display( data[0].currentListId );
     });
     
 });
 
 //poll for current page from the server.
 sw.index.display = function(newIndex){
-    if(sw.index.current != newIndex && document.querySelector("#followTheLeader").checked) {
-        sw.index.current = newIndex;
-        sw.preview.display( document.querySelector("#page").children[sw.index.current] );
+
+    if(document.querySelector("#followTheLeader").checked) {
+        sw.preview.display( newIndex );
     }
 }
 

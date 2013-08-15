@@ -3,7 +3,6 @@ sw.post = {};
 sw.onload.push(function(){
     
     sw.socket.on('items', function (data) {
-        console.log("who are we?");
         sw.post.display(data);
     });
     
@@ -16,9 +15,10 @@ sw.post.display = function(data){
         htmlPosts = "<div class='message text' onclick='sw.preview.itemClicked(this)'>"+ post.url +"</div>" + htmlPosts;
     }
     document.querySelector("#page").innerHTML = htmlPosts;
-    /*if(document.querySelector("#jumpToCurrent").checked){
-        sw.loadPreviewOf(document.querySelector("#rollingLinks").children[0]);
-    }*/
+    if(document.querySelector("#jumpToCurrent").checked){
+        console.log( document.querySelector("#page").children[0] );
+        sw.preview.itemClicked( document.querySelector("#page").children[0] );
+    }
 };
 
 //submits a new post
@@ -27,6 +27,6 @@ sw.post.send = function() {
     navigator.geolocation.getCurrentPosition(function(pos){
         var msg = document.querySelector("#postBox").value;
         document.querySelector("#postBox").value = "";
-        sw.socket.emit('items', {message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude }); //post to?
+        sw.socket.emit('items', {message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude }); //post to?        
     });
 };
