@@ -5,7 +5,6 @@ sw.onload.push(function(){
     sw.socket.on('index', function (data) {
         sw.index.display( data[0].currentListId );
     });
-    
 });
 
 //poll for current page from the server.

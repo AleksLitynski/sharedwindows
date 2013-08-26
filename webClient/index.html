@@ -3,16 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <title>Shared Windows</title>
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="css/options.css" />
         
-        <script src="http://129.21.142.144:10303/socket.io/socket.io.js"></script>
-		<script src='scripts/main.js'></script>
-		<script src='scripts/swOptions.js'></script>
-		<script src='scripts/swPost.js'></script>
-		<script src='scripts/swIndex.js'></script>
-		<script src='scripts/swPreview.js'></script>
+		<script src='scripts/yepnope.js'></script>
+		<script src='scripts/loader.js'></script>
+        
     </head>
 	
 	<body>
@@ -54,8 +48,11 @@
         </div>
         
         <div id="preview">
+            <!--div id="treeLocation"></div-->
+            <button id="it" onclick="clickedIt()">It</button>
             <iframe src="" id="previewImage"></iframe>
         </div>
+        
 	</body>
 
 

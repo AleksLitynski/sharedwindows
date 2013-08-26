@@ -8,7 +8,7 @@ io.sockets.on('connection', function (socket) {
    
     socket.on('change', function(data) {
        
-        //console.log(JSON.stringify(data.page));
+        //Impersistantconsole.log(JSON.stringify(data.page));
         
         fs.writeFile("thetree.txt", data.page, function(err) {}); 
         

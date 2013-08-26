@@ -22,10 +22,14 @@ io.sockets.on('connection', function (socket) {                 //when somebody 
                 });                              
             });
     socket.on('index', function (data) {                        //when you are told about an index
-                
                 socket.get("page", function(err, val){
                     storeIndex(socket, val, data.index);
                 });
+            });
+    socket.on('moveIndex', function (data) {
+                socket.get("page", function(err, val){
+                    moveItem(socket, val, data.currentIndex, data.newIndex);
+                }); 
             });
     
     
@@ -96,6 +100,38 @@ function emitIndex(socket, list) {
         });
     });
 }
+
+function moveItem(socket, page, currentIndex, newIndex) {
+    console.log(page, currentIndex, newIndex);
+    
+    //1) set the new index
+    //2) set the element at that index and all future elements to +1
+    var query = "";
+    
+    
+    var rising = currentIndex > newIndex;
+    if(rising) {
+        for(var i = currentIndex - 1; i >= newIndex; i--) {
+            at(i) = at(i) + 1;
+        }
+        currentIndex = newIndex;
+    }
+    else { //falling
+        for(var i = currentIndex + 1; i <= newIndex; i++) {
+            at(i) = at(i) - 1;
+        }
+        currentIndex = newIndex;
+    }
+    
+    
+    
+    socket.broadcast.emit('moveIndex', {0 : {
+                            one : "two"
+                        }} );
+    socket.emit('moveIndex', {0 :   {
+                            one : "two"
+                        }} );
+} 
 
 //able to choose your own page
 

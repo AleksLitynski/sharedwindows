@@ -5,25 +5,22 @@
         <title>Tree Demo</title>
         <!--link rel="stylesheet" type="text/css" href="main.css" /-->
         
-        <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
+        <link   rel="stylesheet"       href="styles/jqx.base.css" type="text/css" />
         <script type="text/javascript" src="scripts/gettheme.js"></script>
         <script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
-        <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
-        <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
-        <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
-        <script type="text/javascript" src="jqwidgets/jqxpanel.js"></script>
-        <script type="text/javascript" src="jqwidgets/jqxdragdrop.js"></script>
-        <script type="text/javascript" src="jqwidgets/jqxtree.js"></script>
+        <script type="text/javascript" src="scripts/jqxcore.js"></script>
+        <script type="text/javascript" src="scripts/jqxbuttons.js"></script>
+        <script type="text/javascript" src="scripts/jqxscrollbar.js"></script>
+        <script type="text/javascript" src="scripts/jqxpanel.js"></script>
+        <script type="text/javascript" src="scripts/jqxdragdrop.js"></script>
+        <script type="text/javascript" src="scripts/jqxtree.js"></script>
         
         <script src="http://129.21.142.144:10303/socket.io/socket.io.js"></script>
 		<script>
         
         
         $(document).ready(function () {
-         var source =   [
-                            { label: "Item 1", expanded: true, items: [
-                                                                            { label: "Item 1.1" },
-                                                                            { label: "Item 1.2", selected: true }
+         var source =   [{ label: "Item 1", expanded: true, items: [{ label: "Item 1.1" },{ label: "Item 1.2", selected: true }
                                                                       ]
                             },
                             { label: "Item 2" },
@@ -146,8 +143,6 @@
         socket.on("change", function(data){
         
             $("#tree").jqxTree("destroy");
-            //console.log(data.page);
-            //console.log( JSON.parse(data.page) );
             createTree(data.page);
             
         });

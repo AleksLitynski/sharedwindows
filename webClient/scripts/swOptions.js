@@ -5,7 +5,7 @@ sw.options.lastClick = "";
 sw.options.*/
 
 document.onclick = function(){
-    console.log("hey");
+
     sw.options.lastClick = "";
     sw.options.disableNew();
     sw.options.disableOption();
