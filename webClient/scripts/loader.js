@@ -41,8 +41,8 @@ sw.loaded = function() {
         
         
         
-    sw.socket.on("moveIndex", function(one, two, three){
-        console.log(one, two, three);
+    sw.socket.on("moveIndex", function(data){
+        console.log(data);
     });
         
 }
@@ -51,8 +51,12 @@ sw.loaded = function() {
    
    
 function clickedIt() {
-    console.log("hey");
-    sw.socket.emit('moveIndex', {currentIndex:0,newIndex:0});
+    
+    
+    sw.socket.emit('moveIndex', {
+                                    currentIndex: document.querySelector("#from").value,
+                                    newIndex: document.querySelector("#to").value
+                                });
 }
 
 

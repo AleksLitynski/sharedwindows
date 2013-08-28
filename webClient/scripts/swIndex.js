@@ -3,17 +3,16 @@ sw.index.current = NaN;
 
 sw.onload.push(function(){
     sw.socket.on('index', function (data) {
-        sw.index.display( data[0].currentListId );
+        //if we're following the leader, preview the new node
+        if(document.querySelector("#followTheLeader").checked) { 
+            var index = data[0].currentListId;      
+            sw.index.current = index;
+            sw.post.display();
+            sw.preview.display( sw.post.items[ index - 1].url );
+        }
+        
     });
 });
-
-//poll for current page from the server.
-sw.index.display = function(newIndex){
-
-    if(document.querySelector("#followTheLeader").checked) {
-        sw.preview.display( newIndex );
-    }
-}
 
 //sends the current page to the server
 sw.index.send = function(current){

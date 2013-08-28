@@ -1,0 +1,45 @@
+
+
+
+create temp table oldId (value integer primary key);
+insert into oldId (value) values ( (select id from items where listIndex = currentIndex) );
+            
+update items set listIndex =   listIndex - 1 
+where listIndex  >=  currentIndex + 1 
+and   listIndex  <=  newIndex 
+and listId = (select id from lists where name = 'global');
+
+
+update items set listIndex = newIndex
+where id = (select * from oldId)
+and listId = (select id from lists where name = 'global');
+
+drop table oldId;
+
+
+currentIndex = 3
+newIndex = 15
+
+
+
+create temp table oldId (value integer primary key);
+insert into oldId (value) values ( (select id from items where listIndex = 3) );
+            
+update items set listIndex =   listIndex - 1 
+where listIndex  >=  3 + 1 
+and   listIndex  <=  15 
+and listId = (select id from lists where name = 'global');
+
+
+update items set listIndex = 15
+where id = (select * from oldId)
+and listId = (select id from lists where name = 'global');
+
+drop table oldId;
+
+select * from items 
+where listId = (select id from lists where name = 'global')
+order by listIndex;
+
+
+

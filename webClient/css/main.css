@@ -1,7 +1,7 @@
 .message{
     border-bottom:1px solid black;
     border-left:1px solid black;
-    height:30px;
+    height:50px;
     background-color:#e1e1e1;
     padding:4px;
     /*
@@ -30,6 +30,19 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.selectedMessage{
+    background-color:#efefef !important;
+}
+
+.messageElement {
+    font-size:50%;
+    line-height:-50%
+    padding:0px;
+    margin:0px;
+    border:0px;
+}
+
 .message:first-child{
     border-top: 1px solid black;
 }
@@ -37,11 +50,11 @@
 
 #controlPanel{
     float:left;
-    width:20vw;
+    width:30vw;
 }
 
 #postLink{
-    height:4vh;
+    /*height:4vh;*/
 }
 
 #postBox{
@@ -61,7 +74,7 @@
 
 #preview{
     float:left;
-    width:80vw;
+    width:70vw;
     height:100vh;
 }
 

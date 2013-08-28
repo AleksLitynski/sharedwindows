@@ -1,6 +1,6 @@
-console.log("hey");
+//console.log("hey");
 sw.onload.push(function(){
-    console.log("hey");
+    //console.log("hey");
     //swap for actual load?
     var source = [{label:"Item 1",expanded:true,items:[{label:"Item 1.1"},{label:"Item 1.2",selected:true}]},{label:"Item 2"},{label:"Item 3"},{label:"Item 4",items:[{label:"Item 4.1"},{label:"Item 4.2"}]},{label:"Item 5"},{label:"Item 6"},{label:"Item 7"}];
     //sw.insertTree(source);

@@ -6,9 +6,7 @@ var db      = new sqlite3.Database('../' + config.databaseFile);
 
 
 io.sockets.on('connection', function (socket) {                 //when somebody connects...
-    socket.on('disconnect', function() {
-        //db.close();
-    });
+    
     
     socket.on('page', function(data) {                          //Client tells you it's current list name
         emitItems(socket, data.list, 0);                        //Send it it's items
@@ -52,31 +50,24 @@ function addItem(socket, list, item) {
     
         var time = new Date().getTime();
         
-        
-        socket.get("page", function(err, val){
-            var query = "insert into items(createdOn, createdBy, latitude, longitude, url, title, thumbnail, listId, listIndex) values (" +
-                                time+","+
-                                "'someone',"+
-                                item.latitude+", "+item.longitude+","+
-                                "'"+item.message+"',"+
-                                "'the title',"+
-                                "'none',"+
-                                "(select id from lists where name = '"+val+"'),"+
-                                "((SELECT MAX(listIndex) FROM items) + 1)"+
-                                ");";
-            db.run(query, function(){
-                var query = "select";
-                db.all(query, function(err, val){
-                    console.log(val);
-                    socket.broadcast.emit('items', {0 : {
-                                                    url : item.message  //upgrade to include all fields
-                                                }} );
-                    socket.emit('items', {0 :   {
-                                            url : item.message
-                                        }} );
-                });
-            });
-        });
+        var query = "insert into items(createdOn, createdBy, latitude, longitude, url, title, thumbnail, listId, listIndex) values (" +
+                            time+","+
+                            "'someone',"+
+                            item.latitude+", "+item.longitude+","+
+                            "'"+item.message+"',"+
+                            "'the title',"+
+                            "'none',"+
+                            "(select id from lists where name = '"+list+"'),"+
+                            "((SELECT MAX(listIndex) FROM items) + 1)"+
+                            ");";
+                            
+        db.run("BEGIN TRANSACTION;", function(){
+        db.run(query, function(){
+        db.all("select * from items where id = (select MAX(id) from items) and listId = (select id from lists where name = '"+list+"');", function(err, data){
+            socket.broadcast.emit('items', data);
+            socket.emit('items', data);
+        db.run("COMMIT TRANSACTION;");
+        });});});
     });
 }
 
@@ -102,36 +93,62 @@ function emitIndex(socket, list) {
 }
 
 function moveItem(socket, page, currentIndex, newIndex) {
+
+
+    console.log("Move: ");
     console.log(page, currentIndex, newIndex);
     
     //1) set the new index
     //2) set the element at that index and all future elements to +1
-    var query = "";
-    
-    
+    var queries = [];
+    queries.push("BEGIN TRANSACTION;");
+    queries.push("drop table if exists oldId;");
+    queries.push("create temp table oldId (value integer primary key);");
+    queries.push("insert into oldId (value) values ( (select id from items where listIndex = "+currentIndex+") );");
     var rising = currentIndex > newIndex;
     if(rising) {
-        for(var i = currentIndex - 1; i >= newIndex; i--) {
-            at(i) = at(i) + 1;
-        }
-        currentIndex = newIndex;
+        queries.push(" update items listIndex = listIndex + 1 "
+          +  " where listIndex  <= " + currentIndex + " - 1 "
+          +  " and   listIndex  >= " + newIndex 
+          +  " and listId = (select id from lists where name = '"+page+"');");
     }
     else { //falling
-        for(var i = currentIndex + 1; i <= newIndex; i++) {
+        /*for(var i = currentIndex + 1; i <= newIndex; i++) {
             at(i) = at(i) - 1;
-        }
-        currentIndex = newIndex;
+        }*/
+        queries.push(" update items set listIndex = listIndex - 1 "
+              +  " where listIndex  >= " + currentIndex + " + 1 "
+              +  " and   listIndex  <= " + newIndex 
+              +  " and listId = (select id from lists where name = '"+page+"');");
     }
     
+    queries.push(" update items set listIndex = " + newIndex          //<---- set current index to new index.
+               +  " where id = (select * from oldId)" 
+               +  " and listId = (select id from lists where name = '" + page + "');");
+    queries.push("COMMIT TRANSACTION;");
+    
+    var toSend = { from: currentIndex, to: newIndex, queries: queries};
+    socket.broadcast.emit('moveIndex', toSend );
+    socket.emit('moveIndex', toSend );
+    
+    sequenceQueries(queries);   
     
     
-    socket.broadcast.emit('moveIndex', {0 : {
-                            one : "two"
-                        }} );
-    socket.emit('moveIndex', {0 :   {
-                            one : "two"
-                        }} );
+    
 } 
+
+function sequenceQueries(queries){
+    db.serialize(function() {
+        (function doNext(toDo){
+            if(toDo.length > 0) {
+                db.run(toDo.shift(), function(error){
+                    console.log(error);
+                    doNext(toDo);
+                });
+            }
+        })(queries);
+    });
+}
 
 //able to choose your own page
 
