@@ -1,5 +1,9 @@
 var io      = require('socket.io').listen(10303, { log: false })                //require socketio and start it listening
 var fs      = require('fs');
+var jsdom   = require('jsdom');
+var jquery  = fs.readFileSync("./jquery.js", "utf-8");
+var url     = require('url');
+
 var config  = JSON.parse(fs.readFileSync('../config.json'));
 var sqlite3 = new require('sqlite3').verbose();
 var db      = new sqlite3.Database('../' + config.databaseFile);
@@ -45,30 +49,49 @@ function emitItems(socket, list, start) {
 
 function addItem(socket, list, item) {
     
+    function addItemFromParams(user, title, icon) {
     
-    db.serialize(function() {
-    
-        var time = new Date().getTime();
+        var time  = new Date().getTime();
+        db.serialize(function() {
         
-        var query = "insert into items(createdOn, createdBy, latitude, longitude, url, title, thumbnail, listId, listIndex) values (" +
-                            time+","+
-                            "'someone',"+
-                            item.latitude+", "+item.longitude+","+
-                            "'"+item.message+"',"+
-                            "'the title',"+
-                            "'none',"+
-                            "(select id from lists where name = '"+list+"'),"+
-                            "((SELECT MAX(listIndex) FROM items) + 1)"+
-                            ");";
-                            
-        db.run("BEGIN TRANSACTION;", function(){
-        db.run(query, function(){
-        db.all("select * from items where id = (select MAX(id) from items) and listId = (select id from lists where name = '"+list+"');", function(err, data){
-            socket.broadcast.emit('items', data);
-            socket.emit('items', data);
-        db.run("COMMIT TRANSACTION;");
-        });});});
-    });
+            var query = "insert into items(createdOn, createdBy, latitude, longitude, url, title, thumbnail, listId, listIndex) values (" +
+                                time+","+
+                                "'"+user+"',"+
+                                item.latitude+", "+item.longitude+","+
+                                "'"+item.message+"',"+
+                                "'"+ title +"',"+
+                                "'"+icon +"',"+
+                                "(select id from lists where name = '"+list+"'),"+
+                                "((SELECT MAX(listIndex) FROM items) + 1)"+
+                                ");";
+                                
+            db.run("BEGIN TRANSACTION;", function(){
+            db.run(query, function(){
+            db.all("select * from items where id = (select MAX(id) from items) and listId = (select id from lists where name = '"+list+"');", function(err, data){
+                socket.broadcast.emit('items', data);
+                socket.emit('items', data);
+            db.run("COMMIT TRANSACTION;");
+            });});});
+        });
+    
+    }
+    
+    jsdom.env(
+        item.message, ["http://code.jquery.com/jquery.js"],
+        function (errors, window) {
+            var title = "" + item.message + "";
+            var icon = "about:blank";
+            if(window != undefined){ if(window.$ != undefined){ if(window.$("title").html() != undefined) {
+                title = window.$("title").html();
+                icon  = url.parse(item.message).protocol + "//" + url.parse(item.message).host + "/favicon.ico";
+            } } }
+           
+            
+            var user  = socket.handshake.address.address + ":" + socket.handshake.address.port;
+            addItemFromParams(user, title, icon);
+        }
+    );
+    
 }
 
 function storeIndex(socket, list, index) {

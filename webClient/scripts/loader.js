@@ -10,6 +10,7 @@ yepnope({
                     "css/main.css",
                     "css/reset.css",
                     "css/options.css",
+                    "css/items.css",
               
                     "css/jqx/jqx.base.css",        
                     "scripts/jqx/gettheme.js",        

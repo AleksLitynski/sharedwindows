@@ -45,6 +45,7 @@ python -m SimpleHTTPServer
 NODE MODULES:
 npm install sqlite3
 npm install socket.io
+npm install jsdom
 
 
 

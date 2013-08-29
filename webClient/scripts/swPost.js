@@ -113,26 +113,31 @@ sw.post.display = function(){
         if(sw.index.current == sw.post.items[i].listIndex) {
             selected = " selectedMessage";
         }
+        
+        //=================
+            console.log(sw.post.items[i].createdBy,
+                        sw.post.items[i].createdOn,
+                        sw.post.items[i].id,
+                        sw.post.items[i].latitude,
+                        sw.post.items[i].listId,
+                        sw.post.items[i].listIndex,
+                        sw.post.items[i].longitude,
+                        sw.post.items[i].thumbnail,
+                        sw.post.items[i].title,
+                        sw.post.items[i].url);
+        //=================
+        
     
         newPosts+= "<div class='message"+selected+"' draggable='true' ondragstart='sw.post.drag.start(this)' ondragend='sw.post.drag.end(this)' onclick='sw.post.itemClicked(this)'>" 
                 
-                +  "<div style='float:left; width:30%;'>"
-                +      "<span class='messageElement itemCreatedBy'>"+ sw.post.items[i].createdBy + "</span></br>"
-                +      "<span class='messageElement itemCreatedOn'> " + sw.post.items[i].createdOn + "</span></br>"
-                +      "<span class='messageElement itemId'> id -> " + sw.post.items[i].id + "</span></br>"
-                +  "</div>"
-                +  "<div style='float:left; width:30%;'>"
-                +      "<span class='messageElement itemlatitude'> " + sw.post.items[i].latitude + "</span></br>"
-                +      "<span class='messageElement itemListId'> " + sw.post.items[i].listId + "</span></br>"
-                +      "<span class='messageElement itemlistIndex'> I -> " + sw.post.items[i].listIndex + "</span></br>"
-                 
-                +  "</div>"
-                +  "<div style='float:left; width:30%;'>"
-                +      "<span class='messageElement itemLongitude'> " + sw.post.items[i].longitude + "</span></br>"
-                +      "<span class='messageElement itemThumbnail'> " + sw.post.items[i].thumbnail + "</span></br>"
-                +      "<span class='messageElement itemTitle'> " + sw.post.items[i].title + "</span></br>"
-                +  "</div>"
-                +  "<span class='messageElement itemUrl'> " + sw.post.items[i].url + "</span></br>"
+                    +  "<div style='float:left; width:30%;'>"
+                    +      "<image src='"+sw.post.items[i].thumbnail+"'></image>"
+                    +  "</div>"
+                    
+                    +  "<div style='float:left; width:70%;'>"
+                    +      "<div>"+sw.post.items[i].title+"</div>"
+                    +      "<div>"+sw.post.items[i].url+"</div>"
+                    +  "</div>"
                 +  "</div>";
     }
     document.querySelector("#page").innerHTML = newPosts;

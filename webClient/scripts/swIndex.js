@@ -4,11 +4,13 @@ sw.index.current = NaN;
 sw.onload.push(function(){
     sw.socket.on('index', function (data) {
         //if we're following the leader, preview the new node
-        if(document.querySelector("#followTheLeader").checked) { 
-            var index = data[0].currentListId;      
-            sw.index.current = index;
-            sw.post.display();
-            sw.preview.display( sw.post.items[ index - 1 ].url );
+        if(data[0]){
+            if(document.querySelector("#followTheLeader").checked) { 
+                var index = data[0].currentListId;      
+                sw.index.current = index;
+                sw.post.display();
+                sw.preview.display( sw.post.items[ index - 1 ].url );
+            }
         }
         
     });
