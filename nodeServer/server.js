@@ -62,7 +62,13 @@ function addItem(socket, list, item) {
                                 "'"+ title +"',"+
                                 "'"+icon +"',"+
                                 "(select id from lists where name = '"+list+"'),"+
-                                "((SELECT MAX(listIndex) FROM items) + 1)"+
+                                "("+
+                                    "(SELECT CASE "+
+                                       " WHEN ( (SELECT MAX(listIndex) FROM items) IS NULL )"+
+                                       " THEN 1 "+
+                                      "  ELSE (SELECT MAX(listIndex) FROM items) + 1"+
+                                   " END)"+
+                               " )"+
                                 ");";
                                 
             db.run("BEGIN TRANSACTION;", function(){
