@@ -107,19 +107,18 @@ function moveItem(socket, page, currentIndex, newIndex) {
     queries.push("insert into oldId (value) values ( (select id from items where listIndex = "+currentIndex+") );");
     var rising = currentIndex > newIndex;
     if(rising) {
-        queries.push(" update items listIndex = listIndex + 1 "
+        console.log("rising");
+        queries.push(" update items set listIndex = listIndex + 1 "
           +  " where listIndex  <= " + currentIndex + " - 1 "
           +  " and   listIndex  >= " + newIndex 
           +  " and listId = (select id from lists where name = '"+page+"');");
     }
-    else { //falling
-        /*for(var i = currentIndex + 1; i <= newIndex; i++) {
-            at(i) = at(i) - 1;
-        }*/
+    else { 
+        console.log("falling");
         queries.push(" update items set listIndex = listIndex - 1 "
-              +  " where listIndex  >= " + currentIndex + " + 1 "
-              +  " and   listIndex  <= " + newIndex 
-              +  " and listId = (select id from lists where name = '"+page+"');");
+          +  " where listIndex  >= " + currentIndex + " + 1 "
+          +  " and   listIndex  <= " + newIndex 
+          +  " and listId = (select id from lists where name = '"+page+"');");
     }
     
     queries.push(" update items set listIndex = " + newIndex          //<---- set current index to new index.
@@ -149,6 +148,12 @@ function sequenceQueries(queries){
         })(queries);
     });
 }
+
+
+//falling
+        /*for(var i = currentIndex + 1; i <= newIndex; i++) {
+            at(i) = at(i) - 1;
+        }*/
 
 //able to choose your own page
 

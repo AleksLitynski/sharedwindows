@@ -1,22 +1,15 @@
 .message{
-    border-bottom:1px solid black;
-    border-left:1px solid black;
+    border:1px solid black;
     height:50px;
-    background-color:#e1e1e1;
+    background-color:white;
     padding:4px;
-    /*
     
-    border-bottom-left-radius:5px;
-    border-top-left-radius:5px;
+    margin:3px;
+    border-radius:5px;
+    
     -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
     -moz-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
     
-   background-image: -webkit-gradient(
-      linear,
-      left top,
-      right bottom,
-      color-stop(0, rgba(225,225,225,0)),
-      color-stop(1, rgba(225,225,225,100)));*/
 
     
     white-space: nowrap;
@@ -29,11 +22,33 @@
     -moz-user-select: moz-none;
     -ms-user-select: none;
     user-select: none;
+    
 }
 
 .selectedMessage{
-    background-color:#efefef !important;
+    background-color:rgba(200,200,200, 1.0);
 }
+
+
+@-webkit-keyframes glow {
+	0%      {opacity: 0.1;}
+	50%         {opacity: 1;}
+	100%       {opacity: 0.1;}
+}
+
+.draggedMessage{
+-webkit-animation-name:             glow;
+    -webkit-animation-duration:         1.1s;
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function:	ease-in-out;
+    
+
+    border:1px dashed black;
+    -webkit-box-shadow: inset 0px 0px 30px rgba(255, 255, 255, 0.4); 
+    -moz-box-shadow: inset 0px 0px 30px rgba(255, 255, 255, 0.4); 
+    background-color:rgba(200,200,200, 1.0);
+}
+
 
 .messageElement {
     font-size:50%;
@@ -58,12 +73,16 @@
 }
 
 #postBox{
-    width:98%;
+    width:90%;
     height:100%;
-    border:2px dotted black;
-    margin: 0 auto;
-    padding:1px;
+    border:1px dashed black;
+    border-radius:5px;
+    
+    margin-left:9px;
+    margin-right:9px;
+    margin-top:2px;
     resize: none;
+        
 }
 
 #page{
@@ -85,7 +104,9 @@
 
 body{
     overflow:hidden;
-    background-color: #e1f1f1;
+    background-color: #FDFFE7;
+    background-image: url(bkgs/sandpaper.jpg);
+    background-size:150px 150px;
 }
 
 

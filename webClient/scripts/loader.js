@@ -5,6 +5,7 @@ yepnope({
                     'scripts/swPost.js',
                     'scripts/swIndex.js',
                     'scripts/swPreview.js',
+                    'scripts/helpers.js',
                            
                     "css/main.css",
                     "css/reset.css",
@@ -38,15 +39,8 @@ sw.loaded = function() {
     for(toLoad in sw.onload){                                   //call all onload functions.
         sw.onload[toLoad]();
     }
-        
-        
-        
-    sw.socket.on("moveIndex", function(data){
-        console.log(data);
-    });
-        
+    
 }
-   
    
    
    

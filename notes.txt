@@ -45,3 +45,11 @@ python -m SimpleHTTPServer
 NODE MODULES:
 npm install sqlite3
 npm install socket.io
+
+
+
+todo:
+
+dragging:
+- the hover target is often one below where it "should" be
+- if the window is scrolled, it drops onto the wrong target.

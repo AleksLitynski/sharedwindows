@@ -8,7 +8,7 @@ sw.onload.push(function(){
             var index = data[0].currentListId;      
             sw.index.current = index;
             sw.post.display();
-            sw.preview.display( sw.post.items[ index - 1].url );
+            sw.preview.display( sw.post.items[ index - 1 ].url );
         }
         
     });
