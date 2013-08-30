@@ -1,12 +1,5 @@
 sw.post = {};
 sw.post.items = [];
-sw.post.drag = {};
-sw.post.drag.currentY = 0;
-sw.post.drag.dragTo = {};
-sw.post.drag.dragTo.current = 0;  //weird hack. It always puts the item on top of the scroll area in as the "current" 
-sw.post.drag.dragTo.previous = 0; //when done dragging, so I store the previous element as the "move to" target.
-sw.post.drag.startedDrag = 0;
-sw.post.drag.currentDragged;
 
 sw.onload.push(function(){
     
@@ -23,40 +16,11 @@ sw.onload.push(function(){
         sw.post.display();
     });
     
-    //display a blank space wherever the user is hovering the dragged div.
-    document.querySelector("#page").ondrag = draggyMoved;
-    document.querySelector("#page").onscroll = draggyMoved;
-    function draggyMoved(event){
-        
-        
-        if(event.y != sw.post.drag.currentY){
-                
-                        
-            for(var i = 0; i < document.querySelector("#page").children.length; i++) {
-            
-                var child = document.querySelector("#page").children[i];
-                var top = sw.helpers.ObjectPosition(child) - document.querySelector("#page").scrollTop;
-                var bottom = child.clientHeight + top;
-                                
-                if(event.y > top && event.y < bottom) {
-                    if(event.y < sw.post.drag.currentY) { //moving up
-                        child.parentNode.insertBefore( sw.post.drag.currentDragged, child);
-                    } else { //moving down
-                        child.parentNode.insertBefore( sw.post.drag.currentDragged, child.nextSibling);
-                    }
-                    sw.post.drag.dragTo.previous =  sw.post.drag.dragTo.current;
-                    sw.post.drag.dragTo.current = sw.helpers.childIndex(sw.post.drag.currentDragged);
-                    console.log(sw.post.drag.dragTo.previous);
-                    break;
-                }
-            }
-            sw.post.drag.currentY = event.y;
-            
-        }       
-    }
-    
     
 });
+
+
+
 
 sw.post.addItem = function(item){
     
@@ -114,7 +78,7 @@ sw.post.display = function(){
             selected = " selectedMessage";
         }
         
-        //=================
+        /*/=================
             console.log(sw.post.items[i].createdBy,
                         sw.post.items[i].createdOn,
                         sw.post.items[i].id,
@@ -125,10 +89,10 @@ sw.post.display = function(){
                         sw.post.items[i].thumbnail,
                         sw.post.items[i].title,
                         sw.post.items[i].url);
-        //=================
+        //=================*/
         
     
-        newPosts+= "<div class='message"+selected+"' draggable='true' ondragstart='sw.post.drag.start(this)' ondragend='sw.post.drag.end(this)' onclick='sw.post.itemClicked(this)'>" 
+        newPosts+= "<div class='message"+selected+"' draggable='true' ondragstart='sw.drag.start(this)' ondragend='sw.drag.end(this)' onclick='sw.post.itemClicked(this)'>" 
                 
                     +  "<div style='float:left; width:30%;'>"
                     +      "<image src='"+sw.post.items[i].thumbnail+"'></image>"
@@ -145,29 +109,7 @@ sw.post.display = function(){
    
 };
 
-sw.post.drag.start = function(node) {
-    sw.post.drag.currentDragged = node;//sw.helpers.childIndex(node);
-    sw.post.drag.startedDrag = sw.helpers.childIndex(node);
-    
-    node.classList.add("draggedMessage");
-    
-}
-sw.post.drag.end = function(node) {
-    //debugger;
-    
-    var childLength = document.querySelector("#page").children.length;
-    var to   = childLength - sw.post.drag.dragTo.previous + 1;
-    var from = childLength - sw.post.drag.startedDrag + 1;
 
-    console.log("Drag To: " + sw.post.drag.dragTo.previous);
-    
-    
-    
-    sw.socket.emit('moveIndex', {
-                                    currentIndex: from,
-                                    newIndex: to
-                                });
-}
 
 //submits a new post
 sw.post.send = function() {

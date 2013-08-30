@@ -1,0 +1,3 @@
+1) Fix index (now that we have multiple lists)
+2) Merge node server (node modules). 
+    -> wiki list creation (There is no list here. Want to create one?)

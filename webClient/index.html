@@ -4,7 +4,13 @@
         <meta charset="utf-8" />
         <title>Shared Windows</title>
         
-		<script src='scripts/yepnope.js'></script>
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+        <link rel="stylesheet" type="text/css" href="css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="css/options.css" />
+        <link rel="stylesheet" type="text/css" href="css/items.css" />
+        <link rel="stylesheet" type="text/css" href="css/jqx/jqx.base.css" />
+        
+		<script src='scripts/require.js'></script>
 		<script src='scripts/loader.js'></script>
         
     </head>
@@ -29,9 +35,9 @@
                 </div>
                 <span class="option" id="showNewBtn" onclick="sw.options.showCreateNew()">New</span>
                 <div id="createNew" class="expandedOption"> <h2>Create New</h2>
-                    <input placeholder="name"></input>
+                    <input id="newPageName" placeholder="name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input>
                     <input type="checkbox" id="postToCurrent" value="post to current?"> post to current?</input>
-                    <button>create</button>
+                    <button onclick="sw.page.create()" >create</button>
                 </div>
                 <span class="option" id="showMoreBtn" onclick="sw.options.showMoreOptions()">More</span>
                 <div id="moreOptions" class="expandedOption"> 
@@ -49,8 +55,6 @@
         
         <div id="preview">
             <!--div id="treeLocation"></div>
-            <input id="from" placeholder="from"></input>
-            <input id="to" placeholder="to"></input>
             <button id="it" onclick="clickedIt()">Move It!</button-->
             <iframe src="" id="previewImage"></iframe>
         </div>

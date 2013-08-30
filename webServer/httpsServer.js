@@ -16,55 +16,61 @@ http.createServer(handleRequest).listen(80);
 
 
 function handleRequest(req, res)  {
-  console.log(req.url);
-  var uriPath = uriToArray(url.parse(req.url).pathname);
-  if(uriPath.length > 0 && uriPath[0] == "favicon.ico") return;
+
+    var uriPath = uriToArray(url.parse(req.url).pathname);
+
+
+    if( uriPath.length == 0 ) {
+        redirectToGlobal(res);
+        return;
+    }
+    
+    
+
+    if(uriPath[0] == "lists" && uriPath.length > 1)  {
+        if(uriPath.length == 2) {
+            serveSinglePage(uriPath[1], res);
+            return;
+        } else {
+            uriPath.shift();
+        }
+    } else {
+        if(uriPath[0] == "lists") redirectToGlobal(res);
+    }
+
+    var html = "file not found";
+    try {
+        res.writeHead(200);
+        var html = fs.readFileSync("../" + config.webClientLoc + uriPath.join("/") );
+    }
+    catch(err){
+        res.writeHead(404);
+    }
+    res.write(html);
+    res.end();  
   
-  if( uriPath.length == 0 ) {
-    redirectToGlobal(res);
-  }
-  if(uriPath.length == 1 || (uriPath[uriPath.length-1].split(".").length == 2)) { 
-    serveSinglePage(res, uriPath);
-    return;
-  } 
-
-  if(uriPath.length > 1)  {                     
-    serveMultiPage(res, uriPath);
-  }
+  
 };
-
-
 
 function redirectToGlobal(res){
     res.writeHead(302, {
-        'Location': '/global'
+        "Location": "lists/global"
     });
     res.end();
 }
 
-function serveSinglePage(res, uriPath){ //single name -> selected list OR create list page
+function serveSinglePage(toServe, res){ //single name -> selected list OR create list page
     //lookup page
-    
+        
     db.serialize(function() {
         
-       // console.log(uriPath + " " + uriPath[0]);
-            
-        
-        var query = "select id from lists where name = '" + uriPath[0] + "';";
+        var query = "select id from lists where name = '" + toServe + "';";
         db.all(query, function(err, row){
         
             if(row.length > 0) {
                 res.writeHead(200);
                 
-                var html = "page exists";
-                if(uriPath.length == 1) {
-                    html = fs.readFileSync("../" + config.webClientLoc + "index.html");
-                } else {
-                    uriPath.shift();
-                    uriPath = uriPath.join("/");
-                    html = fs.readFileSync("../" + config.webClientLoc + uriPath);
-                }
-                
+                var html = fs.readFileSync("../" + config.webClientLoc + "index.html");
                 res.write(html);
                 
                 res.end();
@@ -72,25 +78,12 @@ function serveSinglePage(res, uriPath){ //single name -> selected list OR create
             } else {
             
                 res.writeHead(200);
-                res.write("page doesn't exist");
+                res.write("List doesn't exist yet.");
                 res.end();
             
             }
         });
     });
-}
-
-/*
-    Takes a uriPath and redirects to the end of the chain.
-*/
-function serveMultiPage(res, uriPath) {
-    res.writeHead(200);
-    res.write("<!doctype html><html><head></head><body>");
-    for(var i = 0; i < uriPath.length; i++){
-        res.write(uriPath[i] + "</br>");
-    }
-    res.write("</body></html>");
-    res.end();
 }
 
 

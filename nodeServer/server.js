@@ -19,20 +19,24 @@ io.sockets.on('connection', function (socket) {                 //when somebody 
     });
     
     socket.on('items', function (data) {                        //when you are told about an item
-                socket.get("page", function(err, val){          //store the new item
-                    addItem(socket, val, data);
-                });                              
-            });
+        socket.get("page", function(err, val){          //store the new item
+            addItem(socket, val, data);
+        });                              
+    });
     socket.on('index', function (data) {                        //when you are told about an index
-                socket.get("page", function(err, val){
-                    storeIndex(socket, val, data.index);
-                });
-            });
+        socket.get("page", function(err, val){
+            storeIndex(socket, val, data.index);
+        });
+    });
     socket.on('moveIndex', function (data) {
-                socket.get("page", function(err, val){
-                    moveItem(socket, val, data.currentIndex, data.newIndex);
-                }); 
-            });
+        socket.get("page", function(err, val){
+            moveItem(socket, val, data.currentIndex, data.newIndex);
+        }); 
+    });
+    
+    socket.on('pageTask', function(data) {
+        pageTask(socket, data);
+    });
     
     
 });
@@ -82,8 +86,9 @@ function addItem(socket, list, item) {
     
     }
     
+    try {
     jsdom.env(
-        item.message, ["http://code.jquery.com/jquery.js"],
+        url.parse(item.message.replace("\n", ""), true).href, [url.parse("http://code.jquery.com/jquery.js").href],
         function (errors, window) {
             var title = "" + item.message + "";
             var icon = "about:blank";
@@ -96,7 +101,14 @@ function addItem(socket, list, item) {
             var user  = socket.handshake.address.address + ":" + socket.handshake.address.port;
             addItemFromParams(user, title, icon);
         }
-    );
+    );}
+    catch(er){
+        var title = "" + item.message + "";
+        var icon = "about:blank";
+       
+        var user  = socket.handshake.address.address + ":" + socket.handshake.address.port;
+        addItemFromParams(user, title, icon);
+    }
     
 }
 
@@ -164,7 +176,8 @@ function moveItem(socket, page, currentIndex, newIndex) {
     
     
 } 
-
+//I'm real proud of this baby. Dequeues a list of queries and runs the sequentially. 
+//I was a bit... bored? and so it's a bit convoluted.
 function sequenceQueries(queries){
     db.serialize(function() {
         (function doNext(toDo){
@@ -177,6 +190,56 @@ function sequenceQueries(queries){
         })(queries);
     });
 }
+
+
+
+
+function pageTask(socket, data) {
+    if(data.type == "touch") {
+        isNameSafe(data.pageName, function(isSafe){
+                    socket.emit('pageTask', {type: data.type,
+                                             reply: isSafe });
+            });    
+    }
+    if(data.type == "create") {
+        isNameSafe(data.pageName, function(isSafe){
+            if(isSafe == "safe"){
+                db.serialize(function() {
+                    var time  = new Date().getTime();
+                    var user  = socket.handshake.address.address + ":" + socket.handshake.address.port;
+                    db.serialize(function(){
+                        db.run("insert into lists (createdOn, createdBy, currentListId, name) values ("+time+", '"+user+"', 0, '"+data.pageName+"');", function(){
+                            socket.emit('pageTask', {type:data.type,
+                                                        created:true,
+                                                        pageName:data.pageName} );
+                        });
+                    });
+                });
+                //create the page
+            } else {
+                //don't create the page
+                socket.emit('pageTask', {type:data.type, created:false, pageName:data.pageName} );
+            }
+        });
+    }
+}
+
+
+function isNameSafe(name, callback) {
+    db.serialize(function() {
+        db.all("select * from lists where name = '" + name + "';", function(err, databaseReply){
+            var replyData = "safe";
+            if(databaseReply.length != 0 || (/[^a-zA-Z0-9]/.test( name )) ){ 
+                replyData = "unsafe";
+            }
+            callback(replyData);
+        });
+    });
+}
+
+
+/*
+
 
 
 //falling
