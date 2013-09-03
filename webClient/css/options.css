@@ -11,6 +11,14 @@
     padding:3px;
     border-top-right-radius:5px;
     
+    text-align: left;
+}
+
+.expandedOption:hover {
+    display:inline;
+}
+.option:hover  + .expandedOption{
+    display:inline;
 }
 
 .option{
@@ -55,3 +63,4 @@ h2{
     font-size:1.1em;
     font-weight:bold;
 }
+

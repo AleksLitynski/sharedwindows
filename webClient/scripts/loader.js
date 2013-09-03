@@ -42,7 +42,16 @@ sw.loaded = function() {
         sw.onload[toLoad]();
     }
     
+    /*sw.socket.on("currentPageName", function(data){
+        document.querySelector("#pageName").value = data.name;
+    });*/
+    
 }
+
+/*function getPageName() {
+    console.log("ok");
+    sw.socket.emit("currentPageName", {});
+}*/
    
    
    

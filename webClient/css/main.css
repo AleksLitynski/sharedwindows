@@ -49,4 +49,10 @@ body{
     background-size:150px 150px;
 }
 
+#pageName {
+    width:90%;
+    margin-left:5%;
+    text-align: center;
+    background-color: lightgrey;
+}
 

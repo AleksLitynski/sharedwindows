@@ -19,6 +19,8 @@
         <div id="controlPanel">
             
             <div id="postLink">
+                <input readonly="readonly" id="pageName"></input>
+                
                 <textarea id="postBox" placeholder="Drop files here" onkeydown="Javascript: if (event.keyCode==13) sw.post.send()" ondrop="Javascript: sw.post.send();"></textarea>
             </div>
             
@@ -36,8 +38,8 @@
                 <span class="option" id="showNewBtn" onclick="sw.options.showCreateNew()">New</span>
                 <div id="createNew" class="expandedOption"> <h2>Create New</h2>
                     <input id="newPageName" placeholder="name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input>
-                    <input type="checkbox" id="postToCurrent" value="post to current?"> post to current?</input>
-                    <button onclick="sw.page.create()" >create</button>
+                    <input type="checkbox" id="postToCurrent" value="post to current?"> post to current?</input></br>
+                    <button onclick="sw.page.create()" id="createNewCanvasBtn">create</button>
                 </div>
                 <span class="option" id="showMoreBtn" onclick="sw.options.showMoreOptions()">More</span>
                 <div id="moreOptions" class="expandedOption"> 
@@ -54,8 +56,6 @@
         </div>
         
         <div id="preview">
-            <!--div id="treeLocation"></div>
-            <button id="it" onclick="clickedIt()">Move It!</button-->
             <iframe src="" id="previewImage"></iframe>
         </div>
         

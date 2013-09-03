@@ -16,6 +16,9 @@ io.sockets.on('connection', function (socket) {                 //when somebody 
         emitItems(socket, data.list, 0);                        //Send it it's items
         emitIndex(socket, data.list);                           //send it it's index
         socket.set("page", data.list);
+        socket.join(data.list);
+        
+        //console.log(socket.manager.rooms);
     });
     
     socket.on('items', function (data) {                        //when you are told about an item
@@ -39,7 +42,9 @@ io.sockets.on('connection', function (socket) {                 //when somebody 
     });
     
     
+    
 });
+//socket.server.close()
 
 function emitItems(socket, list, start) {
     db.serialize(function() {
@@ -57,7 +62,6 @@ function addItem(socket, list, item) {
     
         var time  = new Date().getTime();
         db.serialize(function() {
-        
             var query = "insert into items(createdOn, createdBy, latitude, longitude, url, title, thumbnail, listId, listIndex) values (" +
                                 time+","+
                                 "'"+user+"',"+
@@ -68,9 +72,9 @@ function addItem(socket, list, item) {
                                 "(select id from lists where name = '"+list+"'),"+
                                 "("+
                                     "(SELECT CASE "+
-                                       " WHEN ( (SELECT MAX(listIndex) FROM items) IS NULL )"+
+                                       " WHEN ( (SELECT MAX(listIndex) FROM items WHERE listId = (select id from lists where name = '"+list+"') ) IS NULL )"+
                                        " THEN 1 "+
-                                      "  ELSE (SELECT MAX(listIndex) FROM items) + 1"+
+                                      "  ELSE (SELECT MAX(listIndex) FROM items WHERE listId = (select id from lists where name = '"+list+"') ) + 1"+
                                    " END)"+
                                " )"+
                                 ");";
@@ -78,7 +82,7 @@ function addItem(socket, list, item) {
             db.run("BEGIN TRANSACTION;", function(){
             db.run(query, function(){
             db.all("select * from items where id = (select MAX(id) from items) and listId = (select id from lists where name = '"+list+"');", function(err, data){
-                socket.broadcast.emit('items', data);
+                socket.broadcast.to(list).emit('items', data);
                 socket.emit('items', data);
             db.run("COMMIT TRANSACTION;");
             });});});
@@ -125,37 +129,31 @@ function storeIndex(socket, list, index) {
 function emitIndex(socket, list) {
      db.serialize(function() {
     
-        var query = "select currentListId from lists where name = '"+list+"';";
-        db.all(query, function(err, row){
+        var query = "select currentListId, name from lists where name = '"+list+"';";
+        db.all(query, function(err, row){ //Message goes out to everyone, not just people connected to the current page.
             socket.emit('index', row );
-            socket.broadcast.emit('index', row );
+            socket.broadcast.to(list).emit('index', row );
         });
     });
 }
 
 function moveItem(socket, page, currentIndex, newIndex) {
-
-
-    console.log("Move: ");
-    console.log(page, currentIndex, newIndex);
-    
+    //console.log(socket, page, currentIndex, newIndex);
     //1) set the new index
     //2) set the element at that index and all future elements to +1
     var queries = [];
     queries.push("BEGIN TRANSACTION;");
     queries.push("drop table if exists oldId;");
     queries.push("create temp table oldId (value integer primary key);");
-    queries.push("insert into oldId (value) values ( (select id from items where listIndex = "+currentIndex+") );");
+    queries.push("insert into oldId (value) values ( (select id from items where listIndex = "+currentIndex+"  and listId = (select id from lists where name = '"+page+"')) );");
     var rising = currentIndex > newIndex;
     if(rising) {
-        console.log("rising");
         queries.push(" update items set listIndex = listIndex + 1 "
           +  " where listIndex  <= " + currentIndex + " - 1 "
           +  " and   listIndex  >= " + newIndex 
           +  " and listId = (select id from lists where name = '"+page+"');");
     }
     else { 
-        console.log("falling");
         queries.push(" update items set listIndex = listIndex - 1 "
           +  " where listIndex  >= " + currentIndex + " + 1 "
           +  " and   listIndex  <= " + newIndex 
@@ -168,7 +166,7 @@ function moveItem(socket, page, currentIndex, newIndex) {
     queries.push("COMMIT TRANSACTION;");
     
     var toSend = { from: currentIndex, to: newIndex, queries: queries};
-    socket.broadcast.emit('moveIndex', toSend );
+    socket.broadcast.to(page).emit('moveIndex', toSend );
     socket.emit('moveIndex', toSend );
     
     sequenceQueries(queries);   
@@ -183,7 +181,6 @@ function sequenceQueries(queries){
         (function doNext(toDo){
             if(toDo.length > 0) {
                 db.run(toDo.shift(), function(error){
-                    console.log(error);
                     doNext(toDo);
                 });
             }
