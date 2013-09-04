@@ -40,29 +40,11 @@ sw.loaded = function() {
     
     for(toLoad in sw.onload){                                   //call all onload functions.
         sw.onload[toLoad]();
-    }
-    
-    /*sw.socket.on("currentPageName", function(data){
-        document.querySelector("#pageName").value = data.name;
-    });*/
-    
+    }  
 }
+   
+   
 
-/*function getPageName() {
-    console.log("ok");
-    sw.socket.emit("currentPageName", {});
-}*/
-   
-   
-   
-function clickedIt() {
-    var first = document.querySelector("#page").childNodes[0];
-    first.classList.add("expandAbove");
-    first.addEventListener("webkitAnimationEnd", function(e){
-        first.classList.remove("expandAbove"); 
-    }, false);
-    
-}
 
 
 

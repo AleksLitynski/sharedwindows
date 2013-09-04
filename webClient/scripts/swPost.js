@@ -16,6 +16,11 @@ sw.onload.push(function(){
         sw.post.display();
     });
     
+    sw.socket.on("deleteItem", function(data){
+        if(data.success) {
+            sw.post.removeItem(data.toDelete);
+        }
+    });
     
 });
 
@@ -143,4 +148,27 @@ sw.post.selectItemByIndex = function(index) {
     sw.index.current = index;
     sw.post.display();
     sw.preview.display( sw.post.items[index].url );
+}
+
+
+sw.post.requestDelete = function( ) {
+    sw.socket.emit("deleteItem", {index: document.querySelector("#toDelete").value} );
+}
+
+sw.post.removeItem = function(index) {
+    console.log("removing: " + index);
+    for(var i = 0; i < sw.post.items.length; i++) {
+        if(sw.post.items[i].listIndex == index) {
+            sw.post.items.splice(i, 1);
+            break;
+        }
+    }
+    
+    for(var i = 0; i < sw.post.items.length; i++) {
+        if(sw.post.items[i].listIndex > index) {
+            sw.post.items[i].listIndex--;
+        }
+    }
+        
+    sw.post.display();
 }
