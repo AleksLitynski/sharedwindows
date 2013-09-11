@@ -5,7 +5,8 @@
     padding:4px;
     
     margin:3px;
-    border-radius:5px;
+    
+    border-radius:2px;
     
     -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
     -moz-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
@@ -20,6 +21,9 @@
     -moz-user-select: moz-none;
     -ms-user-select: none;
     user-select: none;
+    
+    
+    cursor:move;
     
 }
 
@@ -60,6 +64,27 @@
     
 }
 
+.postURL {
+    font-size: 65%;
+    color:grey;
+}
+
+.postTitle {
+
+}
+
+
+
+.closeBtn {
+    float:right;
+    
+    cursor:pointer;
+    height:15px;
+    width:15px;
+    
+    background-image:url(bkgs/close.png);
+    background-size: 13px;
+}
 
 
 

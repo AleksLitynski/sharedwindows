@@ -13,8 +13,7 @@ http://jqueryui.com/sortable/
 */
 sw.onload.push(function(){ 
 
-
-//display a blank space wherever the user is hovering the dragged div.
+    //display a blank space wherever the user is hovering the dragged div.
     document.querySelector("#page").ondrag = draggyMoved;
     document.querySelector("#page").onscroll = draggyMoved;
     function draggyMoved(event){
@@ -33,7 +32,7 @@ sw.onload.push(function(){
                     var y = document.defaultView.getComputedStyle(x,null).getPropertyValue(styleProp);
                 return y;
             }
-            console.log(   );
+            
             placeholder.style.width = (sw.drag.currentDragged.offsetWidth) + "px";
                         
             for(var i = 0; i < document.querySelector("#page").children.length; i++) {

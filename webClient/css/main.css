@@ -25,7 +25,7 @@
 #postBox{ 
     width:90%;
     border:1px dashed black;
-    border-radius:5px;
+    border-radius:3px;
     
     margin-left:9px;
     margin-right:9px;
@@ -53,9 +53,10 @@
 }
 
 body{
+    font-family: sans-serif;
     overflow:hidden;
     background-color: #FDFFE7;
-    background-image: url(bkgs/sandpaper.jpg);
+    background-image: url(bkgs/sandpaper.jpg); /*url(bkgs/sandpaper.jpg);*/
     background-size:150px 150px;
 }
 
@@ -65,4 +66,3 @@ body{
     text-align: center;
     background-color: lightgrey;
 }
-

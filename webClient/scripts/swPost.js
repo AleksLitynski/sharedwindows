@@ -99,14 +99,17 @@ sw.post.display = function(){
     
         newPosts+= "<div class='message"+selected+"' draggable='true' ondragstart='sw.drag.start(this)' ondragend='sw.drag.end(this)' onclick='sw.post.itemClicked(this)'>" 
                 
-                    +  "<div style='float:left; width:30%;'>"
+                    +  "<button class='closeBtn' onclick='sw.post.requestDeleteThis(this.parentNode)'></button>"
+                    
+                    +  "<div style='float:left; width:15%;'>"
                     +      "<image src='"+sw.post.items[i].thumbnail+"'></image>"
                     +  "</div>"
                     
-                    +  "<div style='float:left; width:70%;'>"
-                    +      "<div>"+sw.post.items[i].title+"</div>"
-                    +      "<div>"+sw.post.items[i].url+"</div>"
+                    +  "<div style='float:left; width:50%;'>"
+                    +      "<div class='postTitle'>"+sw.post.items[i].title+"</div>"
+                    +      "<div class='postURL'>"+sw.post.items[i].url+"</div>"
                     +  "</div>"
+                    
                 +  "</div>";
     }
     document.querySelector("#page").innerHTML = newPosts;
@@ -138,6 +141,7 @@ sw.post.itemClicked = function(node){
         return n+1;
     })(node);
     sw.post.selectItemByIndex(index);
+    
 }
 
 sw.post.selectItemByIndex = function(index) {
@@ -151,8 +155,23 @@ sw.post.selectItemByIndex = function(index) {
 }
 
 
-sw.post.requestDelete = function( ) {
-    sw.socket.emit("deleteItem", {index: document.querySelector("#toDelete").value} );
+sw.post.requestDeleteThis = function(node) {
+    var index = (function(node) {
+        var n = 0;
+        while (node = node.nextSibling){
+            n++;
+        }
+        return n+1;
+    })(node);
+    sw.post.requestDelete(index);
+    
+    event.stopPropagation();
+    window.event.cancelBubble = true;
+}
+
+sw.post.requestDelete = function(deleteIndex) {
+    console.log(deleteIndex);
+    sw.socket.emit("deleteItem", { index: deleteIndex } );
 }
 
 sw.post.removeItem = function(index) {
