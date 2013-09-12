@@ -28,20 +28,20 @@
             
             <div id="optionsBar">
                 
-                <span class="option" id="showViewBtn" onclick="sw.options.showViewOptions()">View</span>
+                <span class="option" id="showViewBtn">View</span>
                 <div id="viewOptions" class="expandedOption"> <h2>View Options</h2>
                     <button>mini mode</button>
                     <button>bottom bar</button>
                     <button>left bar</button>
                     <button>Very large preview mode</button>
                 </div>
-                <span class="option" id="showNewBtn" onclick="sw.options.showCreateNew()">New</span>
+                <span class="option" id="showNewBtn">New</span>
                 <div id="createNew" class="expandedOption"> <h2>Create New</h2>
                     <input id="newPageName" placeholder="name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input>
                     <input type="checkbox" id="postToCurrent" value="post to current?"> post to current?</input></br>
                     <button onclick="sw.page.create()" id="createNewCanvasBtn">create</button>
                 </div>
-                <span class="option" id="showMoreBtn" onclick="sw.options.showMoreOptions()">More</span>
+                <span class="option" id="showMoreBtn">More</span>
                 <div id="moreOptions" class="expandedOption"> 
                     <h2>Extra Options</h2>
                     <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow the leader?</input> </br>
@@ -56,27 +56,6 @@
         </div>
         
         <div id="preview">
-        
-            <!--input id="toDelete" onkeydown="Javascript: if (event.keyCode==13) sw.post.requestDelete()"></input>
-            <button onclick="sw.post.requestDelete()">DELETE!</button-->
-            
-            <div class="demoTreeWrapper">
-                <div class="treeDragDrop">
-                    <ul class="tdd-tree">
-                        <li>Item 1
-                            <ul>
-                                <li>Item 1.1</li>
-                                <li>Item 1.2</li>
-                                <li>Item 1.3</li>
-                                <li>Item 1.4</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <p>Drag your items here to remove them.</p>
-                    <ul class="tdd-trashbin"></ul>
-                </div>	
-            </div>
-
             
             
         

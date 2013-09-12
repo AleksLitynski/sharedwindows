@@ -73,9 +73,14 @@ sw.post.moveItem = function(from, to){
 //loads all posts since a given post. Just pass in 0 to get all posts to date.
 sw.post.display = function(){
     
+    
     document.querySelector("#page").innerHTML = "";
     
     var newPosts = "";
+    newPosts    +="<div class='demoTreeWrapper'>"
+                +        "<div class='treeDragDrop'>"
+                +            "<ul class='tdd-tree'>";
+                    
     for(var i = sw.post.items.length-1; i >= 0 ; i--){
         
         var selected = "";
@@ -83,36 +88,65 @@ sw.post.display = function(){
             selected = " selectedMessage";
         }
         
-        /*/=================
-            console.log(sw.post.items[i].createdBy,
-                        sw.post.items[i].createdOn,
-                        sw.post.items[i].id,
-                        sw.post.items[i].latitude,
-                        sw.post.items[i].listId,
-                        sw.post.items[i].listIndex,
-                        sw.post.items[i].longitude,
-                        sw.post.items[i].thumbnail,
-                        sw.post.items[i].title,
-                        sw.post.items[i].url);
-        //=================*/
+        //=================
+        //    console.log(sw.post.items[i].createdBy,
+        //                sw.post.items[i].createdOn,
+        //                sw.post.items[i].id,
+        //                sw.post.items[i].latitude,
+        //                sw.post.items[i].listId,
+        //                sw.post.items[i].listIndex,
+        //                sw.post.items[i].longitude,
+        //                sw.post.items[i].thumbnail,
+        //                sw.post.items[i].title,
+        //               sw.post.items[i].url);
+        //=================/
         
-    
+        var thumbnail = sw.post.items[i].thumbnail;
+        if( thumbnail == "about:blank"){
+            thumbnail = "";
+        }
+        var nestedPage = "";
+        
+        
+        if(sw.post.items[i].url.split("/").indexOf("lists") > -1){
+            sw.post.items[i].nests = true;
+        } else {
+            sw.post.items[i].nests = false;
+        }
+        
+        
+        newPosts += "<li>";
+        
         newPosts+= "<div class='message"+selected+"' draggable='true' ondragstart='sw.drag.start(this)' ondragend='sw.drag.end(this)' onclick='sw.post.itemClicked(this)'>" 
                 
                     +  "<button class='closeBtn' onclick='sw.post.requestDeleteThis(this.parentNode)'></button>"
                     
                     +  "<div style='float:left; width:15%;'>"
-                    +      "<image src='"+sw.post.items[i].thumbnail+"'></image>"
+                    +      "<image src='"+thumbnail+"'></image>"
                     +  "</div>"
                     
                     +  "<div style='float:left; width:50%;'>"
                     +      "<div class='postTitle'>"+sw.post.items[i].title+"</div>"
                     +      "<div class='postURL'>"+sw.post.items[i].url+"</div>"
+                    +  nestedPage
                     +  "</div>"
                     
+                    
                 +  "</div>";
+                
+        
+        newPosts += "</li>"
     }
+    
+    newPosts +=         "</ul>"
+             +      "</div>"
+             +   "</div>";
+             
+             /*"<p>Drag your items here to remove them.</p><ul class='tdd-trashbin'></ul>"*/
     document.querySelector("#page").innerHTML = newPosts;
+    
+    
+    
     
    
 };
@@ -151,7 +185,9 @@ sw.post.selectItemByIndex = function(index) {
     //preview etc the new node
     sw.index.current = index;
     sw.post.display();
-    sw.preview.display( sw.post.items[index].url );
+    if(sw.post.items[index] && sw.post.items[index].url){
+        sw.preview.display( sw.post.items[index].url );
+    }
 }
 
 
@@ -170,12 +206,10 @@ sw.post.requestDeleteThis = function(node) {
 }
 
 sw.post.requestDelete = function(deleteIndex) {
-    console.log(deleteIndex);
     sw.socket.emit("deleteItem", { index: deleteIndex } );
 }
 
 sw.post.removeItem = function(index) {
-    console.log("removing: " + index);
     for(var i = 0; i < sw.post.items.length; i++) {
         if(sw.post.items[i].listIndex == index) {
             sw.post.items.splice(i, 1);

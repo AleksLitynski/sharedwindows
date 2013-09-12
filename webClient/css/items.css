@@ -1,12 +1,11 @@
 .message{
-    border:1px solid black;
+    border-top:1px solid lightgrey;
     height:50px;
     background-color:white;
     padding:4px;
     
-    margin:3px;
+    margin:0px;
     
-    border-radius:2px;
     
     -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
     -moz-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
@@ -28,7 +27,7 @@
 }
 
 .selectedMessage{
-    background-color:rgba(200,200,200, 1.0);
+    background-color:rgba(250,250,200, 1.0);
 }
 
 
@@ -59,7 +58,7 @@
     -webkit-animation-timing-function:	ease-in-out;
     
     border:1px dashed black;
-    background-color:rgba(200,200,200, 1.0);
+    background-color:rgba(250,250,200, 1.0);
 
     
 }

@@ -42,7 +42,29 @@ exports.run = function() {
 
         var html = "file not found";
         try {
-            res.writeHead(200);
+            
+            
+            var lastPathList = uriPath[uriPath.length-1].split(".");
+            var type = lastPathList[lastPathList.length-1];
+            
+            if(type == "js"){
+                res.writeHead(200, {
+                    "Content-Type": "application/javascript"
+                });
+            }
+            else if(type == "css"){
+                res.writeHead(200, {
+                    "Content-Type": "text/css"
+                });
+            else if(type == "jpg" || type == "gif" || type == "png" || type == "ico"){
+            res.writeHead(200, {
+                "Content-Type": "image"
+            });
+            } else {
+                res.writeHead(200);
+            }
+            
+            
             var html = fs.readFileSync("../" + config.webClientLoc + uriPath.join("/") );
         }
         catch(err){
