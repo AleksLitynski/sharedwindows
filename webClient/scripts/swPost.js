@@ -54,7 +54,14 @@ sw.post.addItemTo = function(list, item){
         return a.listIndex - b.listIndex;
     });
     
-    if( document.querySelector("#jumpToCurrent").checked ) {
+    //check if the message is a list. Don't select it if its a list
+    var isAList = false;
+    var u = item.url.split("/");
+    if(u.length >= 3){
+    var uu = u[u.length-2];
+    if(uu == "lists"){ isAList = true;}}
+    
+    if( document.querySelector("#jumpToCurrent").checked && !isAList) {
         sw.index.current[list] = sw.post.items[list].length;
         if(sw.index.current){
             sw.preview.display( sw.post.items[list][sw.index.current[list]-1].url, list );
@@ -89,6 +96,8 @@ sw.post.moveItem = function(page, from, to){
     sw.post.items[page].sort(function (a, b) {
         return a.listIndex - b.listIndex;
     });
+    
+    //I NEED TO ONLY DO THIS IF THE MOVING ENTITY IS NOT A LIST!!!    
     sw.post.selectItemByIndex(to, page);
 }
 
