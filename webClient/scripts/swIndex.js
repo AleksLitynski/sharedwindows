@@ -1,17 +1,21 @@
 sw.index = {};
-sw.index.current = NaN;
+sw.index.current = {};
 
 sw.onload.push(function(){
     sw.socket.on('index', function (data) {
+        //console.log(data);
+    
         //if we're following the leader, preview the new node
-                
-        if(data[0]){
+        if(data.data[0]){
             if(document.querySelector("#followTheLeader").checked) { 
-                var index = data[0].currentListId;      
-                sw.index.current = index;
-                sw.post.display();
-                if(sw.post.items[ index - 1 ].url){
-                    sw.preview.display( sw.post.items[ index - 1 ].url );
+                var index = data.data[0].currentListId;
+                if(sw.index.current && sw.index.current[data.page] ){
+                    sw.index.current[data.page] = index;
+                    
+                    sw.post.display(data.page);
+                    if(sw.post.items[data.page][ index - 1 ] && sw.post.items[data.page][ index - 1 ].url){
+                        sw.preview.display( sw.post.items[data.page][ index - 1 ].url, data.page );
+                    }
                 }
             }
         }
@@ -19,18 +23,9 @@ sw.onload.push(function(){
     });
 });
 
-//sends the current page to the server
-sw.index.send = function(current){
-    sw.socket.emit('index', {index: current} );
+//most be told what page to move index on
+//sends the current item to the server
+sw.index.send = function(current, page){
+    //debugger;
+    sw.socket.emit('index', {index: current, page: page} );
 }
-
-
-
-
-
-
-//http://edgetable.com/sharedWindows/changeCurrentPost.php?setOrGet=set&val=14
-//http://edgetable.com/sharedWindows/changeCurrentPost.php?setOrGet=get
-
-//http://edgetable.com/sharedWindows/changecurrentPost.php?setOrGet=set&val=7 <-set
-//http://edgetable.com/sharedWindows/changecurrentPost.php?setOrGet=get&val=7 <-get

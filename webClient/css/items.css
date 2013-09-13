@@ -1,15 +1,11 @@
 .message{
     border-top:1px solid lightgrey;
-    height:50px;
+    margin:0px;
+    height:25px;
     background-color:white;
     padding:4px;
-    
-    margin:0px;
-    
-    
-    -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
-    -moz-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
-    
+    padding-bottom:10px;
+        
     white-space: nowrap;
     overflow: hidden;
     
@@ -21,44 +17,37 @@
     -ms-user-select: none;
     user-select: none;
     
-    
     cursor:move;
     
 }
 
 .selectedMessage{
-    background-color:rgba(250,250,200, 1.0);
+    border-left:5px solid grey;
 }
 
 
 @-webkit-keyframes glow {
 	0%      {
-                -webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0); 
-                -moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0); 
-                /*border-radius:0px;*/
+                background-color:#ccc;
             }
             
 	50%         {
-                -webkit-box-shadow: inset 0px 0px 75px rgba(255, 255, 255, 1); 
-                -moz-box-shadow: inset 0px 0px 75px rgba(255, 255, 255, 1);
-                /*border-radius:50%;*/
+                background-color:#eee;
             }
     
 	100%       {
-                -webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0); 
-                -moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0); 
-                /*border-radius:0px;*/
+                background-color:#ccc5;
             }
 }
 
 .draggedMessage{
--webkit-animation-name:             glow;
-    -webkit-animation-duration:         1.1s;
+    /*-webkit-animation-name:             glow;
+    -webkit-animation-duration:         2.1s;
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function:	ease-in-out;
+    background-color:#ccc;*/
     
-    border:1px dashed black;
-    background-color:rgba(250,250,200, 1.0);
+    border-left:5px solid grey;
 
     
 }
@@ -86,5 +75,9 @@
 }
 
 
-
+.nestedPages{
+    clear:both;
+    padding-left:20px;
+    padding-top:20px;
+}
 

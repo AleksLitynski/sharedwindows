@@ -9,7 +9,8 @@
     overflow:hidden;
     border:1px solid black;
     padding:3px;
-    border-top-right-radius:5px;
+    /*border-top-right-radius:5px;*/
+    
     
     text-align: left;
 }
@@ -23,6 +24,13 @@
 
 .option:hover {
     background-color: rgb(180, 216, 231);
+    border-top:1px solid black;
+    border-right:1px solid black;
+    margin-left:-1px;
+    
+    margin-top:-10px;
+    border-bottom:15px solid black;
+    z-index:10;
 }
 
 .option{

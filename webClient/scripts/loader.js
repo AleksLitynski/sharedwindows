@@ -34,14 +34,14 @@ sw.loaded = function() {
     
     
     sw.socket = io.connect('http://129.21.142.144:10303');      //connect to socket io.
-    sw.socket.emit("page", {list: sw.listName});
+    sw.socket.emit("subscribe", {list: sw.listName});
     
     for(toLoad in sw.onload){                                   //call all onload functions.
         sw.onload[toLoad]();
     }  
     
     //engages the drag-and-drop
-    $('.treeDragDrop').treeDragDrop(); 
+    //$('.treeDragDrop').treeDragDrop(); 
 }
    
    

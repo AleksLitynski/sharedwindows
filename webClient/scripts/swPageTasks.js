@@ -3,7 +3,7 @@ sw.onload.push(function(){
     
 
     sw.socket.on("pageTask", function(data){
-        console.log(data);
+        //console.log(data);
     });
 
 });
@@ -11,14 +11,16 @@ sw.onload.push(function(){
 sw.page.create = function(pageName){
     sw.socket.emit('pageTask', {
                                     pageName: document.querySelector("#newPageName").value,
-                                    type: "create"
+                                    type: "create",
+                                    page: sw.listName
                                 } );
 }
 
 sw.page.touch = function(pageName){
     sw.socket.emit('pageTask', {
                                     pageName: document.querySelector("#newPageName").value,
-                                    type: "touch"
+                                    type: "touch",
+                                    page: sw.listName
                                 } );
 }
 

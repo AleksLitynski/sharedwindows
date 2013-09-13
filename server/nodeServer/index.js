@@ -15,35 +15,27 @@ exports.run = function(){
     io.sockets.on('connection', function (socket) {                 //when somebody connects...
         
         
-        socket.on('page', function(data) {                          //Client tells you it's current list name
+        socket.on('subscribe', function(data) {                     //Client tells you the lists it wants to know about
             emitItems(socket, data.list, 0);                        //Send it it's items
             emitIndex(socket, data.list);                           //send it it's index
-            socket.set("page", data.list);
             socket.join(data.list);
-            
-            //console.log(socket.manager.rooms);
+        });
+        socket.on('unsubscribe', function(data) {
+            socket.leave(data.list);
         });
         
         socket.on('items', function (data) {                        //when you are told about an item
-            socket.get("page", function(err, val){          //store the new item
-                addItem(socket, val, data);
-            });                              
+                addItem(socket, data.page, data);                              
         });
         socket.on('index', function (data) {                        //when you are told about an index
-            socket.get("page", function(err, val){
-                storeIndex(socket, val, data.index);
-            });
+                storeIndex(socket, data.page, data.index);
         });
         socket.on('moveIndex', function (data) {
-            socket.get("page", function(err, val){
-                moveItem(socket, val, data.currentIndex, data.newIndex);
-            }); 
+            moveItem(socket, data.page, data.currentIndex, data.newIndex);
         });
         
         socket.on('deleteItem', function(data) {
-            socket.get("page", function(err, val) {
-                deleteItem(socket, val, data.index);
-            });
+            deleteItem(socket, data.page, data.index);
         });
         
         socket.on('pageTask', function(data) {
@@ -57,12 +49,22 @@ exports.run = function(){
             var query = "select * from items where listId = (select id from lists where name = '"+list+"') and listIndex > "+start+";";
             db.all(query, function(err, row)
             {
-                socket.emit('items', row);
+                socket.emit('items', {page:list, data:row});
             });
         });
     }
 
     function addItem(socket, list, item) {
+        //detect and prevent user from posting list to itself. If "lists" in in the message and the next term matches var list, it will reject the whole shenangan.
+        var itemAsUrl = item.message.split("/");
+        if(itemAsUrl.length > 3){
+        var iii = itemAsUrl.indexOf("lists");
+        if(iii > -1){
+        var ii = iii + 1;
+        if(itemAsUrl.length >= ii){
+        if(list == itemAsUrl[ii].split("\n")[0]){
+        return false;
+        }}}}
         
         function addItemFromParams(user, title, icon) {
         
@@ -88,8 +90,8 @@ exports.run = function(){
                 db.run("BEGIN TRANSACTION;", function(){
                 db.run(query, function(){
                 db.all("select * from items where id = (select MAX(id) from items) and listId = (select id from lists where name = '"+list+"');", function(err, data){
-                    socket.broadcast.to(list).emit('items', data);
-                    socket.emit('items', data);
+                    socket.broadcast.to(list).emit('items', {page:list, data:data});
+                    socket.emit('items', {page:list, data:data});
                 db.run("COMMIT TRANSACTION;");
                 });});});
             });
@@ -137,8 +139,8 @@ exports.run = function(){
         
             var query = "select currentListId, name from lists where name = '"+list+"';";
             db.all(query, function(err, row){ //Message goes out to everyone, not just people connected to the current page.
-                socket.emit('index', row );
-                socket.broadcast.to(list).emit('index', row );
+                socket.emit('index', {page:list, data:row} );
+                socket.broadcast.to(list).emit('index', {page:list, data:row} );
             });
         });
     }
@@ -171,7 +173,7 @@ exports.run = function(){
                    +  " and listId = (select id from lists where name = '" + page + "');");
         queries.push("COMMIT TRANSACTION;");
         
-        var toSend = { from: currentIndex, to: newIndex, queries: queries};
+        var toSend = { from: currentIndex, to: newIndex, queries: queries, page:page};
         socket.broadcast.to(page).emit('moveIndex', toSend );
         socket.emit('moveIndex', toSend );
         
@@ -255,8 +257,8 @@ exports.run = function(){
             queries.push("COMMIT TRANSACTION;");
             sequenceQueries(queries);
             
-            socket.emit("deleteItem", {toDelete: toDelete, success: true});
-            socket.broadcast.to(list).emit("deleteItem", {toDelete: toDelete, success: true});
+            socket.emit("deleteItem", {toDelete: toDelete, success: true, page:list});
+            socket.broadcast.to(list).emit("deleteItem", {toDelete: toDelete, success: true, page:list});
         }
     }   
 }

@@ -107,6 +107,7 @@ sw.drag.end = function(node) {
     
     sw.socket.emit('moveIndex', {
                                     currentIndex: from,
-                                    newIndex: to
+                                    newIndex: to,
+                                    page: sw.listName
                                 });
 }

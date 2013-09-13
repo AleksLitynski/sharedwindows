@@ -1,24 +1,44 @@
 sw.post = {};
-sw.post.items = [];
+sw.post.items = {};
+// console.log(sw.post.items[i].createdBy, sw.post.items[i].createdOn, sw.post.items[i].id, sw.post.items[i].latitude, sw.post.items[i].listId, sw.post.items[i].listIndex, sw.post.items[i].longitude, sw.post.items[i].thumbnail, sw.post.items[i].title, sw.post.items[i].url);
+
 
 sw.onload.push(function(){
     
     sw.socket.on('items', function (data) {
-        for(var i = 0; i < data.length; i++){
-            sw.post.addItem(data[i]);
+        if(!sw.post.items[data.page]) {
+            sw.post.items[data.page] = [];
+        } 
+        
+        for(var i = 0; i < data.data.length; i++){
+                
+            var segementPath = data.data[i].url.split("/");
+            var newPageName = segementPath.pop().split("\n")[0];
+            segementPath = segementPath.join("/");
+            var localPath = window.location.toString().split("/");
+            localPath.pop();
+            localPath = localPath.join("/");
+            if(localPath == segementPath){
+                if(!sw.post.items[newPageName]){
+                    sw.socket.emit("subscribe", {list: newPageName});
+                } 
+            }
+            sw.post.addItemTo(data.page, data.data[i]);
         }
-        sw.post.display();
+        //find the node, pass in the items
+        sw.post.display(data.page);
+        
     });
     
     
     sw.socket.on("moveIndex", function(data){
-        sw.post.moveItem(data.from, data.to);
-        sw.post.display();
+        sw.post.moveItem(data.page, data.from, data.to);
+        sw.post.display(data.page);
     });
     
     sw.socket.on("deleteItem", function(data){
         if(data.success) {
-            sw.post.removeItem(data.toDelete);
+            sw.post.removeItem(data.toDelete, data.page);
         }
     });
     
@@ -27,130 +47,125 @@ sw.onload.push(function(){
 
 
 
-sw.post.addItem = function(item){
+sw.post.addItemTo = function(list, item){
     
-    sw.post.items.push(item);
-    sw.post.items.sort(function (a, b) {
+    sw.post.items[list].push(item);
+    sw.post.items[list].sort(function (a, b) {
         return a.listIndex - b.listIndex;
     });
     
     if( document.querySelector("#jumpToCurrent").checked ) {
-        sw.index.current = sw.post.items.length;
-        sw.preview.display( sw.post.items[sw.index.current-1].url );
+        sw.index.current[list] = sw.post.items[list].length;
+        if(sw.index.current){
+            sw.preview.display( sw.post.items[list][sw.index.current[list]-1].url, list );
+        }
     }
 }
 
-sw.post.moveItem = function(from, to){
-
-    var toMoveId = sw.post.items[from - 1].id;
+sw.post.moveItem = function(page, from, to){
+    
+    var toMoveId = sw.post.items[page][from - 1].id;
         
     var rising = from > to;
-    for(var i = 0; i < sw.post.items.length; i++){
+    for(var i = 0; i < sw.post.items[page].length; i++){
         if(rising) {
-            if(sw.post.items[i].listIndex < from && sw.post.items[i].listIndex >= to) {
-                sw.post.items[i].listIndex += 1;
+            if(sw.post.items[page][i].listIndex < from && sw.post.items[page][i].listIndex >= to) {
+                sw.post.items[page][i].listIndex += 1;
             }
             
         } else {
-            if(sw.post.items[i].listIndex > from && sw.post.items[i].listIndex <= to) {
-                sw.post.items[i].listIndex -= 1;
+            if(sw.post.items[page][i].listIndex > from && sw.post.items[page][i].listIndex <= to) {
+                sw.post.items[page][i].listIndex -= 1;
             }
         }
     }
-    for(var i = 0; i < sw.post.items.length; i++) {
-        if(sw.post.items[i].id == toMoveId) {
-            sw.post.items[i].listIndex = to;
+    for(var i = 0; i < sw.post.items[page].length; i++) {
+        if(sw.post.items[page][i].id == toMoveId) {
+            sw.post.items[page][i].listIndex = to;
             break;
         }
     } 
     
-    sw.post.items.sort(function (a, b) {
+    sw.post.items[page].sort(function (a, b) {
         return a.listIndex - b.listIndex;
     });
-    sw.post.selectItemByIndex(to);
+    sw.post.selectItemByIndex(to, page);
 }
 
-//loads all posts since a given post. Just pass in 0 to get all posts to date.
-sw.post.display = function(){
+sw.post.getNodeOfList = function(listName){
+    var page = document.querySelector("#page-" + listName);
+    if(listName == sw.listName) {
+        page = document.querySelector("#page");
+    }
+    return page;
+}
+sw.post.getListOfNode = function(node){
+    if(node.parentNode.id == "page") {
+        return sw.listName;
+    } else {
+        return node.parentNode.parentNode.id.split("-")[1];
+    }
+}
+
+sw.post.display = function(nodeName) {
     
+    var node = sw.post.getNodeOfList(nodeName);
+    var toDisplay = sw.post.items[nodeName];
     
-    document.querySelector("#page").innerHTML = "";
-    
-    var newPosts = "";
-    newPosts    +="<div class='demoTreeWrapper'>"
-                +        "<div class='treeDragDrop'>"
-                +            "<ul class='tdd-tree'>";
-                    
-    for(var i = sw.post.items.length-1; i >= 0 ; i--){
+    if(nodeName != sw.listName){
+        node.onclick = "";
+        node.style.height = "auto";
+        node = node.querySelector(".nestedPages");
+    }
+    node.innerHTML = "";
+
+    for(var i = toDisplay.length-1; i >= 0 ; i--){
         
         var selected = "";
-        if(sw.index.current == sw.post.items[i].listIndex) {
+        if(sw.index.current[nodeName] == toDisplay[i].listIndex) {
             selected = " selectedMessage";
         }
         
-        //=================
-        //    console.log(sw.post.items[i].createdBy,
-        //                sw.post.items[i].createdOn,
-        //                sw.post.items[i].id,
-        //                sw.post.items[i].latitude,
-        //                sw.post.items[i].listId,
-        //                sw.post.items[i].listIndex,
-        //                sw.post.items[i].longitude,
-        //                sw.post.items[i].thumbnail,
-        //                sw.post.items[i].title,
-        //               sw.post.items[i].url);
-        //=================/
-        
-        var thumbnail = sw.post.items[i].thumbnail;
+        var thumbnail = toDisplay[i].thumbnail;
         if( thumbnail == "about:blank"){
             thumbnail = "";
         }
-        var nestedPage = "";
         
         
-        if(sw.post.items[i].url.split("/").indexOf("lists") > -1){
-            sw.post.items[i].nests = true;
-        } else {
-            sw.post.items[i].nests = false;
+        var root = document.createElement("div");
+        root = node.appendChild(root);
+        root.setAttribute("class", "message" + selected);
+        root.setAttribute("draggable", true);
+        root.setAttribute("ondragstart", "sw.drag.start(this); ");
+        root.setAttribute("ondragend", "sw.drag.end(this)");
+        root.setAttribute("onclick", "sw.post.itemClicked(this)");
+        
+        root.innerHTML  +=  "<button class='closeBtn' onclick='sw.post.requestDeleteThis(this.parentNode)'></button>"
+                        +  "<div style='float:left; width:15%;'>"
+                        +      "<image src='"+thumbnail+"'></image>"
+                        +  "</div>"
+                        +  "<div style='float:left; width:50%;'>"
+                        +      "<div class='postTitle'>"+toDisplay[i].title+"</div>"
+                        +      "<div class='postURL'>"+toDisplay[i].url+"</div>"
+                        +  "</div>"
+                        +  "<div class='nestedPages'>"
+                        +  "</div>";
+                        
+        var segementPath = toDisplay[i].url.split("/");
+        var potentialPageName = segementPath.pop().split("\n")[0];
+        segementPath = segementPath.join("/");
+        var localPath = window.location.toString().split("/");
+        localPath.pop();
+        localPath = localPath.join("/");
+        if(localPath == segementPath && potentialPageName != sw.listName){
+            root.setAttribute("id", "page-"+potentialPageName);
+            if(sw.post.items[potentialPageName]){
+                sw.post.display(potentialPageName);
+            }
         }
         
-        
-        newPosts += "<li>";
-        
-        newPosts+= "<div class='message"+selected+"' draggable='true' ondragstart='sw.drag.start(this)' ondragend='sw.drag.end(this)' onclick='sw.post.itemClicked(this)'>" 
-                
-                    +  "<button class='closeBtn' onclick='sw.post.requestDeleteThis(this.parentNode)'></button>"
-                    
-                    +  "<div style='float:left; width:15%;'>"
-                    +      "<image src='"+thumbnail+"'></image>"
-                    +  "</div>"
-                    
-                    +  "<div style='float:left; width:50%;'>"
-                    +      "<div class='postTitle'>"+sw.post.items[i].title+"</div>"
-                    +      "<div class='postURL'>"+sw.post.items[i].url+"</div>"
-                    +  nestedPage
-                    +  "</div>"
-                    
-                    
-                +  "</div>";
-                
-        
-        newPosts += "</li>"
     }
-    
-    newPosts +=         "</ul>"
-             +      "</div>"
-             +   "</div>";
-             
-             /*"<p>Drag your items here to remove them.</p><ul class='tdd-trashbin'></ul>"*/
-    document.querySelector("#page").innerHTML = newPosts;
-    
-    
-    
-    
-   
-};
-
+}
 
 
 //submits a new post
@@ -159,7 +174,7 @@ sw.post.send = function() {
     navigator.geolocation.getCurrentPosition(function(pos){
         var msg = document.querySelector("#postBox").value;
         document.querySelector("#postBox").value = "";
-        sw.socket.emit('items', {message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude }); //post to?        
+        sw.socket.emit('items', {message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude, page: sw.listName }); //post to?        
     });
 };
 
@@ -174,24 +189,26 @@ sw.post.itemClicked = function(node){
         }
         return n+1;
     })(node);
-    sw.post.selectItemByIndex(index);
+    sw.post.selectItemByIndex(index, sw.post.getListOfNode(node));
     
 }
 
-sw.post.selectItemByIndex = function(index) {
+sw.post.selectItemByIndex = function(index, page) {
 
-    sw.index.send( index );
+    sw.index.send( index, page );
     
     //preview etc the new node
-    sw.index.current = index;
-    sw.post.display();
+    sw.index.current[page] = index;
+    
+    sw.post.display(page);
     if(sw.post.items[index] && sw.post.items[index].url){
-        sw.preview.display( sw.post.items[index].url );
+        sw.preview.display( sw.post.items[index].url, page );
     }
 }
 
 
 sw.post.requestDeleteThis = function(node) {
+    console.log(node);
     var index = (function(node) {
         var n = 0;
         while (node = node.nextSibling){
@@ -199,29 +216,34 @@ sw.post.requestDeleteThis = function(node) {
         }
         return n+1;
     })(node);
-    sw.post.requestDelete(index);
+    console.log(node.parentNode);
+    if(node.parentNode.id == "page"){
+        sw.post.requestDelete(index, sw.listName);
+    } else {
+        sw.post.requestDelete(index, node.parentNode.parentNode.id.split("-")[1].split("\n")[0]);
+    }
     
-    event.stopPropagation();
+    event.stopPropagation();    
     window.event.cancelBubble = true;
 }
 
-sw.post.requestDelete = function(deleteIndex) {
-    sw.socket.emit("deleteItem", { index: deleteIndex } );
+sw.post.requestDelete = function(deleteIndex, page) {
+    sw.socket.emit("deleteItem", { index: deleteIndex, page: page } );
 }
 
-sw.post.removeItem = function(index) {
-    for(var i = 0; i < sw.post.items.length; i++) {
-        if(sw.post.items[i].listIndex == index) {
-            sw.post.items.splice(i, 1);
+sw.post.removeItem = function(index, page) {
+    for(var i = 0; i < sw.post.items[page].length; i++) {
+        if(sw.post.items[page][i].listIndex == index) {
+            sw.post.items[page].splice(i, 1);
             break;
         }
     }
     
-    for(var i = 0; i < sw.post.items.length; i++) {
-        if(sw.post.items[i].listIndex > index) {
-            sw.post.items[i].listIndex--;
+    for(var i = 0; i < sw.post.items[page].length; i++) {
+        if(sw.post.items[page][i].listIndex > index) {
+            sw.post.items[page][i].listIndex--;
         }
     }
         
-    sw.post.display();
+    sw.post.display( page );
 }

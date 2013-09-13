@@ -43,24 +43,20 @@ exports.run = function() {
         var html = "file not found";
         try {
             
-            
             var lastPathList = uriPath[uriPath.length-1].split(".");
             var type = lastPathList[lastPathList.length-1];
             
+            var n = true;
             if(type == "js"){
-                res.writeHead(200, {
-                    "Content-Type": "application/javascript"
-                });
+                res.writeHead(200, {"Content-Type": "application/javascript"}); n = false;
             }
-            else if(type == "css"){
-                res.writeHead(200, {
-                    "Content-Type": "text/css"
-                });
-            else if(type == "jpg" || type == "gif" || type == "png" || type == "ico"){
-            res.writeHead(200, {
-                "Content-Type": "image"
-            });
-            } else {
+            if(type == "css"){
+                res.writeHead(200, { "Content-Type": "text/css"}); n = false;
+            }
+            if(type == "jpg" || type == "gif" || type == "png" || type == "ico"){
+                res.writeHead(200, {"Content-Type": "image/png"}); n = false;
+            } 
+            if(n){
                 res.writeHead(200);
             }
             
