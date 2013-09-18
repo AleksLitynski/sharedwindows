@@ -1,26 +1,21 @@
 sw.post = {};
 sw.post.items = {};
+sw.post.subbedLists = [];
 // console.log(sw.post.items[i].createdBy, sw.post.items[i].createdOn, sw.post.items[i].id, sw.post.items[i].latitude, sw.post.items[i].listId, sw.post.items[i].listIndex, sw.post.items[i].longitude, sw.post.items[i].thumbnail, sw.post.items[i].title, sw.post.items[i].url);
 
 
 sw.onload.push(function(){
-    
     sw.socket.on('items', function (data) {
         if(!sw.post.items[data.page]) {
             sw.post.items[data.page] = [];
         } 
         
         for(var i = 0; i < data.data.length; i++){
-                
-            var segementPath = data.data[i].url.split("/");
-            var newPageName = segementPath.pop().split("\n")[0];
-            segementPath = segementPath.join("/");
-            var localPath = window.location.toString().split("/");
-            localPath.pop();
-            localPath = localPath.join("/");
-            if(localPath == segementPath){
-                if(!sw.post.items[newPageName]){
-                    sw.socket.emit("subscribe", {list: newPageName});
+            var isURL = sw.helpers.isUrlAList(data.data[i].url);
+            if(isURL != false){
+                if( !sw.post.subbedLists.some(function(ele){return (ele == isURL)}) ){
+                    sw.post.subbedLists.push(isURL);
+                    sw.socket.emit("subscribe", {list: isURL});
                 } 
             }
             sw.post.addItemTo(data.page, data.data[i]);
@@ -70,122 +65,176 @@ sw.post.addItemTo = function(list, item){
 }
 
 sw.post.moveItem = function(page, from, to){
-    
-    var toMoveId = sw.post.items[page][from - 1].id;
+    if((from - 1) >= 0){
+        var toMoveId = sw.post.items[page][from - 1].id;
         
-    var rising = from > to;
-    for(var i = 0; i < sw.post.items[page].length; i++){
-        if(rising) {
-            if(sw.post.items[page][i].listIndex < from && sw.post.items[page][i].listIndex >= to) {
-                sw.post.items[page][i].listIndex += 1;
+        var rising = from > to;
+        for(var i = 0; i < sw.post.items[page].length; i++){
+            if(rising) {
+                if(sw.post.items[page][i].listIndex < from && sw.post.items[page][i].listIndex >= to) {
+                    sw.post.items[page][i].listIndex += 1;
+                }
+                
+            } else {
+                if(sw.post.items[page][i].listIndex > from && sw.post.items[page][i].listIndex <= to) {
+                    sw.post.items[page][i].listIndex -= 1;
+                }
             }
-            
-        } else {
-            if(sw.post.items[page][i].listIndex > from && sw.post.items[page][i].listIndex <= to) {
-                sw.post.items[page][i].listIndex -= 1;
+        }
+        for(var i = 0; i < sw.post.items[page].length; i++) {
+            if(sw.post.items[page][i].id == toMoveId) {
+                sw.post.items[page][i].listIndex = to;
+                break;
             }
+        }
+        
+        sw.post.items[page].sort(function (a, b) {
+            return a.listIndex - b.listIndex;
+        });
+        
+        //do not select the moved element if it is a list
+        if(sw.post.items[page][to-1] && sw.helpers.isUrlAList(sw.post.items[page][to-1].url) == false){
+            sw.post.selectItemByIndex(to, page);
         }
     }
-    for(var i = 0; i < sw.post.items[page].length; i++) {
-        if(sw.post.items[page][i].id == toMoveId) {
-            sw.post.items[page][i].listIndex = to;
-            break;
-        }
-    } 
     
-    sw.post.items[page].sort(function (a, b) {
-        return a.listIndex - b.listIndex;
-    });
-    
-    //I NEED TO ONLY DO THIS IF THE MOVING ENTITY IS NOT A LIST!!!    
-    sw.post.selectItemByIndex(to, page);
 }
 
-sw.post.getNodeOfList = function(listName){
-    var page = document.querySelector("#page-" + listName);
+sw.post.getNodesOfList = function(listName){
+    var page = document.querySelectorAll(".page-" + listName);
     if(listName == sw.listName) {
-        page = document.querySelector("#page");
+        page = [document.querySelector("#page")];
     }
     return page;
 }
 sw.post.getListOfNode = function(node){
-    if(node.parentNode.id == "page") {
-        return sw.listName;
-    } else {
-        return node.parentNode.parentNode.id.split("-")[1];
+    function isSubPage(nodeI){
+        if(nodeI.className && hasHitMessage >= 2 ){
+            for(var i = 0; i < nodeI.className.split(" ").length; i++){
+                var classy = nodeI.className.split(" ")[i];
+                if(classy.split("-")[0] == "page" ){
+                    return classy.split("-")[1];
+                }
+            }
+        }
+        return false;
     }
+    function isPage(nodeI){
+        if(nodeI.id){
+            if(nodeI.id == "page"){
+                return sw.listName;
+            }
+        }
+        return false;
+    }
+    var hasHitMessage = 0;
+    var toReturn = false;
+    while(node != undefined){
+        if(node.classList && node.classList.contains("message")) {
+            hasHitMessage++;
+        }
+        if(toReturn = isSubPage(node)){
+            return toReturn;
+        }
+        if(toReturn = isPage(node)){
+            return toReturn;
+        }
+        node = node.parentNode;
+    }
+    return false;
+    
 }
 
 sw.post.display = function(nodeName) {
     
-    var node = sw.post.getNodeOfList(nodeName);
+    var nodes = sw.post.getNodesOfList(nodeName);
     var toDisplay = sw.post.items[nodeName];
-    
-    if(nodeName != sw.listName){
-        node.onclick = "";
-        node.style.height = "auto";
-        node = node.querySelector(".nestedPages");
+   
+    for(var node = 0; node < nodes.length; node++){
+        displaySingleNode(nodes[node], toDisplay, nodeName);
     }
-    node.innerHTML = "";
+    
+    function displaySingleNode(node, toDisplay, nodeName){
+        if(nodeName != sw.listName){
+            node.onclick = "";
+            /*function(e){
+                if(e.srcElement.classList.contains("listMessageOpen") || e.srcElement.classList.contains("listMessageClosed") ){
+                    if(e.srcElement.classList.contains("listMessageOpen")){
+                        e.srcElement.classList.remove("listMessageOpen");
+                        e.srcElement.classList.add("listMessageClosed");
+                    } else {
+                        e.srcElement.classList.add("listMessageOpen");
+                        e.srcElement.classList.remove("listMessageClosed");
+                    }
+                }
+            };*/
+            node.classList.add("listMessageOpen");
+            node = node.querySelector(".nestedPages");
+        }
+        node.innerHTML = "";
 
-    for(var i = toDisplay.length-1; i >= 0 ; i--){
-        
-        var selected = "";
-        if(sw.index.current[nodeName] == toDisplay[i].listIndex) {
-            selected = " selectedMessage";
-        }
-        
-        var thumbnail = toDisplay[i].thumbnail;
-        if( thumbnail == "about:blank"){
-            thumbnail = "";
-        }
-        
-        
-        var root = document.createElement("div");
-        root = node.appendChild(root);
-        root.setAttribute("class", "message" + selected);
-        root.setAttribute("draggable", true);
-        root.setAttribute("ondragstart", "sw.drag.start(this); ");
-        root.setAttribute("ondragend", "sw.drag.end(this)");
-        root.setAttribute("onclick", "sw.post.itemClicked(this)");
-        
-        root.innerHTML  +=  "<button class='closeBtn' onclick='sw.post.requestDeleteThis(this.parentNode)'></button>"
-                        +  "<div style='float:left; width:15%;'>"
-                        +      "<image src='"+thumbnail+"'></image>"
-                        +  "</div>"
-                        +  "<div style='float:left; width:50%;'>"
-                        +      "<div class='postTitle'>"+toDisplay[i].title+"</div>"
-                        +      "<div class='postURL'>"+toDisplay[i].url+"</div>"
-                        +  "</div>"
-                        +  "<div class='nestedPages'>"
-                        +  "</div>";
-                        
-        var segementPath = toDisplay[i].url.split("/");
-        var potentialPageName = segementPath.pop().split("\n")[0];
-        segementPath = segementPath.join("/");
-        var localPath = window.location.toString().split("/");
-        localPath.pop();
-        localPath = localPath.join("/");
-        if(localPath == segementPath && potentialPageName != sw.listName){
-            root.setAttribute("id", "page-"+potentialPageName);
-            if(sw.post.items[potentialPageName]){
-                sw.post.display(potentialPageName);
+        for(var i = toDisplay.length-1; i >= 0 ; i--){
+            
+            var selected = "";
+            if(sw.index.current[nodeName] == toDisplay[i].listIndex) {
+                selected = " selectedMessage";
+            }
+            
+            var thumbnail = toDisplay[i].thumbnail;
+            if( thumbnail == "about:blank"){
+                thumbnail = "";
+            }
+            
+            var root = document.createElement("div");
+            root = node.appendChild(root);
+            root.setAttribute("class", "message" + selected);
+            root.setAttribute("draggable", true);
+            root.setAttribute("ondragstart", "sw.drag.start(this); ");
+            root.addEventListener("dragend", sw.drag.end );
+            root.setAttribute("onclick", "sw.post.itemClicked(this)");
+            
+            root.innerHTML  +=  "<button class='closeBtn' onclick='sw.post.requestDeleteThis(this.parentNode)'></button>"
+                            +  "<div style='float:left; width:15%;'>"
+                            +      "<image src='"+thumbnail+"'></image>"
+                            +  "</div>"
+                            +  "<div style='float:left; width:75%;overflow:hidden'>"
+                            +      "<div class='postTitle'>"+toDisplay[i].title+"</div>"
+                            +      "<div class='postURL'>"+toDisplay[i].url+"</div>"
+                            +  "</div>"
+                            +  "<div class='nestedPages'>"
+                            +  "</div>";
+                            
+            root.querySelector(".nestedPages").onclick = prev;
+            root.querySelector(".nestedPages").ondragstart = prev;
+            //root.querySelector(".nestedPages").ondragend = prev;
+            function prev(e){
+                e.stopPropagation();
+            }
+                            
+            var isURL = sw.helpers.isUrlAList(toDisplay[i].url);
+            if(isURL != false && isURL != sw.listName){
+                root.classList.add("page-"+isURL);
+                sw.drag.addDragSupport( root );
+                if(sw.post.items[isURL]){
+                    sw.post.display(isURL);
+                }
             }
         }
-        
     }
 }
 
 
 //submits a new post
 sw.post.send = function() {
+    sw.post.post(document.querySelector("#postBox").value, sw.listName);
     
-    navigator.geolocation.getCurrentPosition(function(pos){
-        var msg = document.querySelector("#postBox").value;
-        document.querySelector("#postBox").value = "";
-        sw.socket.emit('items', {message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude, page: sw.listName }); //post to?        
-    });
+    setTimeout(function(){document.querySelector("#postBox").value = "";},1);
 };
+sw.post.post = function(msg, list){
+    navigator.geolocation.getCurrentPosition(function(pos){
+        sw.socket.emit('items', {message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude, page: list }); //post to?        
+    });
+}
 
 
 //called when a message image is clicked
@@ -203,7 +252,6 @@ sw.post.itemClicked = function(node){
 }
 
 sw.post.selectItemByIndex = function(index, page) {
-
     sw.index.send( index, page );
     
     //preview etc the new node
@@ -217,20 +265,14 @@ sw.post.selectItemByIndex = function(index, page) {
 
 
 sw.post.requestDeleteThis = function(node) {
-    console.log(node);
     var index = (function(node) {
         var n = 0;
         while (node = node.nextSibling){
             n++;
         }
         return n+1;
-    })(node);
-    console.log(node.parentNode);
-    if(node.parentNode.id == "page"){
-        sw.post.requestDelete(index, sw.listName);
-    } else {
-        sw.post.requestDelete(index, node.parentNode.parentNode.id.split("-")[1].split("\n")[0]);
-    }
+    })(node);    
+    sw.post.requestDelete(index, sw.post.getListOfNode(node));
     
     event.stopPropagation();    
     window.event.cancelBubble = true;

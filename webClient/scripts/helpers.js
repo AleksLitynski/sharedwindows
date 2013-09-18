@@ -18,3 +18,19 @@ sw.helpers.childIndex = function(node) {
     }
     return i;
 }
+
+sw.helpers.isUrlAList = function(url){
+    var segementPath = url.split("/");
+    var newPageName = segementPath.pop().split("\n")[0];
+    segementPath = segementPath.join("/");
+    var localPath = window.location.toString().split("/");
+    localPath.pop();
+    localPath = localPath.join("/");
+    if(localPath == segementPath){
+        return newPageName;
+    } else {
+        return false;
+    }
+}
+
+

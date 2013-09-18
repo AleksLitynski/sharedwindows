@@ -5,45 +5,35 @@ sw.drag.dragTo.current = 0;  //weird hack. It always puts the item on top of the
 sw.drag.dragTo.previous = 0; //when done dragging, so I store the previous element as the "move to" target.
 sw.drag.startedDrag = 0;
 sw.drag.currentDragged;
-sw.drag.passCount = 0;
 
-/*
-http://jsfiddle.net/Mk4YH/light/
-http://jqueryui.com/sortable/
-*/
+
 sw.onload.push(function(){ 
 
     //display a blank space wherever the user is hovering the dragged div.
-    document.querySelector("#page").ondrag = draggyMoved;
-    document.querySelector("#page").onscroll = draggyMoved;
+    
+    sw.drag.addDragSupport( document.querySelector("#page") );
+
+})
+
+sw.drag.addDragSupport = function(toSupport){
+
+    toSupport.ondrag = draggyMoved;
+    toSupport.onscroll = draggyMoved;
     function draggyMoved(event){
-        
-        
-        if(event.y != sw.drag.currentY){
-                
+        if(event.y != sw.drag.currentY && sw.drag.currentDragged){
+       
             placeholder.style.left = event.x + "px";
             placeholder.style.top = event.y + "px";
-            
-            function getStyle(el, styleProp)    {
-                var x = document.getElementById(el);
-                if (x.currentStyle)
-                    var y = x.currentStyle[styleProp];
-                else if (window.getComputedStyle)
-                    var y = document.defaultView.getComputedStyle(x,null).getPropertyValue(styleProp);
-                return y;
-            }
-            
+
             placeholder.style.width = (sw.drag.currentDragged.offsetWidth) + "px";
                         
-            for(var i = 0; i < document.querySelector("#page").children.length; i++) {
-            
-            
-                var child = document.querySelector("#page").children[i];
+            for(var i = 0; i < event.srcElement.parentElement.children.length; i++) {
+                
+                var child = event.srcElement.parentElement.children[i];
                 var top = sw.helpers.ObjectPosition(child) - document.querySelector("#page").scrollTop;
                 var bottom = child.clientHeight + top;
                                 
                 if(event.y > top && event.y < bottom) {
-                    
                     
                     var rising = event.y < sw.drag.currentY;
                     if(rising){
@@ -58,11 +48,9 @@ sw.onload.push(function(){
                 }
             }
             sw.drag.currentY = event.y;
-            
-        }       
+        }
     }
-
-})
+}
 
 
 
@@ -74,15 +62,12 @@ placeholder.style.position = "absolute";
 placeholder.style.display = "none";
 
 sw.drag.start = function(node) {
-    sw.drag.currentDragged = node;//sw.helpers.childIndex(node);
+    sw.drag.currentDragged = node;
     sw.drag.startedDrag = sw.helpers.childIndex(node);
     
     placeholder.style.display = "inline";
     placeholder.innerHTML = node.innerHTML;
-    placeholder.ondrag = function(){};
-    placeholder.ondragstart = function(){};
-    placeholder.ondragend = function(){};
-    placeholder.onclick = function(){};
+    placeholder.ondrag = placeholder.ondragstart = placeholder.ondragend = placeholder.onclick = function(){};
     placeholder.classList.add("draggedMessage");
     
     node.classList.add("draggedMessage");
@@ -91,23 +76,52 @@ sw.drag.start = function(node) {
     
     
 }
-sw.drag.end = function(node) {
-    //debugger;
-    
-    //animate from dragstop to position, then place!!
+sw.drag.end = function(e) {
+
+    e.stopPropagation();
+    e.preventDefault();
+    var node = e.srcElement;
+
     placeholder.style.display = "none";
     placeholder.classList.remove("draggedMessage");
-    
-    
-    var childLength = document.querySelector("#page").children.length;
+    var childLength = 0;
+    if(node.parentNode){
+        childLength = node.parentNode.children.length;
+    }
     var to   = childLength - sw.drag.dragTo.previous + 1;
     var from = childLength - sw.drag.startedDrag + 1;
     
-    
-    
-    sw.socket.emit('moveIndex', {
-                                    currentIndex: from,
-                                    newIndex: to,
-                                    page: sw.listName
-                                });
+    sw.socket.emit('moveIndex', { currentIndex: from, newIndex: to, page: sw.post.getListOfNode(node) });
 }
+
+
+
+document.querySelector("#page").ondragover = function(e){e.stopPropagation(); e.preventDefault();};
+document.querySelector("#page").ondrop = function(e){
+    if(!placeholder.classList.contains("draggedMessage")){
+        var list = sw.post.getListOfNode(e.target);
+
+        var dropOver = e.target;
+        while(!dropOver.classList.contains("message")){
+            if(dropOver.parentNode == undefined) {
+                return false;
+            }
+            dropOver = dropOver.parentNode;
+        }
+
+        var text = String(e.dataTransfer.getData('Text'));
+        console.log(list);
+        sw.post.post(text, list);
+        
+
+        //dropOver
+        //sw.socket.emit('moveIndex', { currentIndex: from, newIndex: to, page: list });
+
+        e.stopPropagation();
+        e.preventDefault();
+    }
+};
+
+
+window.ondragover = function(e){e.stopPropagation(); e.preventDefault();};
+window.ondrop = function(e){e.stopPropagation(); e.preventDefault();};

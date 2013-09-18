@@ -9,6 +9,10 @@ sw.onload.push(function(){
 });
 
 sw.page.create = function(pageName){
+    if(document.querySelector("#postToCurrent").checked){
+        var msg = "http://" + window.location.host + "/lists/" + document.querySelector("#newPageName").value;
+        sw.post.post(msg, sw.listName);
+    }
     sw.socket.emit('pageTask', {
                                     pageName: document.querySelector("#newPageName").value,
                                     type: "create",

@@ -8,10 +8,10 @@
         <link rel="stylesheet" type="text/css" href="css/reset.css" />
         <link rel="stylesheet" type="text/css" href="css/options.css" />
         <link rel="stylesheet" type="text/css" href="css/items.css" />
-        <link rel="stylesheet" type="text/css" href="css/treeCSS/tree-drag-drop.css" />
         
 		<script src='scripts/require.js'></script>
 		<script src='scripts/loader.js'></script>
+
         
     </head>
 	
@@ -28,18 +28,18 @@
             
             <div id="optionsBar">
                 
-                <span class="option" id="showViewBtn">View</span>
+                <!--span class="option" id="showViewBtn">View</span>
                 <div id="viewOptions" class="expandedOption"> <h2>View Options</h2>
                     <button>mini mode</button>
                     <button>bottom bar</button>
                     <button>left bar</button>
                     <button>Very large preview mode</button>
-                </div>
-                <span class="option" id="showNewBtn">New</span>
+                </div-->
+                <span class="option" id="showNewBtn">New List</span>
                 <div id="createNew" class="expandedOption"> <h2>Create New</h2>
-                    <input id="newPageName" placeholder="name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input>
-                    <input type="checkbox" id="postToCurrent" value="post to current?"> post to current?</input></br>
-                    <button onclick="sw.page.create()" id="createNewCanvasBtn">create</button>
+                    <input id="newPageName" placeholder="name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input></br>
+                    <input type="checkbox" id="postToCurrent" value="post to current?" checked="checked"> post new list to current list?</input></br>
+                    <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button>
                 </div>
                 <span class="option" id="showMoreBtn">More</span>
                 <div id="moreOptions" class="expandedOption"> 
@@ -56,10 +56,15 @@
         </div>
         
         <div id="preview">
-            
-            
-        
+
             <iframe src="" id="previewImage"></iframe>
+
+
+        
+            <!--frameset cols="100%">
+                <frame src="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">
+            </frameset-->
+
         </div>
         
 	</body>
