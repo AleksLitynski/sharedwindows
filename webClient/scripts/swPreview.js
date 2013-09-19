@@ -3,7 +3,7 @@ sw.preview = {};
 sw.preview.current = "";
 
 //loads a preview of a given address.
-sw.preview.display = function( address, list ) {
+sw.preview.display = function( address ) {
     if(address.substr(0, 7) == "http://" || address.substr(0, 8) == "https://"){
         if(sw.preview.current != address){ 
             if(address.substring(0, "http://127.0.0.1/lists/".length) != "http://127.0.0.1/lists/"){

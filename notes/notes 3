@@ -34,3 +34,78 @@ more obvious indents/"level" different from selection
 
 
 
+
+
+/global
+-> /aleks
+-> /jon
+
+/aleks
+-> /aleks
+/aleks/home
+
+/secret
+
+
+/aleks
+-> alink.com
+
+sw.com/aleks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/browsingTogether: 0
+-> comc.com
+
+/aleks
+-> /bowsingTogether :0
+	-> comc.com
+
+/jon
+-> /browsingTogether :0
+	-> comc.com :0
+
+sharedwindows.net/aleks
+ /browsingTogether
+
+
+ sharedwindows.net/browsingTogether
+
+
+
+
+
+
+
+
+
+ /aleks
+ -> sw.com/global
+ -> adadadad
+ -> 

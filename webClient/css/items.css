@@ -1,102 +1,47 @@
 .message{
     border-top:1px solid lightgrey;
     margin:0px;
-    height:25px;
-    background-color:white;
-    padding:4px;
-    padding-bottom:10px;
+    height:30px;
+    /*background-color:white;*/
+    padding:2px;
         
     white-space: nowrap;
     overflow: hidden;
-    
-    cursor: pointer; cursor: hand;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: moz-none;
-    -ms-user-select: none;
-    user-select: none;
-    
+        
     cursor:move;
     
 }
 
 .selectedMessage{
-   background-color:#f1f1ff;
+    /*background-color:#f1f1ff;*/
+    background-color: rgba(255, 100, 0, 1);
 }
+.draggedMessage{}
 
-
-@-webkit-keyframes glow {
-	0%      {
-                background-color:#ccc;
-            }
-            
-	50%         {
-                background-color:#eee;
-            }
-    
-	100%       {
-                background-color:#ccc5;
-            }
-}
-
-.draggedMessage{
-    /*-webkit-animation-name:             glow;
-    -webkit-animation-duration:         2.1s;
-    -webkit-animation-iteration-count:  infinite;
-    -webkit-animation-timing-function:	ease-in-out;
-    background-color:#ccc;*/
-    background-color:#f1f1ff;
-
-    
-}
 
 .postURL {
     font-size: 65%;
     color:grey;
 }
 
-.postTitle {
-
-}
-
-
-
-.closeBtn {
-    float:right;
-    
-    cursor:pointer;
-    height:15px;
-    width:15px;
-    
-    background-image:url(bkgs/close.png);
-    background-size: 13px;
-}
+.postTitle {}
 
 
 .nestedPages{
     clear:both;
     padding-left:20px;
-    padding-top:20px;
+    padding-top:2px;
 }
 
-.listMessageOpen{
-    
+.listMessageOpen{  
     height:auto;
 }
 
-.listMessageClosed{
-}
-
-/*-webkit-animation-name:             grow;
-    -webkit-animation-duration:         1s;
-    @-webkit-keyframes grow {
-    0%      {
-                height:39px;
-            }
-            
-    100%    {
-                height:160px;
-            }
-}*/
+.listMessageClosed{}
     
+.postInfo{
+    background-color:white;
+    width:auto;
+    height:25px;
+    padding-bottom:5px;
+}

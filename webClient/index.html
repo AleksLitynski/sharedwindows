@@ -8,33 +8,25 @@
         <link rel="stylesheet" type="text/css" href="css/reset.css" />
         <link rel="stylesheet" type="text/css" href="css/options.css" />
         <link rel="stylesheet" type="text/css" href="css/items.css" />
+        <link rel="stylesheet" type="text/css" href="css/newArea.css" />
         
-		<script src='scripts/require.js'></script>
-		<script src='scripts/loader.js'></script>
+		<script src='scripts/libraries/require.js'></script>
+		<script src='scripts/swLoader.js'></script>
 
-        
     </head>
 	
 	<body>
         <div id="controlPanel">
             
             <div id="postLink">
-                <input readonly="readonly" id="pageName"></input>
                 
+                <div id="newList">F+</div>
                 <textarea id="postBox" placeholder="Drop files here"></textarea>
             </div>
             
             <div id="page"></div>
             
             <div id="optionsBar">
-                
-                <!--span class="option" id="showViewBtn">View</span>
-                <div id="viewOptions" class="expandedOption"> <h2>View Options</h2>
-                    <button>mini mode</button>
-                    <button>bottom bar</button>
-                    <button>left bar</button>
-                    <button>Very large preview mode</button>
-                </div-->
                 <span class="option" id="showNewBtn">New List</span>
                 <div id="createNew" class="expandedOption"> <h2>Create New</h2>
                     <input id="newPageName" placeholder="name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input></br>
@@ -56,6 +48,8 @@
         </div>
         
         <div id="preview">
+            
+            <input readonly="readonly" id="pageName"></input>
 
             <iframe src="" id="previewImage"></iframe>
 

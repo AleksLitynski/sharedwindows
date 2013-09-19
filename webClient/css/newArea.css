@@ -1,0 +1,28 @@
+/*The area above the current list*/
+#postLink{
+    height:40px;
+}
+
+/*The button to make a new list*/
+#newList{
+    float:left;
+    width:20%;
+    height:100%;
+    background-color:blue;
+}
+
+/*the box you can type a custom link into to post it*/
+#postBox{ 
+    float:left;
+    width:80%;
+    height:100%;
+    
+    resize: none;
+    
+    text-align:center;
+    vertical-align:middle;
+
+    padding:0px;
+    margin:0px;
+    border:0px;
+}

@@ -9,8 +9,6 @@ sw.drag.currentDragged;
 
 sw.onload.push(function(){ 
 
-    //display a blank space wherever the user is hovering the dragged div.
-    
     sw.drag.addDragSupport( document.querySelector("#page") );
 
 })
@@ -91,38 +89,5 @@ sw.drag.end = function(e) {
     var to   = childLength - sw.drag.dragTo.previous + 1;
     var from = childLength - sw.drag.startedDrag + 1;
     
-    sw.socket.emit('moveIndex', { currentIndex: from, newIndex: to, page: sw.post.getListOfNode(node) });
+    sw.socket.emit('moveIndex', { currentIndex: from, newIndex: to, page: sw.helpers.getListOfNode(node) });
 }
-
-
-
-document.querySelector("#page").ondragover = function(e){e.stopPropagation(); e.preventDefault();};
-document.querySelector("#page").ondrop = function(e){
-
-    e.stopPropagation();
-    e.preventDefault();
-    if(!placeholder.classList.contains("draggedMessage")){
-        var list = sw.post.getListOfNode(e.target);
-
-        var dropOver = e.target;
-        
-        while(dropOver && dropOver.classList && !dropOver.classList.contains("message")){
-            if(dropOver.parentNode == undefined) {
-                return false;
-            }
-            dropOver = dropOver.parentNode;
-        }
-        
-        var text = String(e.dataTransfer.getData('Text'));
-        sw.post.post(text, list);
-        
-
-        //dropOver
-        //sw.socket.emit('moveIndex', { currentIndex: from, newIndex: to, page: list });
-
-    }
-};
-
-
-//window.ondragover = function(e){e.stopPropagation(); e.preventDefault();};
-//window.ondrop = function(e){e.stopPropagation(); e.preventDefault();};

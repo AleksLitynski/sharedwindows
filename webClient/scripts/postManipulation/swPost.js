@@ -3,8 +3,8 @@ sw.post.items = {};
 sw.post.subbedLists = [];
 // console.log(sw.post.items[i].createdBy, sw.post.items[i].createdOn, sw.post.items[i].id, sw.post.items[i].latitude, sw.post.items[i].listId, sw.post.items[i].listIndex, sw.post.items[i].longitude, sw.post.items[i].thumbnail, sw.post.items[i].title, sw.post.items[i].url);
 
-
 sw.onload.push(function(){
+
     sw.socket.on('items', function (data) {
         if(!sw.post.items[data.page]) {
             sw.post.items[data.page] = [];
@@ -18,31 +18,18 @@ sw.onload.push(function(){
                     sw.socket.emit("subscribe", {list: isURL});
                 } 
             }
-            sw.post.addItemTo(data.page, data.data[i]);
+            sw.post.addItem(data.page, data.data[i]);
         }
         //find the node, pass in the items
         sw.post.display(data.page);
         
     });
-    
-    
-    sw.socket.on("moveIndex", function(data){
-        sw.post.moveItem(data.page, data.from, data.to);
-        sw.post.display(data.page);
-    });
-    
-    sw.socket.on("deleteItem", function(data){
-        if(data.success) {
-            sw.post.removeItem(data.toDelete, data.page);
-        }
-    });
-    
+
+
 });
 
 
-
-
-sw.post.addItemTo = function(list, item){
+sw.post.addItem = function(list, item){
     
     sw.post.items[list].push(item);
     sw.post.items[list].sort(function (a, b) {
@@ -64,90 +51,9 @@ sw.post.addItemTo = function(list, item){
     }
 }
 
-sw.post.moveItem = function(page, from, to){
-    if((from - 1) >= 0){
-        var toMoveId = sw.post.items[page][from - 1].id;
-        
-        var rising = from > to;
-        for(var i = 0; i < sw.post.items[page].length; i++){
-            if(rising) {
-                if(sw.post.items[page][i].listIndex < from && sw.post.items[page][i].listIndex >= to) {
-                    sw.post.items[page][i].listIndex += 1;
-                }
-                
-            } else {
-                if(sw.post.items[page][i].listIndex > from && sw.post.items[page][i].listIndex <= to) {
-                    sw.post.items[page][i].listIndex -= 1;
-                }
-            }
-        }
-        for(var i = 0; i < sw.post.items[page].length; i++) {
-            if(sw.post.items[page][i].id == toMoveId) {
-                sw.post.items[page][i].listIndex = to;
-                break;
-            }
-        }
-        
-        sw.post.items[page].sort(function (a, b) {
-            return a.listIndex - b.listIndex;
-        });
-        
-        //do not select the moved element if it is a list
-        if(sw.post.items[page][to-1] && sw.helpers.isUrlAList(sw.post.items[page][to-1].url) == false){
-            sw.post.selectItemByIndex(to, page);
-        }
-    }
-    
-}
-
-sw.post.getNodesOfList = function(listName){
-    var page = document.querySelectorAll(".page-" + listName);
-    if(listName == sw.listName) {
-        page = [document.querySelector("#page")];
-    }
-    return page;
-}
-sw.post.getListOfNode = function(node){
-    function isSubPage(nodeI){
-        if(nodeI.className && hasHitMessage >= 2 ){
-            for(var i = 0; i < nodeI.className.split(" ").length; i++){
-                var classy = nodeI.className.split(" ")[i];
-                if(classy.split("-")[0] == "page" ){
-                    return classy.split("-")[1];
-                }
-            }
-        }
-        return false;
-    }
-    function isPage(nodeI){
-        if(nodeI.id){
-            if(nodeI.id == "page"){
-                return sw.listName;
-            }
-        }
-        return false;
-    }
-    var hasHitMessage = 0;
-    var toReturn = false;
-    while(node != undefined){
-        if(node.classList && node.classList.contains("message")) {
-            hasHitMessage++;
-        }
-        if(toReturn = isSubPage(node)){
-            return toReturn;
-        }
-        if(toReturn = isPage(node)){
-            return toReturn;
-        }
-        node = node.parentNode;
-    }
-    return false;
-    
-}
-
 sw.post.display = function(nodeName) {
     
-    var nodes = sw.post.getNodesOfList(nodeName);
+    var nodes = sw.helpers.getNodesOfList(nodeName);
     var toDisplay = sw.post.items[nodeName];
    
     for(var node = 0; node < nodes.length; node++){
@@ -191,7 +97,7 @@ sw.post.display = function(nodeName) {
             root.setAttribute("draggable", true);
             root.setAttribute("ondragstart", "sw.drag.start(this); ");
             root.addEventListener("dragend", sw.drag.end );
-            root.setAttribute("onclick", "sw.post.itemClicked(this)");
+            root.setAttribute("onclick", "sw.index.itemClicked(this)");
             
             root.innerHTML  +=  "<div class='postInfo'>" //sw.post.requestDeleteThis(this.parentNode)
                             +       "<div style='float:left; width:15%;'>"
@@ -225,6 +131,7 @@ sw.post.display = function(nodeName) {
 }
 
 
+
 //submits a new post
 sw.post.send = function(toPost) {
 
@@ -239,64 +146,4 @@ sw.post.post = function(msg, list){
 }
 
 
-//called when a message image is clicked
-sw.post.itemClicked = function(node){
 
-    var index = (function(node) {
-        var n = 0;
-        while (node = node.nextSibling){
-            n++;
-        }
-        return n+1;
-    })(node);
-    sw.post.selectItemByIndex(index, sw.post.getListOfNode(node));
-    
-}
-
-sw.post.selectItemByIndex = function(index, page) {
-    sw.index.send( index, page );
-    
-    //preview etc the new node
-    sw.index.current[page] = index;
-    
-    sw.post.display(page);
-    if(sw.post.items[index] && sw.post.items[index].url){
-        sw.preview.display( sw.post.items[index].url, page );
-    }
-}
-
-
-sw.post.requestDeleteThis = function(node) {
-    var index = (function(node) {
-        var n = 0;
-        while (node = node.nextSibling){
-            n++;
-        }
-        return n+1;
-    })(node);    
-    sw.post.requestDelete(index, sw.post.getListOfNode(node));
-    
-    event.stopPropagation();    
-    window.event.cancelBubble = true;
-}
-
-sw.post.requestDelete = function(deleteIndex, page) {
-    sw.socket.emit("deleteItem", { index: deleteIndex, page: page } );
-}
-
-sw.post.removeItem = function(index, page) {
-    for(var i = 0; i < sw.post.items[page].length; i++) {
-        if(sw.post.items[page][i].listIndex == index) {
-            sw.post.items[page].splice(i, 1);
-            break;
-        }
-    }
-    
-    for(var i = 0; i < sw.post.items[page].length; i++) {
-        if(sw.post.items[page][i].listIndex > index) {
-            sw.post.items[page][i].listIndex--;
-        }
-    }
-        
-    sw.post.display( page );
-}

@@ -33,4 +33,68 @@ sw.helpers.isUrlAList = function(url){
     }
 }
 
+//gets the parent list node of a given list
+sw.helpers.getNodesOfList = function(listName){
+    var page = document.querySelectorAll(".page-" + listName);
+    if(listName == sw.listName) {
+        page = [document.querySelector("#page")];
+    }
+    return page;
+}
 
+//get the list name of a given node
+sw.helpers.getListOfNode = function(node){
+    function isSubPage(nodeI){
+        if(nodeI.className && hasHitMessage >= 2 ){
+            for(var i = 0; i < nodeI.className.split(" ").length; i++){
+                var classy = nodeI.className.split(" ")[i];
+                if(classy.split("-")[0] == "page" ){
+                    return classy.split("-")[1];
+                }
+            }
+        }
+        return false;
+    }
+    function isPage(nodeI){
+        if(nodeI.id){
+            if(nodeI.id == "page"){
+                return sw.listName;
+            }
+        }
+        return false;
+    }
+    var hasHitMessage = 0;
+    var toReturn = false;
+    while(node != undefined){
+        if(node.classList && node.classList.contains("message")) {
+            hasHitMessage++;
+        }
+        if(toReturn = isSubPage(node)){
+            return toReturn;
+        }
+        if(toReturn = isPage(node)){
+            return toReturn;
+        }
+        node = node.parentNode;
+    }
+    return false;
+    
+}
+
+
+//get the node of a given node
+sw.helpers.getNodeOfNode = function(node){
+    
+    function isValid(n){
+        return n.classList && n.classList.contains("message");
+    }
+    while(!isValid(node)){
+        if(node.parentNode) {
+            node = node.parentNode;
+        } else {
+            return false;
+        }
+    }
+    return node;
+    
+}
