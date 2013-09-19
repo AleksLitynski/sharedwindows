@@ -12,6 +12,7 @@ TODO:
 -able to filter by radius
 -drag into a "slot" in the tree
 -do some server side checking (don't just put shit user says into the DB)
+-remove "zombie" page (when delete, remove )
 
 
 NOPE:

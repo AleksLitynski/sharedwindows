@@ -98,30 +98,31 @@ sw.drag.end = function(e) {
 
 document.querySelector("#page").ondragover = function(e){e.stopPropagation(); e.preventDefault();};
 document.querySelector("#page").ondrop = function(e){
+
+    e.stopPropagation();
+    e.preventDefault();
     if(!placeholder.classList.contains("draggedMessage")){
         var list = sw.post.getListOfNode(e.target);
 
         var dropOver = e.target;
-        while(!dropOver.classList.contains("message")){
+        
+        while(dropOver && dropOver.classList && !dropOver.classList.contains("message")){
             if(dropOver.parentNode == undefined) {
                 return false;
             }
             dropOver = dropOver.parentNode;
         }
-
+        
         var text = String(e.dataTransfer.getData('Text'));
-        console.log(list);
         sw.post.post(text, list);
         
 
         //dropOver
         //sw.socket.emit('moveIndex', { currentIndex: from, newIndex: to, page: list });
 
-        e.stopPropagation();
-        e.preventDefault();
     }
 };
 
 
-window.ondragover = function(e){e.stopPropagation(); e.preventDefault();};
-window.ondrop = function(e){e.stopPropagation(); e.preventDefault();};
+//window.ondragover = function(e){e.stopPropagation(); e.preventDefault();};
+//window.ondrop = function(e){e.stopPropagation(); e.preventDefault();};

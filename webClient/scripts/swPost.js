@@ -225,9 +225,10 @@ sw.post.display = function(nodeName) {
 
 
 //submits a new post
-sw.post.send = function() {
-    sw.post.post(document.querySelector("#postBox").value, sw.listName);
-    
+sw.post.send = function(toPost) {
+
+    sw.post.post(toPost, sw.listName);
+
     setTimeout(function(){document.querySelector("#postBox").value = "";},1);
 };
 sw.post.post = function(msg, list){
@@ -297,4 +298,9 @@ sw.post.removeItem = function(index, page) {
     }
         
     sw.post.display( page );
+
+    /*for(var i = 0; i < sw.post.items.length; i++){//for each loaded list
+        sw.index.current
+    }
+    sw.preview.display( "about:blank" );//should display highest level "select", then second highest, then third, etc*/
 }

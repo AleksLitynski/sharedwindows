@@ -41,6 +41,11 @@ sw.loaded = function() {
         sw.onload[toLoad]();
     }  
     
+    document.querySelector("#postBox").ondrop = function(e){
+                                                    sw.post.send( e.dataTransfer.getData('Text') );
+                                                }
+     document.querySelector("#postBox").onkeydown= function(e){ if(e.keyCode == 13){sw.post.send( document.querySelector("#postBox").value );} };
+
     //engages the drag-and-drop
     //$('.treeDragDrop').treeDragDrop(); 
 }
