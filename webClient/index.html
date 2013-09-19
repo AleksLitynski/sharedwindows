@@ -20,28 +20,21 @@
             
             <div id="postLink">
                 
-                <div id="newList">F+</div>
                 <textarea id="postBox" placeholder="Drop files here"></textarea>
             </div>
             
             <div id="page"></div>
             
             <div id="optionsBar">
-                <span class="option" id="showNewBtn">New List</span>
+                <span class="option" id="showNewBtn">New List and Options</span>
                 <div id="createNew" class="expandedOption"> <h2>Create New</h2>
                     <input id="newPageName" placeholder="name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input></br>
                     <input type="checkbox" id="postToCurrent" value="post to current?" checked="checked"> post new list to current list?</input></br>
                     <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button>
-                </div>
-                <span class="option" id="showMoreBtn">More</span>
-                <div id="moreOptions" class="expandedOption"> 
-                    <h2>Extra Options</h2>
+                    </br></br>
                     <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow the leader?</input> </br>
                     <input type="checkbox" id="jumpToCurrent" value="Always load most recent?" checked>Always load most recent?</input> </br>
-                    <span>Distance (miles): </span><input id="radius" value="2"></input>
                 </div>
-                
-                
             </div>
             
             
@@ -49,7 +42,7 @@
         
         <div id="preview">
             
-            <input readonly="readonly" id="pageName"></input>
+            <div id="pageNameBox"><input readonly="readonly" id="pageName"></input></div>
 
             <iframe src="" id="previewImage"></iframe>
 

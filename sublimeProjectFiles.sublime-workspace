@@ -8,58 +8,10 @@
 	"buffers":
 	[
 		{
-			"file": "webClient/scripts/postManipulation/swReorder.js",
+			"file": "webClient/scripts/swPost.js",
 			"settings":
 			{
-				"buffer_size": 3189,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/scripts/postManipulation/swDragIn.js",
-			"settings":
-			{
-				"buffer_size": 1462,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/scripts/postManipulation/swPost.js",
-			"settings":
-			{
-				"buffer_size": 5608,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/scripts/postManipulation/swDelete.js",
-			"settings":
-			{
-				"buffer_size": 948,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/scripts/swIndex.js",
-			"settings":
-			{
-				"buffer_size": 3091,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/scripts/swLoader.js",
-			"settings":
-			{
-				"buffer_size": 767,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/scripts/helpers.js",
-			"settings":
-			{
-				"buffer_size": 2467,
+				"buffer_size": 9976,
 				"line_ending": "Windows"
 			}
 		}
@@ -88,20 +40,26 @@
 	},
 	"file_history":
 	[
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDelete.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPreview.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swIndex.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPost.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/newArea.css",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/main.css",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/options.css",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/index.html",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/server.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/helpers.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swLoader.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swPost.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDragIn.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swReorder.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swAdd.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/items.css",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/index.html",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/setup.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/loader.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/main.css",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPost.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swIndex.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/newArea.css",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swDragPosts.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/helpers.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/options.css",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPageTasks.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPreview.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swTreeView.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/notes/notes 3"
 	],
@@ -111,7 +69,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 		]
@@ -121,6 +79,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"%;",
+			"pageName",
+			"left",
+			"black",
+			"100",
 			"list",
 			"\";\n",
 			"'\n",
@@ -173,23 +136,23 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "webClient/scripts/postManipulation/swReorder.js",
+					"file": "webClient/scripts/swPost.js",
 					"settings":
 					{
-						"buffer_size": 3189,
+						"buffer_size": 9976,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2704,
-								2704
+								0,
+								0
 							]
 						],
 						"settings":
@@ -199,174 +162,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1170.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "webClient/scripts/postManipulation/swDragIn.js",
-					"settings":
-					{
-						"buffer_size": 1462,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								401,
-								425
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "webClient/scripts/postManipulation/swPost.js",
-					"settings":
-					{
-						"buffer_size": 5608,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1813,
-								1813
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 531.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "webClient/scripts/postManipulation/swDelete.js",
-					"settings":
-					{
-						"buffer_size": 948,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								163,
-								163
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "webClient/scripts/swIndex.js",
-					"settings":
-					{
-						"buffer_size": 3091,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2075,
-								2075
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "webClient/scripts/swLoader.js",
-					"settings":
-					{
-						"buffer_size": 767,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								558,
-								567
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "webClient/scripts/helpers.js",
-					"settings":
-					{
-						"buffer_size": 2467,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								803,
-								803
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 352.0,
+						"translation.y": 3803.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
