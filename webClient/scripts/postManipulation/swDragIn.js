@@ -8,17 +8,17 @@ sw.onload.push(function(){
 
 
 document.querySelector("#page").ondragover = function(e){
-    sw.dragIn.showHide(e, "hide");
+    //sw.dragIn.showHide(e, "hide");
     
     e.stopPropagation(); e.preventDefault();
 };
 document.querySelector("#page").ondragleave = function(e){
-    sw.dragIn.showHide(e, "show");
+    //sw.dragIn.showHide(e, "show");
 
     e.stopPropagation(); e.preventDefault();
 };
 
-
+/*
 sw.dragIn.showHide = function(e, showHide){
 
     if(var l = sw.helpers.getNodeOfNode( e.target )){
@@ -35,7 +35,7 @@ sw.dragIn.showHide = function(e, showHide){
         }
     }
 }
-
+*/
 
 document.querySelector("#page").ondrop = function(e){
 

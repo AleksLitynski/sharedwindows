@@ -56,3 +56,12 @@ body{
     padding-left:1px;
     background-color:black;
 }
+
+
+
+.invalidName{
+    background-color:rgba(255,100,0,0.5);
+}
+.validName{
+    background-color:rgba(0,255,0,0.5)
+}

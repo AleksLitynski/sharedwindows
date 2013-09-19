@@ -5,7 +5,7 @@ sw.onload.push(function(){
         
     sw.socket.on("deleteItem", function(data){
         if(data.success) {
-            sw.post.removeItem(data.toDelete, data.page);
+            sw.delete.removeItem(data.toDelete, data.page);
         }
     });
     
@@ -13,10 +13,14 @@ sw.onload.push(function(){
 
 
 sw.delete.requestDelete = function(deleteIndex, page) {
-    if(isNaN(deleteIndex) ){
-        var node = sw.helpers.childIndex(deleteIndex);
-        page = sw.helper.getListOfNode(node);
+    
+    if( isNaN(deleteIndex) ){
+        deleteIndex = sw.helpers.childIndex( sw.helpers.getNodeOfNode(deleteIndex) );
+        console.log(deleteIndex, sw.post.items[sw.listName].length )
+        deleteIndex = sw.post.items[sw.listName].length - deleteIndex + 1;
     }
+    page = sw.listName;
+    console.log(page);
     sw.socket.emit("deleteItem", { index: deleteIndex, page: page } );
 }
 
@@ -33,6 +37,9 @@ sw.delete.removeItem = function(index, page) {
             sw.post.items[page][i].listIndex--;
         }
     }
-        
+
+    if(index ==  sw.index.current[page]){
+        sw.preview.display("about:blank");
+    }
     sw.post.display( page );
 }

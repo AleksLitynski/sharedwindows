@@ -65,7 +65,6 @@ exports.run = function(){
         if(list == itemAsUrl[ii].split("\n")[0]){
         return false;
         }}}}
-        
         function addItemFromParams(user, title, icon) {
         
             var time  = new Date().getTime();
@@ -87,9 +86,11 @@ exports.run = function(){
                                    " )"+
                                     ");";
                                     
+        
                 db.run("BEGIN TRANSACTION;", function(){
                 db.run(query, function(){
                 db.all("select * from items where id = (select MAX(id) from items) and listId = (select id from lists where name = '"+list+"');", function(err, data){
+                    
                     socket.broadcast.to(list).emit('items', {page:list, data:data});
                     socket.emit('items', {page:list, data:data});
                 db.run("COMMIT TRANSACTION;");
@@ -99,21 +100,23 @@ exports.run = function(){
         }
         
         try {
-        jsdom.env(
-            url.parse(item.message.replace("\n", ""), true).href, [url.parse("http://code.jquery.com/jquery.js").href],
-            function (errors, window) {
-                var title = "" + item.message + "";
-                var icon = "about:blank";
-                if(window != undefined){ if(window.$ != undefined){ if(window.$("title").html() != undefined) {
-                    title = window.$("title").html();
-                    icon  = url.parse(item.message).protocol + "//" + url.parse(item.message).host + "/favicon.ico";
-                } } }
-               
-                
-                var user  = socket.handshake.address.address + ":" + socket.handshake.address.port;
-                addItemFromParams(user, title, icon);
-            }
-        );}
+            jsdom.env(
+                url.parse(item.message.replace("\n", ""), true).href, [url.parse("http://code.jquery.com/jquery.js").href],
+                function (errors, window) {
+                    var title = "" + item.message + "";
+                    var icon = "about:blank";
+                    if(window != undefined){ if(window.$ != undefined){ if(window.$("title").html() != undefined) {
+                        title = window.$("title").html();
+                        icon  = url.parse(item.message).protocol + "//" + url.parse(item.message).host + "/favicon.ico";
+                    } } }
+                   
+                    
+                    var user  = socket.handshake.address.address + ":" + socket.handshake.address.port;
+
+                    addItemFromParams(user, title, icon);
+                }
+            );
+        }
         catch(er){
             var title = "" + item.message + "";
             var icon = "about:blank";
@@ -232,15 +235,18 @@ exports.run = function(){
 
 
     function isNameSafe(name, callback) {
-        db.serialize(function() {
-            db.all("select * from lists where name = '" + name + "';", function(err, databaseReply){
-                var replyData = "safe";
-                if(databaseReply.length != 0 || (/[^a-zA-Z0-9]/.test( name )) ){ 
-                    replyData = "unsafe";
-                }
-                callback(replyData);
+        if(  /^[a-z0-9]+$/i.test( name ) ){
+            db.serialize(function() {
+                db.all("select * from lists where name = '" + name + "';", function(err, databaseReply){
+                    var replyData = "safe";
+                    if(databaseReply.length != 0){ 
+                        replyData = "unsafe";
+                    }
+                    callback(replyData);
+                });
             });
-        });
+        }
+        callback("unsafe");
     }
 
 

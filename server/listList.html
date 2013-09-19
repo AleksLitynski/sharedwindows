@@ -2,16 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Shared Windows</title>
+        <title>Shared Windows List list</title>
         
         <link rel="stylesheet" type="text/css" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="css/options.css" />
-        <link rel="stylesheet" type="text/css" href="css/items.css" />
-        <link rel="stylesheet" type="text/css" href="css/newArea.css" />
         
-		<script src='scripts/libraries/require.js'></script>
-		<script src='scripts/swLoader.js'></script>
+        <script>
+
+        </script>
 
     </head>
 	
@@ -19,7 +16,6 @@
         <div id="controlPanel">
             
             <div id="postLink">
-                
                 <textarea id="postBox" placeholder="Drop files here"></textarea>
             </div>
             
@@ -30,14 +26,10 @@
                 <div id="createNew" class="expandedOption"> <h2>Create A New List:</h2>
                     <input id="newPageName" placeholder="name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input></br>
                     <input type="checkbox" id="postToCurrent" value="post to current?" checked="checked"> post new list to current list?</input></br>
-                    <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button></br>
-
-                    New Page: <input id="listFeedback" readonly="readonly" onclick="Javascript: this.focus(); this.select();" style="width:200px"></input>
-
+                    <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button>
                     </br></br>
                     <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow the leader?</input> </br>
                     <input type="checkbox" id="jumpToCurrent" value="Always load most recent?" checked>Always load most recent?</input> </br>
-
                 </div>
             </div>
             

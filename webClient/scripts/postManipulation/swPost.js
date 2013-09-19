@@ -15,11 +15,12 @@ sw.onload.push(function(){
             if(isURL != false){
                 if( !sw.post.subbedLists.some(function(ele){return (ele == isURL)}) ){
                     sw.post.subbedLists.push(isURL);
-                    sw.socket.emit("subscribe", {list: isURL});
+                    //sw.socket.emit("subscribe", {list: isURL});
                 } 
             }
             sw.post.addItem(data.page, data.data[i]);
         }
+        console.log("new item");
         //find the node, pass in the items
         sw.post.display(data.page);
         
@@ -43,7 +44,7 @@ sw.post.addItem = function(list, item){
     var uu = u[u.length-2];
     if(uu == "lists"){ isAList = true;}}
     
-    if( document.querySelector("#jumpToCurrent").checked && !isAList) {
+    if( document.querySelector("#jumpToCurrent").checked) { // && !isAList
         sw.index.current[list] = sw.post.items[list].length;
         if(sw.index.current){
             sw.preview.display( sw.post.items[list][sw.index.current[list]-1].url, list );
@@ -99,7 +100,7 @@ sw.post.display = function(nodeName) {
             root.addEventListener("dragend", sw.drag.end );
             root.setAttribute("onclick", "sw.index.itemClicked(this)");
             
-            root.innerHTML  +=  "<div class='postInfo'>" //sw.post.requestDeleteThis(this.parentNode)
+            root.innerHTML  +=  "<div class='postInfo'><button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>" //
                             +       "<div style='float:left; width:15%;'>"
                             +           "<image src='"+thumbnail+"'></image>"
                             +       "</div>"
