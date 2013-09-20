@@ -27,7 +27,7 @@
 			"file": "webClient/index.html",
 			"settings":
 			{
-				"buffer_size": 2479,
+				"buffer_size": 2504,
 				"line_ending": "Windows"
 			}
 		},
@@ -35,7 +35,7 @@
 			"file": "webClient/scripts/swResizePage.js",
 			"settings":
 			{
-				"buffer_size": 648,
+				"buffer_size": 847,
 				"line_ending": "Windows"
 			}
 		},
@@ -43,7 +43,23 @@
 			"file": "webClient/css/main.css",
 			"settings":
 			{
-				"buffer_size": 1108,
+				"buffer_size": 1113,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/swOptions.js",
+			"settings":
+			{
+				"buffer_size": 627,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/css/options.css",
+			"settings":
+			{
+				"buffer_size": 1057,
 				"line_ending": "Windows"
 			}
 		}
@@ -122,6 +138,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"if",
 			"window.onmousemove",
 			"pageNameBox",
 			"closeBtn",
@@ -185,7 +202,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -200,8 +217,8 @@
 						"selection":
 						[
 							[
-								390,
-								390
+								1094,
+								1094
 							]
 						],
 						"settings":
@@ -221,15 +238,15 @@
 					"file": "webClient/index.html",
 					"settings":
 					{
-						"buffer_size": 2479,
+						"buffer_size": 2504,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2294,
-								2294
+								1148,
+								1148
 							]
 						],
 						"settings":
@@ -239,7 +256,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 15.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -249,15 +266,70 @@
 					"file": "webClient/scripts/swResizePage.js",
 					"settings":
 					{
-						"buffer_size": 648,
+						"buffer_size": 847,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								86,
-								86
+								549,
+								549
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "webClient/css/main.css",
+					"settings":
+					{
+						"buffer_size": 1113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								450,
+								450
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "webClient/scripts/swOptions.js",
+					"settings":
+					{
+						"buffer_size": 627,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								509,
+								509
 							]
 						],
 						"settings":
@@ -271,19 +343,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "webClient/css/main.css",
+					"buffer": 5,
+					"file": "webClient/css/options.css",
 					"settings":
 					{
-						"buffer_size": 1108,
+						"buffer_size": 1057,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								595,
-								595
+								562,
+								562
 							]
 						],
 						"settings":
@@ -293,7 +365,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 405.0,
+						"translation.y": 135.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

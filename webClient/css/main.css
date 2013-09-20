@@ -22,7 +22,6 @@
     right:0px;
     left:310px;
     height:96.6vh;
-    z-index:-5;
 }
 
 #previewImage{
@@ -74,4 +73,5 @@ body{
     height:96vh;
     width:10px;
     background-color:lightgrey;
+    cursor:w-resize;
 }

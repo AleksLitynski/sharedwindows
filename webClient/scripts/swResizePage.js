@@ -6,12 +6,16 @@ sw.onload.push(function(){
 	
 	document.querySelector("#dragHandle").onmousedown = function(e){
 			sw.resizePage.isDragging = true;
-			console.log(sw.resizePage.isDragging);
+
+			document.querySelector("#preview").style.zIndex = "-5";
+			document.querySelector("#previewImage").style.zIndex = "-5";
 	}
 
 	window.addEventListener("mouseup", function(e){
 		sw.resizePage.updateFold(e.x);
 		sw.resizePage.isDragging = false;
+		document.querySelector("#preview").style.zIndex = "";
+		document.querySelector("#previewImage").style.zIndex = "";
 	});
 
 	window.onmousemove = function(e){
