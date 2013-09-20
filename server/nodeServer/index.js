@@ -55,7 +55,7 @@ exports.run = function(){
     }
 
     function addItem(socket, list, item) {
-        console.log(item);
+        
         //detect and prevent user from posting list to itself. If "lists" in in the message and the next term matches var list, it will reject the whole shenangan.
         var itemAsUrl = item.message.split("/");
         if(itemAsUrl.length > 3){
