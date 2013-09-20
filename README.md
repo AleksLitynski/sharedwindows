@@ -6,6 +6,15 @@ sharedwindows
 
 How to use (pre-pre-alpha):
 
+###### Install prerequisites
+*  npm install sqlite3
+*  npm install socket.io
+*  npm install jsdom
+
+To clean the database, 
+copy database/dbClean.sqlite over db.sqlite (it should be named db.sqlite)
+ 
+ 
 1. Open "sharedwindows/server/" in your command prompt.
 2. run "node server.js"
 3. The default ports are 80 (http), 443 (https). To change that, use: "node server.js [http port] [https port]". 
