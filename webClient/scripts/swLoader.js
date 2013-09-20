@@ -1,5 +1,5 @@
 require([
-            'http://'+window.location.hostname+':10303/socket.io/socket.io.js',
+            'http://'+window.location.host+'/socket.io/socket.io.js',
             'scripts/swSetup.js',
             'scripts/swIndex.js',
             'scripts/swPreview.js',
@@ -18,7 +18,11 @@ sw = {};
 sw.socket;
 sw.listName = "";
 sw.onload = [];
+sw.onloadEarly = [];
 sw.loaded = function() {
+    for(toLoad in sw.onloadEarly){                                   //call all onload functions.
+        sw.onloadEarly[toLoad]();
+    }  
     for(toLoad in sw.onload){                                   //call all onload functions.
         sw.onload[toLoad]();
     }  

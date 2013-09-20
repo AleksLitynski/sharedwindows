@@ -1,6 +1,6 @@
 sw.setup = {};
 
-sw.onload.push(function(){
+sw.onloadEarly.push(function(){
 	
     var parser = document.createElement('a');
     parser.href = document.URL;
@@ -10,7 +10,7 @@ sw.onload.push(function(){
         sw.listName = "global";
     }
     
-    sw.socket = io.connect('http://'+window.location.hostname+':10303');      //connect to socket io.
+    sw.socket = io.connect('http://'+window.location.host);      //connect to socket io.
     sw.post.subbedLists.push(sw.listName);
     sw.socket.emit("subscribe", {list: sw.listName});
 

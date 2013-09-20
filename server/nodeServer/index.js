@@ -1,7 +1,7 @@
-exports.run = function(){
+exports.run = function(staticServer){
 
     var path    = require('path');
-    var io      = require('socket.io').listen(10303, { log: false })                //require socketio and start it listening
+    var io      = require('socket.io').listen(staticServer, { log: false })  //10303              //require socketio and start it listening
     var fs      = require('fs');
     var jsdom   = require('jsdom');
     var jquery  = fs.readFileSync(path.resolve(__dirname, './jquery.js'), "utf-8");

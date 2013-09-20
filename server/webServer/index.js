@@ -17,7 +17,7 @@ exports.run = function(port, securePort) {
       cert: fs.readFileSync((path.resolve(__dirname, 'certificate.pem')))
     };
     https.createServer(options, handleRequest).listen(securePort);
-    http.createServer(handleRequest).listen(port);
+    var webServer = http.createServer(handleRequest).listen(port);
 
 
 
@@ -107,6 +107,7 @@ exports.run = function(port, securePort) {
                         );
                     }
                     catch(er){
+                        console.log("hey");
                         res.write(html);
                         res.end();
                     }
@@ -142,4 +143,7 @@ exports.run = function(port, securePort) {
         }
         return uriPath;
     }
+    
+    
+    return webServer;
 }

@@ -4,6 +4,5 @@ console.log(port);
 var securePort = process.argv[3] || 443;
 console.log(securePort);
 
-var persistantServer = require("./nodeServer").run();
-
 var staticServer = require("./webServer").run(port, securePort);
+var persistantServer = require("./nodeServer").run(staticServer);
