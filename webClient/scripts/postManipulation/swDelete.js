@@ -20,7 +20,6 @@ sw.delete.requestDelete = function(deleteIndex, page) {
         deleteIndex = sw.post.items[sw.listName].length - deleteIndex + 1;
     }
     page = sw.listName;
-    console.log(page);
     sw.socket.emit("deleteItem", { index: deleteIndex, page: page } );
 }
 

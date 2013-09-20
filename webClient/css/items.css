@@ -45,3 +45,12 @@
     height:25px;
     padding-bottom:5px;
 }
+
+.previewIcon{
+    width:20px;
+    height:20px;
+}
+
+.closeBtn{
+    float:right;
+}

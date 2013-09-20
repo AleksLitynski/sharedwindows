@@ -24,7 +24,7 @@ sw.page.create = function(pageName){
         var msg = "http://" + window.location.host + "/lists/" + document.querySelector("#newPageName").value;
         console.log(document.querySelector("#postToCurrent").checked);
         if(document.querySelector("#postToCurrent").checked){
-            sw.post.post(msg, sw.listName);
+            sw.post.post(msg, sw.listName, document.querySelector("#newPageName").value);
         }
         var name = document.querySelector("#newPageName").value;
         sw.socket.emit('pageTask', {

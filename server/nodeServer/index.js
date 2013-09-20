@@ -55,6 +55,7 @@ exports.run = function(){
     }
 
     function addItem(socket, list, item) {
+        console.log(item);
         //detect and prevent user from posting list to itself. If "lists" in in the message and the next term matches var list, it will reject the whole shenangan.
         var itemAsUrl = item.message.split("/");
         if(itemAsUrl.length > 3){
@@ -106,7 +107,11 @@ exports.run = function(){
                     var title = "" + item.message + "";
                     var icon = "about:blank";
                     if(window != undefined){ if(window.$ != undefined){ if(window.$("title").html() != undefined) {
-                        title = window.$("title").html();
+                        if(!item.title){
+                            title = window.$("title").html();
+                        } else {
+                            title = item.title;
+                        }
                         icon  = url.parse(item.message).protocol + "//" + url.parse(item.message).host + "/favicon.ico";
                     } } }
                    
@@ -119,6 +124,9 @@ exports.run = function(){
         }
         catch(er){
             var title = "" + item.message + "";
+            if(item.title){
+                title = item.title;
+            }
             var icon = "about:blank";
            
             var user  = socket.handshake.address.address + ":" + socket.handshake.address.port;

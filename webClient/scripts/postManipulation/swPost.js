@@ -20,7 +20,6 @@ sw.onload.push(function(){
             }
             sw.post.addItem(data.page, data.data[i]);
         }
-        console.log("new item");
         //find the node, pass in the items
         sw.post.display(data.page);
         
@@ -102,7 +101,7 @@ sw.post.display = function(nodeName) {
             
             root.innerHTML  +=  "<div class='postInfo'><button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>" //
                             +       "<div style='float:left; width:15%;'>"
-                            +           "<image src='"+thumbnail+"'></image>"
+                            +           "<image class='previewIcon' src='"+thumbnail+"'></image>"
                             +       "</div>"
                             +       "<div style='float:left; width:75%;overflow:hidden'>"
                             +           "<div class='postTitle'>"+toDisplay[i].title+"</div>"
@@ -140,9 +139,10 @@ sw.post.send = function(toPost) {
 
     setTimeout(function(){document.querySelector("#postBox").value = "";},1);
 };
-sw.post.post = function(msg, list){
+sw.post.post = function(msg, list, title){
     navigator.geolocation.getCurrentPosition(function(pos){
-        sw.socket.emit('items', {message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude, page: list }); //post to?        
+        if(!title) {title = msg;}
+        sw.socket.emit('items', {title: title, message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude, page: list }); //post to?        
     });
 }
 

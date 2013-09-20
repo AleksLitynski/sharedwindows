@@ -67,9 +67,9 @@ sw.index.moveItem = function(page, from, to){
         });
         
         //do not select the moved element if it is a list
-        if(sw.post.items[page][to-1] && sw.helpers.isUrlAList(sw.post.items[page][to-1].url) == false){
+        //if(sw.post.items[page][to-1] && sw.helpers.isUrlAList(sw.post.items[page][to-1].url) == false){
             sw.index.selectItemByIndex(to, page);
-        }
+        //}
     }
 }
 

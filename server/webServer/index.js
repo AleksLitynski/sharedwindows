@@ -8,6 +8,10 @@ exports.run = function(port, securePort) {
     var sqlite3 = new require('sqlite3').verbose();
     var db      = new sqlite3.Database('../' + config.databaseFile);
 
+    var jsdom   = require('jsdom');
+    var jquery  = fs.readFileSync(path.resolve(__dirname, './jquery.js'), "utf-8");
+    var url     = require('url');
+
     var options = {
       key: fs.readFileSync((path.resolve(__dirname, 'privatekey.pem'))),
       cert: fs.readFileSync((path.resolve(__dirname, 'certificate.pem')))
@@ -90,10 +94,24 @@ exports.run = function(port, securePort) {
                 if(row.length > 0) {
                     res.writeHead(200);
                     
-                    var html = fs.readFileSync("../" + config.webClientLoc + "index.html");
-                    res.write(html);
-                    
-                    res.end();
+                    var html = fs.readFileSync("../" + config.webClientLoc + "index.html").toString();
+
+                    //replace the title with the name of the page
+                    try {
+                        jsdom.env(html, [url.parse("http://code.jquery.com/jquery.js").href],
+                            function (errors, window) {
+                                window.$("title").html(toServe + " - Shared Windows");
+                                res.write(window.$("html").html());
+                                res.end();
+                            }
+                        );
+                    }
+                    catch(er){
+                        res.write(html);
+                        res.end();
+                    }
+
+
                     
                 } else {
                 

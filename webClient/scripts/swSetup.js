@@ -16,4 +16,21 @@ sw.onload.push(function(){
 
     document.querySelector("#postBox").ondrop = function(e){  sw.post.send( e.dataTransfer.getData('Text') ); }
     document.querySelector("#postBox").onkeydown= function(e){ if(e.keyCode == 13){sw.post.send( document.querySelector("#postBox").value );} };
+
+    var color = stringToColour(sw.listName);
+    document.querySelector("#page").style.backgroundColor = color;
+    document.querySelector("#pageNameBox").style.backgroundColor = color;
+    document.querySelector("#postLink").style.backgroundColor = color;
 })
+
+
+var stringToColour = function(str) {
+
+    // str to hash
+    for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
+
+    // int/hash to hex
+    for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));
+
+    return colour;
+}
