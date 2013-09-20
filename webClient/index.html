@@ -16,6 +16,9 @@
     </head>
 	
 	<body>
+
+        <div id="pageNameBox"><input readonly="readonly" id="pageName" onclick="Javascript: this.focus(); this.select();"></input></div>
+        
         <div id="controlPanel">
             
             <div id="postLink">
@@ -27,7 +30,9 @@
             
             <div id="optionsBar">
                 <span class="option" id="showNewBtn">New List and Options</span>
-                <div id="createNew" class="expandedOption"> <h2>Create A New List:</h2>
+                <div id="createNew" class="expandedOption">
+                    <button id="closeOption">X</button>
+                    <h2>Create A New List:</h2>
                     <input id="newPageName" placeholder="name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input></br>
                     <input type="checkbox" id="postToCurrent" value="post to current?" checked="checked"> post new list to current list?</input></br>
                     <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button></br>
@@ -44,17 +49,12 @@
             
         </div>
         
+        <div class="handle" id="dragHandle"></div>
+
         <div id="preview">
             
-            <div id="pageNameBox"><input readonly="readonly" id="pageName" onclick="Javascript: this.focus(); this.select();"></input></div>
 
             <iframe src="" id="previewImage"></iframe>
-
-
-        
-            <!--frameset cols="100%">
-                <frame src="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">
-            </frameset-->
 
         </div>
         

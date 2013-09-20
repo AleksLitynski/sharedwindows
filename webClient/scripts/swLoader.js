@@ -5,11 +5,15 @@ require([
             'scripts/swPreview.js',
             'scripts/helpers.js',
             'scripts/swPageTasks.js',
+            'scripts/swOptions.js',
+            'scripts/swResizePage.js',
             
             'scripts/postManipulation/swReorder.js',
             'scripts/postManipulation/swDelete.js',
             'scripts/postManipulation/swPost.js',
             'scripts/postManipulation/swDragIn.js'
+
+
         ], 
         function(){sw.loaded()}
 );

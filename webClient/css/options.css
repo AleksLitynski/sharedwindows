@@ -13,15 +13,18 @@
     
     
     text-align: left;
+
+    z-index:100;
 }
 
+/*
 .expandedOption:hover {
     display:inline;
 }
 .option:hover  + .expandedOption{
     display:inline;
 }
-
+*/
 .option:hover {
     background-color: #f1f1ff;
 }
@@ -29,7 +32,8 @@
 .option{
     position:relative;
     background-color:white;
-    width:100%;
+    left:0px;
+    right:0px;
     height:100%;
     float:left;
     display:block;
@@ -54,7 +58,6 @@
 #optionsBar{
     position:absolute;
     bottom:2px;
-    width:300px;
     height:30px
 }
 
@@ -67,3 +70,7 @@ h2{
     font-weight:bold;
 }
 
+
+#closeOption{
+    float:right;
+}

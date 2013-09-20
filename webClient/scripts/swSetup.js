@@ -10,6 +10,9 @@ sw.onloadEarly.push(function(){
         sw.listName = "global";
     }
     
+    //set the name of the "page name" bar
+    document.querySelector("#pageName").value = window.location;
+
     sw.socket = io.connect('http://'+window.location.host);      //connect to socket io.
     sw.post.subbedLists.push(sw.listName);
     sw.socket.emit("subscribe", {list: sw.listName});
@@ -21,6 +24,14 @@ sw.onloadEarly.push(function(){
     document.querySelector("#page").style.backgroundColor = color;
     document.querySelector("#pageNameBox").style.backgroundColor = color;
     document.querySelector("#postLink").style.backgroundColor = color;
+
+
+    function setPageWidth(e){
+        document.querySelector("#page").style.height = (window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight - document.querySelector("#postLink").clientHeight ) + "px"; //pageNameBox, optionsBar, postLink
+    }
+    setPageWidth();
+    window.onresize = setPageWidth;
+
 })
 
 
