@@ -88,7 +88,7 @@ sw.post.display = function(nodeName) {
             
             var thumbnail = toDisplay[i].thumbnail;
             if( thumbnail == "about:blank"){
-                thumbnail = "";
+                thumbnail = "/sFavicon.PNG";
             }
             
             var root = document.createElement("div");
