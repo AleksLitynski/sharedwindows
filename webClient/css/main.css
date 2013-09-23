@@ -1,6 +1,6 @@
 #controlPanel{
     float:left;
-    width:300px;
+    width:350px;
     height:10%;
     
 }
@@ -20,7 +20,7 @@
     float:left;
     position: absolute;
     right:0px;
-    left:310px;
+    left:360px;
     height:96.6vh;
 }
 
@@ -44,7 +44,7 @@ body{
     width:99%;
     border:0px;
     padding-left:10px;
-    border-radius:5px;
+    border-radius:25px;
     margin:0 auto;
     display: table;
     margin-top:1px;

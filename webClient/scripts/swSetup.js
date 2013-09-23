@@ -25,6 +25,9 @@ sw.onloadEarly.push(function(){
     document.querySelector("#pageNameBox").style.backgroundColor = color;
     document.querySelector("#postLink").style.backgroundColor = color;
 
+    for(var i = 0; i < document.styleSheets.length; i++){
+        console.log(document.styleSheets[i].title);
+    }
 
     function setPageWidth(e){
         document.querySelector("#page").style.height = (window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight - document.querySelector("#postLink").clientHeight ) + "px"; //pageNameBox, optionsBar, postLink
@@ -39,6 +42,8 @@ var stringToColour = function(str) {
 
     // str to hash
     for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
+    
+
 
     // int/hash to hex
     for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));

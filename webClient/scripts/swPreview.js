@@ -23,6 +23,10 @@ sw.preview.display = function( address ) {
                 document.querySelector("#previewImage").src = address;
                 sw.preview.current = address;
             }
+        } else {
+            address = "https://sharedwindows.hackpad.com/" + encodeURI(address);
+            document.querySelector("#previewImage").src = address;
+            sw.preview.current = address;
         } 
     }
     
