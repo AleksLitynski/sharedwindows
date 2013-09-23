@@ -89,5 +89,5 @@ sw.drag.end = function(e) {
     var to   = childLength - sw.drag.dragTo.previous + 1;
     var from = childLength - sw.drag.startedDrag + 1;
     
-    sw.socket.emit('moveIndex', { currentIndex: from, newIndex: to, page: sw.helpers.getListOfNode(node) });
+    sw.socket.emit('moveItem', { currentIndex: from, newIndex: to, page: sw.helpers.getListOfNode(node) });
 }

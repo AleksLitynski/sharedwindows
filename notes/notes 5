@@ -1,0 +1,35 @@
+open link in new tab button
+
+fix NYtimes 
+
+cut off links to hackpad at X characters
+
+resizing links eat themselves
+
+able to select item text
+
+cross browser testing!
+
+don't submit blank posts
+
+get page title from page
+
+faster posting, etc. or at least a loading bar
+
+fix flash on change index
+
+
+
+
+Improvments:
+match selected item color to color of the page it will generate
+drag between pages
+clicking options should focus on "new list" (for now)
+show url of fakie page in url bar
+better hovertext on items
+
+
+
+
+DONE:
+select stays on some item after move!

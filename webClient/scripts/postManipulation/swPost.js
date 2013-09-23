@@ -6,23 +6,25 @@ sw.post.subbedLists = [];
 sw.onload.push(function(){
 
     sw.socket.on('items', function (data) {
-        if(!sw.post.items[data.page]) {
-            sw.post.items[data.page] = [];
-        } 
-        
-        for(var i = 0; i < data.data.length; i++){
-            var isURL = sw.helpers.isUrlAList(data.data[i].url);
-            if(isURL != false){
-                if( !sw.post.subbedLists.some(function(ele){return (ele == isURL)}) ){
-                    sw.post.subbedLists.push(isURL);
-                    //sw.socket.emit("subscribe", {list: isURL});
-                } 
+
+        if(sw.post.subbedLists.some(function(e, i, a){return e == data.page;})){
+            if(!sw.post.items[data.page]) {
+                sw.post.items[data.page] = [];
+            } 
+            
+            for(var i = 0; i < data.data.length; i++){
+                var isURL = sw.helpers.isUrlAList(data.data[i].url);
+                if(isURL != false){
+                    if( !sw.post.subbedLists.some(function(ele){return (ele == isURL)}) ){
+                        sw.post.subbedLists.push(isURL);
+                        //sw.socket.emit("subscribe", {list: isURL});
+                    } 
+                }
+                sw.post.addItem(data.page, data.data[i]);
             }
-            sw.post.addItem(data.page, data.data[i]);
+            //find the node, pass in the items
+            sw.post.display(data.page);
         }
-        //find the node, pass in the items
-        sw.post.display(data.page);
-        
     });
 
 
@@ -30,7 +32,7 @@ sw.onload.push(function(){
 
 
 sw.post.addItem = function(list, item){
-    
+
     sw.post.items[list].push(item);
     sw.post.items[list].sort(function (a, b) {
         return a.listIndex - b.listIndex;
@@ -47,6 +49,10 @@ sw.post.addItem = function(list, item){
         sw.index.current[list] = sw.post.items[list].length;
         if(sw.index.current){
             sw.preview.display( sw.post.items[list][sw.index.current[list]-1].url, list );
+        }
+    } else {
+        if(!sw.index.current[list]){
+            sw.index.current[list] = 1;
         }
     }
 }
@@ -100,10 +106,10 @@ sw.post.display = function(nodeName) {
             root.setAttribute("onclick", "sw.index.itemClicked(this)");
             
             root.innerHTML  +=  "<div class='postInfo'><button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>" //
-                            +       "<div style='float:left; width:15%;'>"
+                            +       "<div class='iconBox'>"
                             +           "<image class='previewIcon' src='"+thumbnail+"'></image>"
                             +       "</div>"
-                            +       "<div style='float:left; width:75%;overflow:hidden'>"
+                            +       "<div class='postTextBox'>"
                             +           "<div class='postTitle'>"+toDisplay[i].title+"</div>"
                             +           "<div class='postURL'>"+toDisplay[i].url+"</div>"
                             +       "</div>"

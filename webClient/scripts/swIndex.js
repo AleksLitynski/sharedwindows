@@ -2,6 +2,22 @@ sw.index = {};
 sw.index.current = {};
 
 sw.onload.push(function(){
+
+    //when you're the one who set the index, move reguardless of if follow the leader is set
+    sw.socket.on("yourIndex", function(data){
+        if(data.data[0]){
+            var index = data.data[0].currentListId;
+            if(sw.index.current && sw.index.current[data.page] ){
+                sw.index.current[data.page] = index;
+                
+                sw.post.display(data.page);
+                if(sw.post.items[data.page][ index - 1 ] && sw.post.items[data.page][ index - 1 ].url){
+                    sw.preview.display( sw.post.items[data.page][ index - 1 ].url, data.page );
+                }
+            }
+        }
+    });
+
     sw.socket.on('index', function (data) {
         //console.log(data);
     
@@ -22,7 +38,7 @@ sw.onload.push(function(){
         
     });
 
-    sw.socket.on("moveIndex", function(data){
+    sw.socket.on("moveItem", function(data){
         sw.index.moveItem(data.page, data.from, data.to);
         sw.post.display(data.page);
     });
@@ -39,7 +55,13 @@ sw.index.send = function(current, page){
 
 
 sw.index.moveItem = function(page, from, to){
-    if((from - 1) >= 0){
+
+
+
+    if((from - 1) >= 0 && sw.post.items[page]){
+
+        var oldUrl = sw.post.items[page][ sw.index.current[page]-1 ].url;
+
         var toMoveId = sw.post.items[page][from - 1].id;
         
         var rising = from > to;
@@ -66,10 +88,16 @@ sw.index.moveItem = function(page, from, to){
             return a.listIndex - b.listIndex;
         });
         
-        //do not select the moved element if it is a list
-        //if(sw.post.items[page][to-1] && sw.helpers.isUrlAList(sw.post.items[page][to-1].url) == false){
+        if(document.querySelector("#followTheLeader").checked){
             sw.index.selectItemByIndex(to, page);
-        //}
+        } else {
+            for(var i = 0; i < sw.post.items[page].length; i++){
+                if(sw.post.items[page][i].url == oldUrl){
+                    sw.index.selectItemByIndex(sw.post.items[page][i].listIndex, page);
+                    break;
+                }
+            }
+        }
     }
 }
 

@@ -16,7 +16,7 @@ sw.delete.requestDelete = function(deleteIndex, page) {
     
     if( isNaN(deleteIndex) ){
         deleteIndex = sw.helpers.childIndex( sw.helpers.getNodeOfNode(deleteIndex) );
-        console.log(deleteIndex, sw.post.items[sw.listName].length )
+        
         deleteIndex = sw.post.items[sw.listName].length - deleteIndex + 1;
     }
     page = sw.listName;
