@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"waiting",
+				"waitingToAdd"
+			],
+			[
 				"set",
 				"setPageSize"
 			],
@@ -16,10 +20,10 @@
 	"buffers":
 	[
 		{
-			"file": "webClient/scripts/swSetup.js",
+			"file": "webClient/scripts/postManipulation/swPost.js",
 			"settings":
 			{
-				"buffer_size": 1786,
+				"buffer_size": 6487,
 				"line_ending": "Windows"
 			}
 		},
@@ -27,7 +31,31 @@
 			"file": "webClient/index.html",
 			"settings":
 			{
-				"buffer_size": 2504,
+				"buffer_size": 2577,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "notes/notes 5",
+			"settings":
+			{
+				"buffer_size": 551,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/css/items.css",
+			"settings":
+			{
+				"buffer_size": 1336,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/swPreview.js",
+			"settings":
+			{
+				"buffer_size": 1106,
 				"line_ending": "Windows"
 			}
 		},
@@ -35,31 +63,23 @@
 			"file": "webClient/scripts/swResizePage.js",
 			"settings":
 			{
-				"buffer_size": 847,
+				"buffer_size": 1225,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "webClient/css/main.css",
+			"file": "webClient/scripts/helpers.js",
 			"settings":
 			{
-				"buffer_size": 1113,
+				"buffer_size": 2936,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "webClient/scripts/swOptions.js",
+			"file": "webClient/scripts/swPageTasks.js",
 			"settings":
 			{
-				"buffer_size": 627,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/css/options.css",
-			"settings":
-			{
-				"buffer_size": 1057,
+				"buffer_size": 2966,
 				"line_ending": "Windows"
 			}
 		}
@@ -88,28 +108,30 @@
 	},
 	"file_history":
 	[
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/newArea.css",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/options.css",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swReorder.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/main.css",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDragIn.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swOptions.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swLoader.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/options.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPreview.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/items.css",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swIndex.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPageTasks.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swDragWidth.js",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/index.html",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/notes/notes 4",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swPost.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/placeholder.html",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/webServer/placeholder.html",
-		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/webServer/index.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPageTasks.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/nodeServer/index.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swSetup.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swIndex.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPreview.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swReorder.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/items.css",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swResizePage.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/main.css",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/notes/notes 5",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/options.css",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDelete.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swPost.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/newArea.css",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swOptions.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/index.html",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDragIn.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swLoader.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/options.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swDragWidth.js",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/notes/notes 4",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/webServer/placeholder.html",
+		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/webServer/index.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/helpers.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/listList.html",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/css/reset.css",
@@ -128,7 +150,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 		]
@@ -138,6 +160,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			";\n",
+			"15px",
+			"moveIndex",
+			"|| ",
+			"followTheLeader",
 			"if",
 			"window.onmousemove",
 			"pageNameBox",
@@ -202,23 +229,133 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 6,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "webClient/scripts/swSetup.js",
+					"file": "webClient/scripts/postManipulation/swPost.js",
 					"settings":
 					{
-						"buffer_size": 1786,
+						"buffer_size": 6487,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1094,
-								1094
+								5668,
+								5668
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1710.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "webClient/index.html",
+					"settings":
+					{
+						"buffer_size": 2577,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								815,
+								815
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 180.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "notes/notes 5",
+					"settings":
+					{
+						"buffer_size": 551,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "webClient/css/items.css",
+					"settings":
+					{
+						"buffer_size": 1336,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1193,
+								1182
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1080.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "webClient/scripts/swPreview.js",
+					"settings":
+					{
+						"buffer_size": 1106,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								898,
+								898
 							]
 						],
 						"settings":
@@ -234,47 +371,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "webClient/index.html",
-					"settings":
-					{
-						"buffer_size": 2504,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1148,
-								1148
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 15.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
+					"buffer": 5,
 					"file": "webClient/scripts/swResizePage.js",
 					"settings":
 					{
-						"buffer_size": 847,
+						"buffer_size": 1225,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								549,
-								549
+								1025,
+								1025
 							]
 						],
 						"settings":
@@ -289,83 +398,57 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "webClient/css/main.css",
+					"buffer": 6,
+					"file": "webClient/scripts/helpers.js",
 					"settings":
 					{
-						"buffer_size": 1113,
+						"buffer_size": 2936,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								450,
-								450
+								2930,
+								2930
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1260.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "webClient/scripts/swOptions.js",
+					"buffer": 7,
+					"file": "webClient/scripts/swPageTasks.js",
 					"settings":
 					{
-						"buffer_size": 627,
+						"buffer_size": 2966,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								509,
-								509
+								2151,
+								2151
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "webClient/css/options.css",
-					"settings":
-					{
-						"buffer_size": 1057,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								562,
-								562
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 135.0,
+						"translation.y": 450.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

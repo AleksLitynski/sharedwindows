@@ -74,8 +74,8 @@ sw.drag.start = function(node) {
     
     
 }
-sw.drag.end = function(e) {
-
+sw.drag.end = function() {
+    var e = window.event;
     e.stopPropagation();
     e.preventDefault();
     var node = e.srcElement;

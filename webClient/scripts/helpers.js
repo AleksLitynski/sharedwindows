@@ -98,3 +98,16 @@ sw.helpers.getNodeOfNode = function(node){
     return node;
     
 }
+
+
+sw.helpers.getItemOfNode = function(div){
+    var node = sw.helpers.getNodeOfNode(div);
+    var listOfNode = sw.helpers.getListOfNode( node );
+    var indexOfNode = sw.helpers.childIndex( node );
+    return ( sw.post.items[listOfNode][ sw.post.items[listOfNode].length - indexOfNode]  );
+}
+
+sw.helpers.getHPAddress = function(name){
+    //123 char max for a hackpad name. Can't end in weird (%, etc) chars. Need to take sub-string before encoding. Encoding will blow up string size, so I play it safe and allow 25 char max.
+    return ( "https://sharedwindows.hackpad.com/" + encodeURI(name.substr(0, 25)) );
+}

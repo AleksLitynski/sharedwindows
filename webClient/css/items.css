@@ -70,3 +70,27 @@
 .closeBtn{
     float:right;
 }
+
+.popOutBtn{
+
+    float:right;
+    background-image:url("images/popOut.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    width:15px;
+    height:15px;
+
+    margin-left:5px;
+    margin-top:5px;
+    cursor:pointer;
+}
+
+
+.selectable {
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}

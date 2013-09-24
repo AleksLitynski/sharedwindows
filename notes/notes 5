@@ -1,25 +1,13 @@
-open link in new tab button
+nodes don't always highlight when first opened.
 
-fix NYtimes 
 
-cut off links to hackpad at X characters
-
-resizing links eat themselves
+NO:
 
 able to select item text
-
 cross browser testing!
-
-don't submit blank posts
-
 get page title from page
-
 faster posting, etc. or at least a loading bar
-
 fix flash on change index
-
-
-
 
 Improvments:
 match selected item color to color of the page it will generate
@@ -31,5 +19,11 @@ better hovertext on items
 
 
 
+
 DONE:
 select stays on some item after move!
+open link in new tab button
+resizing links eat themselves
+fix NYtimes 
+cut off links to hackpad at X characters
+don't submit blank posts

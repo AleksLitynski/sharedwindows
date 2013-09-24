@@ -91,7 +91,7 @@ sw.index.moveItem = function(page, from, to){
         if(document.querySelector("#followTheLeader").checked){
             sw.index.selectItemByIndex(to, page);
         } else {
-            for(var i = 0; i < sw.post.items[page].length; i++){
+            for(var i = 0; i < sw.post.items[page].length; i++){    //find the item you used to be on and select that
                 if(sw.post.items[page][i].url == oldUrl){
                     sw.index.selectItemByIndex(sw.post.items[page][i].listIndex, page);
                     break;
@@ -121,7 +121,7 @@ sw.index.selectItemByIndex = function(index, page) {
     //preview etc the new node
     sw.index.current[page] = index;
     
-    sw.post.display(page);
+    sw.post.display(page);  //it MAY be possable to remove this
     if(sw.post.items[index] && sw.post.items[index].url){
         sw.preview.display( sw.post.items[index].url, page );
     }

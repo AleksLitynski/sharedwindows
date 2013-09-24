@@ -28,12 +28,17 @@ sw.onload.push(function(){
 		sw.resizePage.updateFold(e.x);
 	}
 
+	window.addEventListener("resize", function(){
+		sw.resizePage.updateFold( document.querySelector("#controlPanel").clientWidth );
+	})
 
 })
 
 
 sw.resizePage.updateFold = function(x){
 	if(x < 0) {x = 1;}
+	if(x > window.innerWidth) {x = window.innerWidth - 4;}
+
 	if(sw.resizePage.isDragging){
 		document.querySelector("#controlPanel").style.width = x + "px";
 		document.querySelector("#preview").style.left = (x + 3) + "px";

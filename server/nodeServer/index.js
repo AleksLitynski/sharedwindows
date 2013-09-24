@@ -124,15 +124,14 @@ exports.run = function(staticServer){
                                        " )"+
                                         ");";
                                         
-            
-                    db.run("BEGIN TRANSACTION;", function(){
-                    db.run(query, function(){
+                    db.run("BEGIN TRANSACTION;");
+                    db.run(query);
                     db.all("select * from items where id = (select MAX(id) from items) and listId = (select id from lists where name = '"+list+"');", function(err, data){
                         
                         socket.broadcast.to(list).emit('items', {page:list, data:data});
                         socket.emit('items', {page:list, data:data});
+                    });
                     db.run("COMMIT TRANSACTION;");
-                    });});});
                 });
             
             }
@@ -202,51 +201,33 @@ exports.run = function(staticServer){
         //console.log(socket, page, currentIndex, newIndex);
         //1) set the new index
         //2) set the element at that index and all future elements to +1
-        var queries = [];
-        queries.push("BEGIN TRANSACTION;");
-        queries.push("drop table if exists oldId;");
-        queries.push("create temp table oldId (value integer primary key);");
-        queries.push("insert into oldId (value) values ( (select id from items where listIndex = "+currentIndex+"  and listId = (select id from lists where name = '"+page+"')) );");
-        var rising = currentIndex > newIndex;
-        if(rising) {
-            queries.push(" update items set listIndex = listIndex + 1 "
-              +  " where listIndex  <= " + currentIndex + " - 1 "
-              +  " and   listIndex  >= " + newIndex 
-              +  " and listId = (select id from lists where name = '"+page+"');");
-        }
-        else { 
-            queries.push(" update items set listIndex = listIndex - 1 "
-              +  " where listIndex  >= " + currentIndex + " + 1 "
-              +  " and   listIndex  <= " + newIndex 
-              +  " and listId = (select id from lists where name = '"+page+"');");
-        }
-        
-        queries.push(" update items set listIndex = " + newIndex          //<---- set current index to new index.
-                   +  " where id = (select * from oldId)" 
-                   +  " and listId = (select id from lists where name = '" + page + "');");
-        queries.push("COMMIT TRANSACTION;");
-        
-        var toSend = { from: currentIndex, to: newIndex, queries: queries, page:page};
-        socket.broadcast.to(page).emit('moveItem', toSend );
-        socket.emit('moveItem', toSend );
-        
-        sequenceQueries(queries);   
-        
-        
-        
-    } 
-    
-    //I'm real proud of this baby. Dequeues a list of queries and runs the sequentially. 
-    //I was a bit... bored? and so it's a bit convoluted.
-    function sequenceQueries(queries){
         db.serialize(function() {
-            (function doNext(toDo){
-                if(toDo.length > 0) {
-                    db.run(toDo.shift(), function(error){
-                        doNext(toDo);
-                    });
-                }
-            })(queries);
+            db.run("BEGIN TRANSACTION;");
+            db.run("drop table if exists oldId;");
+            db.run("create temp table oldId (value integer primary key);");
+            db.run("insert into oldId (value) values ( (select id from items where listIndex = "+currentIndex+"  and listId = (select id from lists where name = '"+page+"')) );");
+            var rising = currentIndex > newIndex;
+            if(rising) {
+                db.run(" update items set listIndex = listIndex + 1 "
+                  +  " where listIndex  <= " + currentIndex + " - 1 "
+                  +  " and   listIndex  >= " + newIndex 
+                  +  " and listId = (select id from lists where name = '"+page+"');");
+            }
+            else { 
+                db.run(" update items set listIndex = listIndex - 1 "
+                  +  " where listIndex  >= " + currentIndex + " + 1 "
+                  +  " and   listIndex  <= " + newIndex 
+                  +  " and listId = (select id from lists where name = '"+page+"');");
+            }
+            
+            db.run(" update items set listIndex = " + newIndex          //<---- set current index to new index.
+                       +  " where id = (select * from oldId)" 
+                       +  " and listId = (select id from lists where name = '" + page + "');");
+            db.run("COMMIT TRANSACTION;");
+            
+            var toSend = { from: currentIndex, to: newIndex, page:page};
+            socket.broadcast.to(page).emit('moveItem', toSend );
+            socket.emit('moveItem', toSend );
         });
     }
 
@@ -306,12 +287,12 @@ exports.run = function(staticServer){
             socket.emit("deleteItem", {toDelete: toDelete, success: false});
         } else {
             
-            var queries = [];
-            queries.push("BEGIN TRANSACTION;");
-            queries.push("delete from items where listIndex = "+toDelete+" and listId = (select id from lists where name = '"+list+"');");
-            queries.push("update items set listIndex = listIndex - 1 where listIndex > "+toDelete+" and listId = (select id from lists where name = '"+list+"');");
-            queries.push("COMMIT TRANSACTION;");
-            sequenceQueries(queries);
+            db.serialize(function() {
+            db.run("BEGIN TRANSACTION;");
+            db.run("delete from items where listIndex = "+toDelete+" and listId = (select id from lists where name = '"+list+"');");
+            db.run("update items set listIndex = listIndex - 1 where listIndex > "+toDelete+" and listId = (select id from lists where name = '"+list+"');");
+            db.run("COMMIT TRANSACTION;");
+            });
             
             socket.emit("deleteItem", {toDelete: toDelete, success: true, page:list});
             socket.broadcast.to(list).emit("deleteItem", {toDelete: toDelete, success: true, page:list});

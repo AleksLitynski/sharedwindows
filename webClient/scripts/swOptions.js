@@ -10,6 +10,13 @@ sw.option = {};
 sw.option.isOpen = false;
 
 sw.option.open = function(e){
+	
+	document.querySelector("#newPageName").select();
+	document.querySelector("#newPageName").focus();
+
+
+
+
 	if(sw.option.isOpen){
 		document.querySelector("#createNew").style.display = "";
 	} else {

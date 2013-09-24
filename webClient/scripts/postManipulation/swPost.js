@@ -6,24 +6,26 @@ sw.post.subbedLists = [];
 sw.onload.push(function(){
 
     sw.socket.on('items', function (data) {
+        if(data.page == sw.listName){
 
-        if(sw.post.subbedLists.some(function(e, i, a){return e == data.page;})){
-            if(!sw.post.items[data.page]) {
-                sw.post.items[data.page] = [];
-            } 
-            
-            for(var i = 0; i < data.data.length; i++){
-                var isURL = sw.helpers.isUrlAList(data.data[i].url);
-                if(isURL != false){
-                    if( !sw.post.subbedLists.some(function(ele){return (ele == isURL)}) ){
-                        sw.post.subbedLists.push(isURL);
-                        //sw.socket.emit("subscribe", {list: isURL});
-                    } 
+            if(sw.post.subbedLists.some(function(e, i, a){return e == data.page;})){
+                if(!sw.post.items[data.page]) {
+                    sw.post.items[data.page] = [];
+                } 
+                
+                for(var i = 0; i < data.data.length; i++){
+                    var isURL = sw.helpers.isUrlAList(data.data[i].url);
+                    if(isURL != false){
+                        if( !sw.post.subbedLists.some(function(ele){return (ele == isURL)}) ){
+                            sw.post.subbedLists.push(isURL);
+                            //sw.socket.emit("subscribe", {list: isURL});
+                        } 
+                    }
+                    sw.post.addItem(data.page, data.data[i]);
                 }
-                sw.post.addItem(data.page, data.data[i]);
+                //find the node, pass in the items
+                sw.post.display(data.page);
             }
-            //find the node, pass in the items
-            sw.post.display(data.page);
         }
     });
 
@@ -57,7 +59,9 @@ sw.post.addItem = function(list, item){
     }
 }
 
-sw.post.display = function(nodeName) {
+sw.post.display = function(nodeName) {  
+
+    //debugger;
     
     var nodes = sw.helpers.getNodesOfList(nodeName);
     var toDisplay = sw.post.items[nodeName];
@@ -69,22 +73,12 @@ sw.post.display = function(nodeName) {
     function displaySingleNode(node, toDisplay, nodeName){
         if(nodeName != sw.listName){
             node.onclick = "";
-            /*function(e){
-                if(e.srcElement.classList.contains("listMessageOpen") || e.srcElement.classList.contains("listMessageClosed") ){
-                    if(e.srcElement.classList.contains("listMessageOpen")){
-                        e.srcElement.classList.remove("listMessageOpen");
-                        e.srcElement.classList.add("listMessageClosed");
-                    } else {
-                        e.srcElement.classList.add("listMessageOpen");
-                        e.srcElement.classList.remove("listMessageClosed");
-                    }
-                }
-            };*/
+            //put code to min/max div here
             node.classList.add("listMessageOpen");
             node = node.querySelector(".nestedPages");
         }
-        node.innerHTML = "";
 
+        var newBody = "";
         for(var i = toDisplay.length-1; i >= 0 ; i--){
             
             var selected = "";
@@ -97,41 +91,33 @@ sw.post.display = function(nodeName) {
                 thumbnail = "/sFavicon.PNG";
             }
             
-            var root = document.createElement("div");
-            root = node.appendChild(root);
-            root.setAttribute("class", "message" + selected);
-            root.setAttribute("draggable", true);
-            root.setAttribute("ondragstart", "sw.drag.start(this); ");
-            root.addEventListener("dragend", sw.drag.end );
-            root.setAttribute("onclick", "sw.index.itemClicked(this)");
+            newBody+=   "<div class='message"+selected+"' draggable='true' ondragstart='sw.drag.start(this);' ondragend='sw.drag.end(this)' onclick='sw.index.itemClicked(this)'>"
+                    +       "<div class='postInfo'><button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>"
+                    +           "<div class='popOutBtn' onclick='sw.page.popOut(this)'></div>" 
+                    +           "<div class='iconBox'>"
+                    +               "<image class='previewIcon' src='"+thumbnail+"'></image>"
+                    +           "</div>"
+                    +           "<div class='postTextBox'>"
+                    +               "<div class='postTitle' ondblclick='sw.post.select(this)'>"+toDisplay[i].title+"</div>"
+                    +               "<div class='postURL' ondblclick='sw.post.select(this)'>"+toDisplay[i].url+"</div>"
+                    +           "</div>"
+                    +       "</div>"
+                    +       "<div class='nestedPages' onclick='e.stopPropagation()' ondragstart='e.stopPropagation()'></div>"
+                    +   "</div>";
+
             
-            root.innerHTML  +=  "<div class='postInfo'><button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>" //
-                            +       "<div class='iconBox'>"
-                            +           "<image class='previewIcon' src='"+thumbnail+"'></image>"
-                            +       "</div>"
-                            +       "<div class='postTextBox'>"
-                            +           "<div class='postTitle'>"+toDisplay[i].title+"</div>"
-                            +           "<div class='postURL'>"+toDisplay[i].url+"</div>"
-                            +       "</div>"
-                            +  "</div>"
-                            +  "<div class='nestedPages'>"
-                            +  "</div>";
-                            
-            root.querySelector(".nestedPages").onclick = prev;
-            root.querySelector(".nestedPages").ondragstart = prev;
-            //root.querySelector(".nestedPages").ondragend = prev;
-            function prev(e){
-                e.stopPropagation();
-            }
-                            
-            var isURL = sw.helpers.isUrlAList(toDisplay[i].url);
+            /*var isURL = sw.helpers.isUrlAList(toDisplay[i].url);
             if(isURL != false && isURL != sw.listName){
                 root.classList.add("page-"+isURL);
                 sw.drag.addDragSupport( root );
                 if(sw.post.items[isURL]){
                     sw.post.display(isURL);
                 }
-            }
+            }*/
+        }
+
+        if(node.innerHTML != newBody){
+            node.innerHTML = newBody;
         }
     }
 }
@@ -140,8 +126,22 @@ sw.post.display = function(nodeName) {
 
 //submits a new post
 sw.post.send = function(toPost) {
+    
+    if(toPost != " " && toPost != "\n" && toPost != ""){
 
-    sw.post.post(toPost, sw.listName);
+        if(document.querySelector("#postToChildren").checked){
+            for(var i = 0; i < sw.post.items[sw.listName].length; i++){
+                var item = sw.post.items[sw.listName][i];
+                var list = sw.helpers.isUrlAList(item.url);
+                if( list != false ){
+                    sw.post.post(toPost, list);
+                }
+            }
+        } else {
+            sw.post.post(toPost, sw.listName);
+        }
+
+    }
 
     setTimeout(function(){document.querySelector("#postBox").value = "";},1);
 };
@@ -154,3 +154,20 @@ sw.post.post = function(msg, list, title){
 
 
 
+sw.post.select = function(toselect){
+
+    toselect.classList.toggle(".selectable");
+/*
+    function selectElementContents(el) {
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+    console.log(toselect);
+    selectElementContents(toselect);*/
+
+
+
+}
