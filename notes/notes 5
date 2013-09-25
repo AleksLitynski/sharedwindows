@@ -1,4 +1,5 @@
 nodes don't always highlight when first opened.
+doesn't pick up on correct name quite often.
 
 
 NO:
@@ -9,10 +10,14 @@ get page title from page
 faster posting, etc. or at least a loading bar
 fix flash on change index
 
+better checking if site is a website (Http vs http)
+
+
+
 Improvments:
 match selected item color to color of the page it will generate
-drag between pages
-clicking options should focus on "new list" (for now)
+drag between clicking
+pages options should focus on "new list" (for now)
 show url of fakie page in url bar
 better hovertext on items
 
