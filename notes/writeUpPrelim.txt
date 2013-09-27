@@ -42,14 +42,17 @@ to fix before ship:
 - test in IE/firefox/saferi/opera
 --Saferi:
 ---cannot resize divider
-- alert on disconnect
+
 - spin the wheels while waiting for new post
 - sometimes, pages dont highligh when first opened/created or something
+<- the first post created isnt selected.
 
+
+
+
+DONE:
+- grey out the nav field so people dont try to type into it! Or, merge nav field with new post field
+- use a handle to move item, use regular select to copy text. Remove top field
 - the name of a page isnt always the name of the page (js dom cant even do its one job!!)
-
-make options always visable (dont click, just use the bottom corner of the screen)
-
-- grey out the nav field so people dont try to type into it! Or, merge nav field with new post field <- good idea aleks!!
-
-use a handle to move item, use regular select to copy text. Remove top field
+- make options always visable (dont click, just use the bottom corner of the screen)
+- alert on disconnect

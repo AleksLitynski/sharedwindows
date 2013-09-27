@@ -11,7 +11,7 @@ sw.onloadEarly.push(function(){
     }
     
     //set the name of the "page name" bar
-    document.querySelector("#pageName").value = window.location;
+    //document.querySelector("#pageName").value = window.location;
 
     sw.socket = io.connect('http://'+window.location.host);      //connect to socket io.
     sw.post.subbedLists.push(sw.listName);
@@ -34,7 +34,7 @@ sw.onloadEarly.push(function(){
     var color = stringToColour(sw.listName);
     document.querySelector("#page").style.backgroundColor = color;
     document.querySelector("#pageNameBox").style.backgroundColor = color;
-    document.querySelector("#postLink").style.backgroundColor = color;
+    //document.querySelector("#postLink").style.backgroundColor = color;
     /*console.log(color, color.substring(1,3));
     document.querySelector("#pageName").style.backgroundColor = color;//"lightgrey";*/
 
@@ -46,7 +46,7 @@ sw.onloadEarly.push(function(){
 
     //sets the height of the page element
     function setPageWidth(e){
-        document.querySelector("#page").style.height = (window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight - document.querySelector("#postLink").clientHeight ) + "px"; //pageNameBox, optionsBar, postLink
+        document.querySelector("#page").style.height = (window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight) + "px"; //pageNameBox, optionsBar, postLink
     }
     setPageWidth();
     window.onresize = setPageWidth;

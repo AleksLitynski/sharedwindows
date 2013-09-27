@@ -1,7 +1,7 @@
 sw.onload.push(function(){
 
-	document.querySelector("#showNewBtn").onclick = sw.option.open;
-	document.querySelector("#closeOption").onclick = sw.option.close;
+	//document.querySelector("#showNewBtn").onclick = sw.option.open;
+	//document.querySelector("#closeOption").onclick = sw.option.close;
 })
 
 

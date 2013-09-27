@@ -12,6 +12,8 @@
     display:block;
     border-top:1px solid black;
     border-right:1px solid black;
+
+    resize: vertical;
 }
 
 
@@ -28,7 +30,6 @@ h2{
 
 #newPageName, .listFeedback{
     width:100%;
-    z-index:-1000;
 }
 .listFeedback{
     background-color: lightgrey;

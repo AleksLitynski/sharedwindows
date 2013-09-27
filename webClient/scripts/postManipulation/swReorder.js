@@ -18,16 +18,18 @@ sw.drag.addDragSupport = function(toSupport){
     toSupport.ondrag = draggyMoved;
     toSupport.onscroll = draggyMoved;
     function draggyMoved(event){
-        if(event.y != sw.drag.currentY && sw.drag.currentDragged){
+        if(event.y != sw.drag.currentY && sw.drag.currentDragged && event.srcElement.classList.contains("dragHandle")){
        
             placeholder.style.left = event.x + "px";
             placeholder.style.top = event.y + "px";
 
             placeholder.style.width = (sw.drag.currentDragged.offsetWidth) + "px";
-                        
-            for(var i = 0; i < event.srcElement.parentElement.children.length; i++) {
-                
-                var child = event.srcElement.parentElement.children[i];
+            
+
+            var children = sw.helpers.getNodeOfNode(event.srcElement).parentElement.children;
+            for(var i = 0; i < children.length; i++) {
+
+                var child = children[i];
                 var top = sw.helpers.ObjectPosition(child) - document.querySelector("#page").scrollTop;
                 var bottom = child.clientHeight + top;
                                 
@@ -60,6 +62,7 @@ placeholder.style.position = "absolute";
 placeholder.style.display = "none";
 
 sw.drag.start = function(node) {
+    node = sw.helpers.getNodeOfNode(node);
     sw.drag.currentDragged = node;
     sw.drag.startedDrag = sw.helpers.childIndex(node);
     
@@ -76,18 +79,22 @@ sw.drag.start = function(node) {
 }
 sw.drag.end = function() {
     var e = window.event;
-    e.stopPropagation();
-    e.preventDefault();
-    var node = e.srcElement;
+    console.log(e.srcElement);
+    if(e.srcElement.classList.contains("dragHandle")){
+        e.stopPropagation();
+        e.preventDefault();
+        var node = sw.helpers.getNodeOfNode(e.srcElement);
 
-    placeholder.style.display = "none";
-    placeholder.classList.remove("draggedMessage");
-    var childLength = 0;
-    if(node.parentNode){
-        childLength = node.parentNode.children.length;
+
+        placeholder.style.display = "none";
+        placeholder.classList.remove("draggedMessage");
+        var childLength = 0;
+        if(node.parentNode){
+            childLength = node.parentNode.children.length;
+        }
+        var to   = childLength - sw.drag.dragTo.previous + 1;
+        var from = childLength - sw.drag.startedDrag + 1;
+        
+        sw.socket.emit('moveItem', { currentIndex: from, newIndex: to, page: sw.helpers.getListOfNode(node) });
     }
-    var to   = childLength - sw.drag.dragTo.previous + 1;
-    var from = childLength - sw.drag.startedDrag + 1;
-    
-    sw.socket.emit('moveItem', { currentIndex: from, newIndex: to, page: sw.helpers.getListOfNode(node) });
 }

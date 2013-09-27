@@ -2,24 +2,36 @@
     border-top:1px solid rgba(0,0,0,0);
     margin:0px;
     height:30px;
-    /*background-color:white;*/
-    padding:2px;
 
-    padding-left:7px;
-    padding-right:7px;
+    padding-top:0px;
+    padding-bottom:0px;
+
+    padding-left:1px;
+    padding-right:1px;
         
     white-space: nowrap;
     overflow: hidden;
         
-    cursor:move;
     
 }
 
-.selectedMessage{
-    /*background-color:#f1f1ff;*/
-    background-color: rgba(255, 100, 0, 1);
+.selectedMessage .postInfo {
+    box-shadow: inset 0 0 25px rgba(0, 100, 255, 1);
 }
-.draggedMessage{}
+
+
+
+.dragHandle{
+    float:left;
+    cursor:move;
+    background-color:rgba(50,50,50,0.8);
+    height:100%;
+    width:15px;
+
+    border-right:1px solid grey;
+    padding-right:-1px;
+
+}
 
 
 .postURL {
@@ -94,3 +106,4 @@
     -ms-user-select: text;
     user-select: text;
 }
+

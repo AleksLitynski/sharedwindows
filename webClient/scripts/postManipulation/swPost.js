@@ -91,8 +91,10 @@ sw.post.display = function(nodeName) {
                 thumbnail = "/sFavicon.PNG";
             }
             
-            newBody+=   "<div class='message"+selected+"' draggable='true' ondragstart='sw.drag.start(this);' ondragend='sw.drag.end(this)' onclick='sw.index.itemClicked(this)'>"
-                    +       "<div class='postInfo'><button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>"
+            newBody+=   "<div class='message"+selected+"'onclick='sw.index.itemClicked(this)'>"
+                    +       "<div class='dragHandle' draggable='true' ondragstart='sw.drag.start(this);' ondragend='sw.drag.end(this)' >=</br>=</div>"
+                    +       "<div class='postInfo'>"
+                    +           "<button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>"
                     +           "<div class='popOutBtn' onclick='sw.page.popOut(this)'></div>" 
                     +           "<div class='iconBox'>"
                     +               "<image class='previewIcon' src='"+thumbnail+"'></image>"

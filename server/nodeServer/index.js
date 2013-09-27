@@ -142,9 +142,13 @@ exports.run = function(staticServer){
                     function (errors, window) {
                         var title = "" + item.message + "";
                         var icon = "about:blank";
+
                         if(window != undefined){ if(window.$ != undefined){ if(window.$("title").html() != undefined) {
-                            if(!item.title){
-                                title = window.$("title").html();
+                            console.log(item.title);
+                            if(!item.title || item.title == item.message){
+                                console.log(sql_escape(window.$("title").html()));
+                                title = sql_escape(window.$("title").html());
+                                console.log(title);
                             } else {
                                 title = item.title;
                             }
@@ -298,4 +302,32 @@ exports.run = function(staticServer){
             socket.broadcast.to(list).emit("deleteItem", {toDelete: toDelete, success: true, page:list});
         }
     }   
+
+    //an incomplete fix, at best. Used when posting to verify post names.
+    //I never really got into verifying content like I should have.
+    //http://stackoverflow.com/questions/7744912/making-a-javascript-string-sql-friendly
+    function sql_escape (str) {
+        return str.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
+            switch (char) {
+                case "\0":
+                    return "\\0";
+                case "\x08":
+                    return "\\b";
+                case "\x09":
+                    return "\\t";
+                case "\x1a":
+                    return "\\z";
+                case "\n":
+                    return "\\n";
+                case "\r":
+                    return "\\r";
+                case "\"": return "";
+                case "'": return "";
+                case "\\": return "\\"+char;
+                case "%":
+                    return "\\"+char; // prepends a backslash to backslash, percent,
+                                      // and double/single quotes
+            }
+        });
+    }
 }
