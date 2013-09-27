@@ -19,6 +19,23 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "notes/writeUpPrelim.txt",
+			"settings":
+			{
+				"buffer_size": 957,
+				"line_ending": "Windows",
+				"name": "1) what is it?"
+			}
+		},
+		{
+			"file": "notes/notes.txt",
+			"settings":
+			{
+				"buffer_size": 1430,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -44,8 +61,22 @@
 	},
 	"file_history":
 	[
-		"/C/Users/inv/Documents/GitHub/sharedwindows/sublimeProjectFiles.sublime-workspace",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/notes/notes 5",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/notes/notes 4",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/notes/notes 3",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/notes/new  2.txt",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/notes/mitrenotes.txt",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/notes/favicontemp.png",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/server/listList.html",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/server/config.json",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/.idea/scopes/scope_settings.xml",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/.idea/.name",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/.idea/encodings.xml",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/.idea/misc.xml",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/.idea/sharedwindows.iml",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/.idea/modules.xml",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/sublimeProjectFiles.sublime-project",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/sublimeProjectFiles.sublime-workspace",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swPost.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/nodeServer/index.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPageTasks.js",
@@ -167,8 +198,62 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "notes/writeUpPrelim.txt",
+					"settings":
+					{
+						"buffer_size": 957,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								957,
+								957
+							]
+						],
+						"settings":
+						{
+							"auto_name": "1) what is it?",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "notes/notes.txt",
+					"settings":
+					{
+						"buffer_size": 1430,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

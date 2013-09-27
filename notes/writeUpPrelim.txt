@@ -1,0 +1,55 @@
+1) what is it?
+- the pieces
+- what you could do with them
+
+2) how to set it up.
+- deps.
+- running it.
+- running the site, clean DB, etc
+
+3) Structure of the code
+- database
+-- how to clean it, its structure
+- notes
+-- working notes. Nothing too exciting
+- tests
+-- not unit tests. Early tests for various features
+- server
+-- web server
+--- serves files, etc
+-- node server
+--- 2 way comm. Adds posts, removes posts, etc
+--config.json
+---has details about where files are
+-web client
+-- page favicon and dead link (sFavicon) favicon
+-- placeholder
+-- index/main page. Whats in the frame?
+--css
+--- images
+--- label css files with comments
+--scripts
+---
+
+
+
+
+to fix before ship:
+- test on iphone
+-- cannot reorder on touch screen
+-- cannot resize on touch screen
+-- page is too long (by a lot)
+- test in IE/firefox/saferi/opera
+--Saferi:
+---cannot resize divider
+- alert on disconnect
+- spin the wheels while waiting for new post
+- sometimes, pages dont highligh when first opened/created or something
+
+- the name of a page isnt always the name of the page (js dom cant even do its one job!!)
+
+make options always visable (dont click, just use the bottom corner of the screen)
+
+- grey out the nav field so people dont try to type into it! Or, merge nav field with new post field <- good idea aleks!!
+
+use a handle to move item, use regular select to copy text. Remove top field

@@ -1,6 +1,5 @@
 sw.onload.push(function(){
 
-	//document.querySelector("#showNewBtn").onmouseover = sw.option.open;
 	document.querySelector("#showNewBtn").onclick = sw.option.open;
 	document.querySelector("#closeOption").onclick = sw.option.close;
 })

@@ -35,6 +35,9 @@ sw.onloadEarly.push(function(){
     document.querySelector("#page").style.backgroundColor = color;
     document.querySelector("#pageNameBox").style.backgroundColor = color;
     document.querySelector("#postLink").style.backgroundColor = color;
+    /*console.log(color, color.substring(1,3));
+    document.querySelector("#pageName").style.backgroundColor = color;//"lightgrey";*/
+
 
     /*
     for(var i = 0; i < document.styleSheets.length; i++){
@@ -47,6 +50,24 @@ sw.onloadEarly.push(function(){
     }
     setPageWidth();
     window.onresize = setPageWidth;
+
+
+    //set alert on disconnect
+    sw.disconnected = false;
+    function count(){
+        setTimeout(function(e){
+            if(!sw.socket.socket.connected){
+                if(!sw.disconnected){
+                    sw.disconnected = true;
+                    alert("Connection to the server has been lost! \n have you lost connection to the internet, or is the server down?");
+                }
+            } else {
+                sw.disconnected = false;
+            }
+            count();
+        }, 5000);
+        
+    }count();
 
 })
 

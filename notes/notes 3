@@ -1,15 +1,11 @@
 TODO:
 
+-able to filter by radius
 -drag between lists
 -dragging one item onto another makes a list where both items are a child
--show SOMETHING if the iframe doesn't work or the link insn't a link
--make "new" (new list, not new item) clear and get rid of useless buttons
 -alert system (when dragging into self, let them know it was refused)
 -moving item flashes on top of screen (not on mine because of frame rate?). It waits there until it has permission from the server to move
 -uploading images
--post to many at once: Drag onto parent, auto post to all children
--sidebar width draggable
--able to filter by radius
 -drag into a "slot" in the tree
 -do some server side checking (don't just put shit user says into the DB)
 -remove "zombie" page (when delete, remove )
@@ -30,6 +26,10 @@ more obvious indents/"level" different from selection
 -make socket io port infered
 -drag into tree instead of drop zone. 
 -prevent text from overlapping "close" btn
+-show SOMETHING if the iframe doesn't work or the link insn't a link
+-make "new" (new list, not new item) clear and get rid of useless buttons
+-post to many at once: Drag onto parent, auto post to all children
+-sidebar width draggable
 
 
 

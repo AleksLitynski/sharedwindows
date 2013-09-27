@@ -1,55 +1,17 @@
-.expandedOption{
-    display:none;
-    position:absolute;
-    bottom:30px;
-    left:0px;
-    background-color:white;
-    width:350px;
-    height:250px;
-    overflow:hidden;
-    border:1px solid black;
-    padding:3px;
-    /*border-top-right-radius:5px;*/
-    
-    
-    text-align: left;
-
-    z-index:100;
-}
-
-.option:hover {
-    background-color: #f1f1ff;
-}
-
-.option{
-    background-color:white;
-    width:100%;
-    height:100%;
-    float:left;
-    display:block;
-    border-left:1px solid black;
-    border-top:1px solid black;
-    border-bottom:1px solid black;
-    text-align:center;
-    cursor: pointer; cursor: hand;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: moz-none;
-    -ms-user-select: none;
-    user-select: none;
-    border-right:1px solid black;
-}
-
 #showMoreBtn{
     border-right:1px solid black;
 }
 
 #optionsBar{
-    position:relative;
     bottom:2px;
-    height:30px;
+    height:200px;
     width:100%;
+
+    background-color:white;
+    float:left;
+    display:block;
+    border-top:1px solid black;
+    border-right:1px solid black;
 }
 
 
@@ -61,4 +23,13 @@ h2{
 
 #closeOption{
     float:right;
+}
+
+
+#newPageName, .listFeedback{
+    width:100%;
+    z-index:-1000;
+}
+.listFeedback{
+    background-color: lightgrey;
 }
