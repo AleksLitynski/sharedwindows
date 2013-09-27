@@ -20,3 +20,10 @@ copy database/dbClean.sqlite over db.sqlite (it should be named db.sqlite)
 3. The default ports are 80 (http), 443 (https). To change that, use: "node server.js [http port] [https port]". 
 
 > node server.js 8080 4432
+
+
+
+###### JSDOM issues on windows?
+
+* JSDOM relies on contextify, which relies on node-gyp
+* node-gyp notes: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup

@@ -19,14 +19,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "notes/notes 5",
-			"settings":
-			{
-				"buffer_size": 697,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -52,6 +44,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/inv/Documents/GitHub/sharedwindows/sublimeProjectFiles.sublime-workspace",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/notes/notes 5",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swPost.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/nodeServer/index.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPageTasks.js",
@@ -173,35 +167,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "notes/notes 5",
-					"settings":
-					{
-						"buffer_size": 697,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								400,
-								400
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 90.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
