@@ -6,8 +6,11 @@ sw.preview.current = "";
 sw.preview.display = function( address ) {
 
     if(sw.preview.current != address && address != "/placeholder.html" && sw.preview.current != sw.helpers.getHPAddress(address)){
-        var newSrc = "/placeholder.html";
+        var newSrc = "/placeholder.html?newPage=" + address;
         document.querySelector("#previewImage").src = newSrc;
+        /*document.querySelector("#previewImage").onload = function(){
+            console.log("loaded ");
+        }*/
         //
         sw.preview.current = newSrc;
         document.querySelector("#previewImage").onload = function(){

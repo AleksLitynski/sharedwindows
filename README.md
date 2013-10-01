@@ -11,6 +11,9 @@ How to use (pre-pre-alpha):
 *  npm install socket.io
 *  npm install jsdom
 
+[ ]  npm install hackpad
+[ ]  npm install request
+
 To clean the database, 
 copy database/dbClean.sqlite over db.sqlite (it should be named db.sqlite)
  

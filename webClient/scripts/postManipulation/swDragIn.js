@@ -38,27 +38,48 @@ sw.dragIn.showHide = function(e, showHide){
 */
 
 document.querySelector("#page").ondrop = function(e){
-
     e.stopPropagation();
     e.preventDefault();
-    if(!placeholder.classList.contains("draggedMessage")){
-        var list = sw.helpers.getListOfNode(e.target);
+   /*var data = e.dataTransfer.files[0];
+    if(data.type.split("/")[0] == "image"){
 
-        var dropOver = e.target;
-        
-        while(dropOver && dropOver.classList && !dropOver.classList.contains("message")){
-            if(dropOver.parentNode == undefined) {
-                return false;
+        var reader = new FileReader();
+
+        reader.addEventListener("loadend", function(e, file){
+            console.log(e, file);
+
+
+            var img = document.createElement("img"); 
+            img.file = file;   
+            img.src = this.result;
+            document.querySelector("#preview").appendChild(img);
+        })
+       
+        console.log(data);
+        reader.readAsDataURL(data);
+
+
+
+    } else {*/
+
+
+
+        if(!placeholder.classList.contains("draggedMessage")){
+            var list = sw.helpers.getListOfNode(e.target);
+
+            var dropOver = e.target;
+            
+            while(dropOver && dropOver.classList && !dropOver.classList.contains("message")){
+                if(dropOver.parentNode == undefined) {
+                    return false;
+                }
+                dropOver = dropOver.parentNode;
             }
-            dropOver = dropOver.parentNode;
+            
+            var text = String(e.dataTransfer.getData('Text'));
+            sw.post.post(text, list);
+            
+
         }
-        
-        var text = String(e.dataTransfer.getData('Text'));
-        sw.post.post(text, list);
-        
-
-        //dropOver
-        //sw.socket.emit('moveIndex', { currentIndex: from, newIndex: to, page: list });
-
-    }
+    //}
 };

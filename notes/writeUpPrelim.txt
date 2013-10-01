@@ -56,3 +56,15 @@ DONE:
 - the name of a page isnt always the name of the page (js dom cant even do its one job!!)
 - make options always visable (dont click, just use the bottom corner of the screen)
 - alert on disconnect
+
+
+
+-------------------------
+if it wont load, open the pop up automatically
+hide drag area until mouse over
+just make a a href
+
+
+-----------------
+drag in image.
+let users annotate image.

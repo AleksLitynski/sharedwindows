@@ -7,15 +7,79 @@
 				width:40px;
 				height:40px;
 			}
+
+			#link {
+				cursor:pointer;
+			}
+
+			#targetPage, #counter {
+				color:red;
+			}
+
 		</style>
+		<script>
+			var dontLoad = false;
+			window.onload = function(){
+				var doCount = function(time, toDo){
+					document.querySelector('#counter').innerHTML = time;
+					if(time > 0 && !dontLoad){
+						time --;
+						setTimeout(function(){
+							doCount(time, toDo)
+
+						}, 1000);
+					} else {
+						if(!dontLoad){
+							toDo();
+						}else {
+							document.querySelector('#counter').parentNode.innerHTML = 'Autoload canceled';
+						}
+					}
+				}
+
+				doCount(3, function(){
+					clickedIt();
+				});
+
+
+				
+			}
+
+			function clickedIt(){
+				clickedStop();
+				//console.log(parent.docuemnt);
+				var xPadding = window.outerWidth - window.innerWidth;
+				var yPadding = window.outerHeight - window.innerHeight;
+				
+				var w = window.innerWidth - 15;
+				var h = window.innerHeight - yPadding;
+				var left = xPadding + window.screenX;
+				var top  = yPadding + window.screenY;
+
+				var win = window.open(document.querySelector('#targetPage').innerHTML, "Page", 'width='+w+', height='+h+'left='+left+', top='+top );
+				win.moveTo(left, top);
+
+				if (window.focus) {win.focus()}
+				return false;
+			}
+
+			function clickedStop() {
+				dontLoad = true;
+			}
+
+		</script>
 	</head>
 
 	<body>
-		<h1>Now loading your page!</h1>
-		<h3>Caution: your page may never load!</h3>
-		We're working hard to provide previews of more and more websites. Bear with us!
+		<h1>Now loading <span id='targetPage'>about:blank</span></h1>
+		<h3>If the page isnt loading, click here:
+			<img id="link" src="css/images/popOut.png" onclick="clickedIt()"></img>
+		<h3>
+		<h3>
+			or wait <span id="counter"></span> seconds</img>
+		<h3>
+			<button onclick="clickedStop()">Dont Load It!!</button>
 
-		<h2>Feel free to use the <img src="css/images/popOut.png"></img> button for now.</h2>
 	</body>
 
 </html>

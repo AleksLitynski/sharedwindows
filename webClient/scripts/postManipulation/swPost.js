@@ -92,7 +92,7 @@ sw.post.display = function(nodeName) {
             }
             
             newBody+=   "<div class='message"+selected+"'onclick='sw.index.itemClicked(this)'>"
-                    +       "<div class='dragHandle' draggable='true' ondragstart='sw.drag.start(this);' ondragend='sw.drag.end(this)' >=</br>=</div>"
+                    +       "<div class='dragHandle' draggable='true' ondragstart='sw.drag.start(this);' ondragend='sw.drag.end(this)' ></div>"
                     +       "<div class='postInfo'>"
                     +           "<button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>"
                     +           "<div class='popOutBtn' onclick='sw.page.popOut(this)'></div>" 

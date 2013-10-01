@@ -64,15 +64,47 @@ exports.run = function(port, securePort) {
                 res.writeHead(200);
             }
             
-            
-            var html = fs.readFileSync("../" + config.webClientLoc + uriPath.join("/") );
+            if(uriPath[0] == "upload"){ // http://129.21.142.18/upload
+                //accept uploaded image
+                console.log(req)
+                res.write("/files/");
+                res.end(); 
+                
+            } else if(uriPath[0] == "file") {
+                var file = fs.readFileSync( "../" + config.database + "hostedFiles/" + lastPathList.join(".") ); //http://129.21.142.18/file/testy.jpg
+                res.write(file);
+                res.end();  
+            } else {
+
+
+
+                var html = fs.readFileSync("../" + config.webClientLoc + uriPath.join("/") );
+
+                if(uriPath[0].split(".")[0] == "placeholder"){
+                    var newPage = url.parse(req.url, true).query.newPage;
+                    jsdom.env({
+                            html: html, 
+                            scripts: ["http://code.jquery.com/jquery.js"], 
+                            done: function (errors, window) { 
+                                var $ = window.$;
+                                $("#targetPage").html(newPage);
+                                res.write($("html").html());
+                                res.end();
+                            }
+                    });
+                }
+                else {
+                    res.write(html);
+                    res.end();  
+                } 
+            }
         }
         catch(err){
             res.writeHead(404);
+            var html = "file not found";
+            res.write(html);
+            res.end();  
         }
-        res.write(html);
-        res.end();  
-      
       
     };
 
@@ -107,7 +139,6 @@ exports.run = function(port, securePort) {
                         );
                     }
                     catch(er){
-                        console.log("hey");
                         res.write(html);
                         res.end();
                     }
@@ -124,6 +155,7 @@ exports.run = function(port, securePort) {
             });
         });
     }
+
 
 
     //-------------------------------//
