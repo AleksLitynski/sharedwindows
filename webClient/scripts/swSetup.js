@@ -38,18 +38,10 @@ sw.onloadEarly.push(function(){
     /*console.log(color, color.substring(1,3));
     document.querySelector("#pageName").style.backgroundColor = color;//"lightgrey";*/
 
+    document.querySelector("#page").style.height = window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight + "px";
 
-    /*
-    for(var i = 0; i < document.styleSheets.length; i++){
-        console.log(document.styleSheets[i].title);
-    }*/
 
-    //sets the height of the page element
-    function setPageWidth(e){
-        document.querySelector("#page").style.height = (window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight) + "px"; //pageNameBox, optionsBar, postLink
-    }
-    setPageWidth();
-    window.onresize = setPageWidth;
+
 
 
     //set alert on disconnect
@@ -73,7 +65,7 @@ sw.onloadEarly.push(function(){
 
 
 var stringToColour = function(str) {
-
+    if(str == "global") {return "rgb(12, 151, 202)";}
     // str to hash
     for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
     // int/hash to hex

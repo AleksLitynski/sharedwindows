@@ -2,8 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Shared Windows</title>
         
+
+        <title>Shared Windows</title>
+                
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/reset.css" />
         <link rel="stylesheet" type="text/css" href="css/options.css" />
@@ -35,27 +37,20 @@
                 <input type="checkbox" id="postToCurrent" value="post to current?" checked="checked"> post new list to current list?</input>
                 <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button></br>
 
-
                 </br>
                 <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow the leader?</input> </br>
                 <input type="checkbox" id="jumpToCurrent" value="Always load most recent?" checked>Always load most recent?</input> </br>
                 <input type="checkbox" id="postToChildren" value="Post to childen instead?">Post to childen instead?</input> </br>
                 <a href="/lists/recent">>>>Recent Lists</a>
-
-                <!--button id="upload" onclick="uploadImg()">Upload Something!~</button-->
-
             </div>
             
             
         </div>
         
-        <div class="handle" id="dragHandle"></div>
+        <div class="handle" id="dragHandle"><div class="exendedDragHandle"></div></div>
 
-        <div id="preview">
-            
-
-            <iframe src="" id="previewImage" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
-
+        <div id="previewPane">
+            <iframe src="" id="preview"></iframe>
         </div>
         
 	</body>

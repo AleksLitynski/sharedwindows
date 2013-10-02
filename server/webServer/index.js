@@ -76,7 +76,7 @@ exports.run = function(port, securePort) {
                 res.end();  
             } else {
 
-
+                //console.log(uriPath);
 
                 var html = fs.readFileSync("../" + config.webClientLoc + uriPath.join("/") );
 
@@ -85,11 +85,13 @@ exports.run = function(port, securePort) {
                     jsdom.env({
                             html: html, 
                             scripts: ["http://code.jquery.com/jquery.js"], 
-                            done: function (errors, window) { 
-                                var $ = window.$;
-                                $("#targetPage").html(newPage);
-                                res.write($("html").html());
-                                res.end();
+                            done: function (errors, window) {
+                                if(errors == null){
+                                    var $ = window.$;
+                                    $("#targetPage").html(newPage);
+                                    res.write($("html").html());
+                                    res.end();
+                                }
                             }
                     });
                 }

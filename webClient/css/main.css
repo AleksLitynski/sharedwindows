@@ -1,33 +1,45 @@
 #controlPanel{
     float:left;
     width:350px;
-    height:10%;
+    height:100vh;
+
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+
+    -webkit-flex-flow: column;
+    -webkit-justify-content: flex-start;
+    /*-webkit-align-content: space-around;*/
     
 }
 
 #page{
     overflow-y: scroll;
-    overflow-x:hidden;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch
     
-    top:33px;
-    bottom:30px;
-    width:100%;
-
+    
     background-color:lightgrey;
 }
 
 #preview{
-    float:left;
-    position: absolute;
-    right:0px;
-    left:353px;
-    height:100vh;
-}
-
-#previewImage{
     width:100%;
     height:100%;
+
+    overflow-y: scroll;
+    overflow-x: scroll;
 }
+
+#previewPane{
+    float:left;
+    position:absolute;
+    right:0px;
+    left:353px;
+    100vh:height;
+
+
+}
+
 
 body{
     font-family: sans-serif;
@@ -47,11 +59,29 @@ body{
 
 .handle{
     float:left;
-    height:100vh;
+    height:100%;
     width:3px;
     background-color:lightgrey;
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.5);
     cursor:w-resize;
+    z-index:100;
+}
+
+.exendedDragHandle{
+    background-color:inherit;
+    width:33px;
+    height:33px;
+    margin-left:-30px;
+    background-image: url("images/resize.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    box-shadow: -2px 0px 3px 0px rgba(0, 0, 0, 0.5);
+    z-index:10;
+}
+
+.activeDrag {
+    background-color:red;
 }
 
 

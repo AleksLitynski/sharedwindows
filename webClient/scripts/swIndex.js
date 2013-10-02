@@ -59,7 +59,6 @@ sw.index.moveItem = function(page, from, to){
 
 
     if((from - 1) >= 0 && sw.post.items[page]){
-
         var oldUrl = sw.post.items[page][ sw.index.current[page]-1 ].url;
 
         var toMoveId = sw.post.items[page][from - 1].id;

@@ -43,9 +43,10 @@ to fix before ship:
 --Saferi:
 ---cannot resize divider
 
-- spin the wheels while waiting for new post
-- sometimes, pages dont highligh when first opened/created or something
-<- the first post created isnt selected.
+cannot drag bar after rotate
+on iphone chrome, when selecting new post box, box vanishes!
+
+
 
 
 
@@ -68,3 +69,13 @@ just make a a href
 -----------------
 drag in image.
 let users annotate image.
+
+
+
+IGNORE:
+- spin the wheels while waiting for new post
+- sometimes, pages dont highligh when first opened/created or something
+<- the first post created isnt selected.
+
+
+Nice blue:rgb(12, 151, 202)

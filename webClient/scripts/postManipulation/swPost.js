@@ -92,7 +92,7 @@ sw.post.display = function(nodeName) {
             }
             
             newBody+=   "<div class='message"+selected+"'onclick='sw.index.itemClicked(this)'>"
-                    +       "<div class='dragHandle' draggable='true' ondragstart='sw.drag.start(this);' ondragend='sw.drag.end(this)' ></div>"
+                    +       "<div class='dragHandle' draggable='true'></div>"
                     +       "<div class='postInfo'>"
                     +           "<button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>"
                     +           "<div class='popOutBtn' onclick='sw.page.popOut(this)'></div>" 
@@ -100,8 +100,8 @@ sw.post.display = function(nodeName) {
                     +               "<image class='previewIcon' src='"+thumbnail+"'></image>"
                     +           "</div>"
                     +           "<div class='postTextBox'>"
-                    +               "<div class='postTitle' ondblclick='sw.post.select(this)'>"+toDisplay[i].title+"</div>"
-                    +               "<div class='postURL' ondblclick='sw.post.select(this)'>"+toDisplay[i].url+"</div>"
+                    +               "<div class='postTitle'>"+toDisplay[i].title+"</div>"
+                    +               "<div class='postURL'>"+toDisplay[i].url+"</div>"
                     +           "</div>"
                     +       "</div>"
                     +       "<div class='nestedPages' onclick='e.stopPropagation()' ondragstart='e.stopPropagation()'></div>"
@@ -120,6 +120,18 @@ sw.post.display = function(nodeName) {
 
         if(node.innerHTML != newBody){
             node.innerHTML = newBody;
+
+            var handles = document.querySelectorAll(".dragHandle");
+            for(var i = 0; i < handles.length; i++){ var handle = handles[i];
+                handle.addEventListener("dragstart", function(e){sw.drag.start(e.srcElement, e);})
+                handle.addEventListener("dragend", function(e){sw.drag.end(e.srcElement);})
+                handle.addEventListener("touchstart", function(e){console.log("live and let roll around?");sw.drag.touchstart(e.srcElement, e);})
+                handle.addEventListener("contextmenu", function(e){e.preventDefault();e.stopPropagation();})
+            }
+            var pics = document.querySelectorAll(".iconBox");
+            for(var i = 0; i < pics.length; i++){ var pic = pics[i];
+                //pic.addEventListener("touchstart", function(e){console.log("live and let roll around?");sw.drag.touchstart(e.srcElement, e);})
+            }
         }
     }
 }
