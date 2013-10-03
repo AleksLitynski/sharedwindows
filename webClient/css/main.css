@@ -36,6 +36,9 @@
     right:0px;
     left:353px;
     100vh:height;
+    
+    overflow-y: scroll;
+    overflow-x: scroll;
 
 
 }

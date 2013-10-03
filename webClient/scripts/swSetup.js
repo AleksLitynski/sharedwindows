@@ -41,9 +41,21 @@ sw.onloadEarly.push(function(){
     function setPageHeight(){
         document.querySelector("#page").style.height = window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight + "px";
     };
-    window.addEventListener("resize", setPageHeight);
-    setPageHeight();
+    function isiPhone(){
+        return (
+            //Detect iPhone
+            (navigator.platform.indexOf("iPhone") != -1) ||
+            //Detect iPod
+            (navigator.platform.indexOf("iPod") != -1)   || 
+            (navigator.platform.indexOf("iPad") != -1) 
+        );
+    }
+    if(!isiPhone()){
+        document.querySelector("#newPageName").value = "fuck";
+        window.addEventListener("resize", setPageHeight);
+    }
 
+        setPageHeight();
 
 
     //set alert on disconnect

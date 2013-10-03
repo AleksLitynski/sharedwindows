@@ -35,16 +35,9 @@
 
 
 to fix before ship:
-- test on iphone
--- cannot reorder on touch screen
--- cannot resize on touch screen
--- page is too long (by a lot)
-- test in IE/firefox/saferi/opera
---Saferi:
----cannot resize divider
-
-cannot drag bar after rotate
-on iphone chrome, when selecting new post box, box vanishes!
+- document and DOCUMENT
+- final iphone test
+- final jon test
 
 
 
@@ -57,6 +50,13 @@ DONE:
 - the name of a page isnt always the name of the page (js dom cant even do its one job!!)
 - make options always visable (dont click, just use the bottom corner of the screen)
 - alert on disconnect
+
+
+- test on iphone
+-- cannot reorder on touch screen
+-- cannot resize on touch screen
+- iphone: cannot drag bar after rotate
+- iphone: on iphone chrome, when selecting new post box, box vanishes!
 
 
 
@@ -76,6 +76,11 @@ IGNORE:
 - spin the wheels while waiting for new post
 - sometimes, pages dont highligh when first opened/created or something
 <- the first post created isnt selected.
+
+-- page is too long (by a lot)
+- test in IE/firefox/saferi/opera
+--Saferi:
+---cannot resize divider
 
 
 Nice blue:rgb(12, 151, 202)
