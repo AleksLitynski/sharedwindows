@@ -89,7 +89,8 @@ exports.run = function(port, securePort) {
                                 if(errors == null){
                                     var $ = window.$;
                                     $("#targetPage").html(newPage);
-                                    res.write($("html").html());
+                                    var html = /*"<!DOCTYPE HTML>" +*/ $("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>","");
+                                    res.write(html);
                                     res.end();
                                 }
                             }
@@ -135,7 +136,8 @@ exports.run = function(port, securePort) {
                         jsdom.env(html, [url.parse("http://code.jquery.com/jquery.js").href],
                             function (errors, window) {
                                 window.$("title").html(toServe + " - Shared Windows");
-                                res.write(window.$("html").html());
+                                var html = /*"<!DOCTYPE HTML>" +*/ window.$("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>","");
+                                res.write(html);
                                 res.end();
                             }
                         );

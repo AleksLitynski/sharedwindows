@@ -38,9 +38,11 @@ sw.onloadEarly.push(function(){
     /*console.log(color, color.substring(1,3));
     document.querySelector("#pageName").style.backgroundColor = color;//"lightgrey";*/
 
-    document.querySelector("#page").style.height = window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight + "px";
-
-
+    function setPageHeight(){
+        document.querySelector("#page").style.height = window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight + "px";
+    };
+    window.addEventListener("resize", setPageHeight);
+    setPageHeight();
 
 
 
