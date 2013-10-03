@@ -37,12 +37,14 @@
                 <input placeholder="New Page like will appear here" id="listFeedback" readonly="readonly" onclick="Javascript: this.focus(); this.select();" class="listFeedback"></input>
 
                 <input type="checkbox" id="postToCurrent" value="post to current?" checked="checked"> post new list to current list?</input>
-                <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button></br>
+                <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button><div>-----</div>
 
-                </br>
                 <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow the leader?</input> </br>
                 <input type="checkbox" id="jumpToCurrent" value="Always load most recent?" checked>Always load most recent?</input> </br>
                 <input type="checkbox" id="postToChildren" value="Post to childen instead?">Post to childen instead?</input> </br>
+
+                <div>Range: <input type="range" title="Caution: This slider does nothing!!"></input> (does nothing)</div>
+
                 <a href="/lists/recent">>>>Recent Lists</a>
             </div>
             

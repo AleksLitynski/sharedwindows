@@ -51,7 +51,7 @@ sw.onloadEarly.push(function(){
         );
     }
     if(!isiPhone()){
-        document.querySelector("#newPageName").value = "fuck";
+        //document.querySelector("#newPageName").value = "fuck";
         window.addEventListener("resize", setPageHeight);
     }
 

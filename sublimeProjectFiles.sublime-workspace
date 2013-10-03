@@ -35,7 +35,7 @@
 			"file": "webClient/index.html",
 			"settings":
 			{
-				"buffer_size": 2642,
+				"buffer_size": 2755,
 				"line_ending": "Windows"
 			}
 		},
@@ -102,7 +102,7 @@
 			"file": "webClient/scripts/swSetup.js",
 			"settings":
 			{
-				"buffer_size": 3348,
+				"buffer_size": 3350,
 				"line_ending": "Windows"
 			}
 		},
@@ -111,6 +111,14 @@
 			"settings":
 			{
 				"buffer_size": 1676,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/postManipulation/swPost.js",
+			"settings":
+			{
+				"buffer_size": 6933,
 				"line_ending": "Windows"
 			}
 		}
@@ -326,7 +334,7 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 8,
 			"sheets":
 			[
 				{
@@ -334,15 +342,15 @@
 					"file": "webClient/index.html",
 					"settings":
 					{
-						"buffer_size": 2642,
+						"buffer_size": 2755,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1248,
-								1259
+								1888,
+								1888
 							]
 						],
 						"settings":
@@ -553,15 +561,15 @@
 					"file": "webClient/scripts/swSetup.js",
 					"settings":
 					{
-						"buffer_size": 3348,
+						"buffer_size": 3350,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2442,
-								2442
+								1616,
+								1616
 							]
 						],
 						"settings":
@@ -600,6 +608,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "webClient/scripts/postManipulation/swPost.js",
+					"settings":
+					{
+						"buffer_size": 6933,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6510,
+								6510
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1890.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
