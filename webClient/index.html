@@ -34,14 +34,14 @@
             
             <div id="optionsBar">
                 <h2>Create A New List:</h2>
-                <input id="newPageName" placeholder="Type New Page Name Here"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input></br>
+                <input id="newPageName" placeholder="Type New List Name Here"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input></br>
                                
-                <input placeholder="New Page like will appear here" id="listFeedback" readonly="readonly" onclick="Javascript: this.focus(); this.select();" class="listFeedback"></input>
+                <input placeholder="New List link will appear here" id="listFeedback" readonly="readonly" onclick="Javascript: this.focus(); this.select();" class="listFeedback"></input>
 
                 <input type="checkbox" id="postToCurrent" value="post to current?" checked="checked"> post new list to current list?</input>
                 <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button><div>-----</div>
 
-                <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow the leader?</input> </br>
+                <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow other participants?</input> </br>
                 <input type="checkbox" id="jumpToCurrent" value="Always load most recent?" checked>Always load most recent?</input> </br>
                 <input type="checkbox" id="postToChildren" value="Post to childen instead?">Post to childen instead?</input> </br>
 

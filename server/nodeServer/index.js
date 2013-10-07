@@ -61,6 +61,8 @@ exports.run = function(staticServer){
     var waitingToAdd = [];
     //item.message, 
     function addItem(socket, list, item) {
+            item.message = sql_escape(item.message);
+            item.title = sql_escape(item.title) || undefined;
         //check if entry already exists. If it does, move it to the top. Else, add the new item.
         if(!waitingToAdd.some(function(e,i){return (e.list == list && e.item == item.message)})){
             //console.log(item);

@@ -1,10 +1,17 @@
--- dont hardcode link
--- make "now posting" appear
-fix for iPhone
 
 
-solutions:
-- ignore node_modules. + gets rid of problem. - each use has to install all deps. No future safety
-- merge win and mac versions of node_module. + easier + backwards comp + could be slower - 
-- incude copy of dep repos for future, but don't install by default
 
+
+
+
+DONE:
+first drag may be a little bit funny
+don't use hover for hover indicator. (at least, not on touch)
+not i'm dropnote <- kills database (" and ' killed it. Other escape characters too, probably)
+post to children doesn't work on posting lists
+clear text field after list is posted
+
+
+NOPE:
+can't log into hackpad with google when iframed
+first drag may be a little bit funny
