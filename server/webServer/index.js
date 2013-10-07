@@ -63,6 +63,7 @@ exports.run = function(port, securePort) {
             if(n){
                 res.writeHead(200);
             }
+            res.setHeader('Access-Control-Allow-Origin','*');
             
             switch (uriPath[0]){
                 case "config":
