@@ -1,4 +1,4 @@
-exports.run = function(port, securePort) {
+exports.run = function(port) {
     var path = require('path');
     var https = require('https');
     var http = require('http');
@@ -16,7 +16,6 @@ exports.run = function(port, securePort) {
       key: fs.readFileSync((path.resolve(__dirname, 'privatekey.pem'))),
       cert: fs.readFileSync((path.resolve(__dirname, 'certificate.pem')))
     };
-    //https.createServer(options, handleRequest).listen(securePort);
     var webServer = http.createServer(handleRequest).listen(port);
 
 

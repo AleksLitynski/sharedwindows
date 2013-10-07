@@ -20,9 +20,9 @@ copy database/dbClean.sqlite over db.sqlite (it should be named db.sqlite)
  
 1. Open "sharedwindows/server/" in your command prompt.
 2. run "node server.js"
-3. The default ports are 80 (http), 443 (https). To change that, use: "node server.js [http port] [https port]". 
+3. The default port is 80 (http). To change that, use: "node server.js [http port]". 
 
-> node server.js 8080 4432
+> node server.js 8080
 
 
 
