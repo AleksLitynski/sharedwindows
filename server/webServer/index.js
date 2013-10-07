@@ -41,7 +41,7 @@ exports.run = function(port, securePort) {
                 uriPath.shift();
             }
         } else {
-            if(uriPath[0] == "lists") redirectToGlobal(res);
+            if(uriPath[0] == "lists") redirectToGlobal(res, req);
         }
 
         var html = "file not found";
@@ -63,17 +63,17 @@ exports.run = function(port, securePort) {
             if(n){
                 res.writeHead(200);
             }
-            res.setHeader('Access-Control-Allow-Origin','*');
+            //res.setHeader('Access-Control-Allow-Origin','*');
             
             switch (uriPath[0]){
                 case "config":
                     var clientConfig = {};
-                    clientConfig.webSocketServer = getAddresses()[0];
+                    clientConfig.webSocketServer = getAddresses()[0] + ":" + port;
                     res.write( JSON.stringify(clientConfig) );
                     res.end(); 
                 break;
                 case "upload":
-                    console.log(req)
+                    console.log(req);
                     res.write("/files/");
                     res.end(); 
                 break;
@@ -119,9 +119,17 @@ exports.run = function(port, securePort) {
       
     };
 
-    function redirectToGlobal(res){
+    function redirectToGlobal(res, req){
+        var redirectTo = "lists/global";
+        if(req){
+            var pathname = url.parse(req.url).pathname;
+            if(pathname[pathname.length-1] == "/"){
+                redirectTo = "global";
+            }
+        }
+        
         res.writeHead(302, {
-            "Location": "lists/global"
+            "Location": redirectTo
         });
         res.end();
     }
