@@ -1,5 +1,4 @@
 exports.run = function(port) {
-    console.log("loading pre reqs");
     var path = require('path');
     var https = require('https');
     var http = require('http');
@@ -18,9 +17,7 @@ exports.run = function(port) {
       cert: fs.readFileSync((path.resolve(__dirname, 'certificate.pem')))
     };
 
-    console.log("starting server for real");
     var webServer = http.createServer(handleRequest).listen(port);
-    console.log("server started");
 
 
     function handleRequest(req, res)  {
