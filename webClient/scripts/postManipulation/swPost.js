@@ -34,6 +34,7 @@ sw.onload.push(function(){
 
 
 sw.post.addItem = function(list, item){
+    document.querySelector("#postBox").style.backgroundColor = "white";
 
     sw.post.items[list].push(item);
     sw.post.items[list].sort(function (a, b) {
@@ -160,6 +161,14 @@ sw.post.send = function(toPost) {
     setTimeout(function(){document.querySelector("#postBox").value = "";},1);
 };
 sw.post.post = function(msg, list, title){
+
+    document.querySelector("#postBox").style.backgroundColor = "lightgrey";
+    if(document.querySelector("#postToChildren").checked){ //uncolor box after a little white if posting to children
+        window.setInterval(function(){
+            document.querySelector("#postBox").style.backgroundColor = "white";
+        },500);
+    }
+
     navigator.geolocation.getCurrentPosition(function(pos){
         if(!title) {title = msg;}
         sw.socket.emit('items', {title: title, message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude, page: list }); //post to?        
