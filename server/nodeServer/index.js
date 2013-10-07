@@ -1,7 +1,8 @@
 exports.run = function(staticServer){
-
+    console.log("loading pre reqs");
     var path    = require('path');
-    var io      = require('socket.io').listen(staticServer, { log: false })  //10303              //require socketio and start it listening
+    console.log("socket latching onto server");
+    var io      = require('socket.io').listen(staticServer, { log: true })  //10303              //require socketio and start it listening
     var fs      = require('fs');
     var jsdom   = require('jsdom');
     var jquery  = fs.readFileSync(path.resolve(__dirname, './jquery.js'), "utf-8");
@@ -11,7 +12,7 @@ exports.run = function(staticServer){
     var sqlite3 = new require('sqlite3').verbose();
     var db      = new sqlite3.Database('../' + config.databaseFile);
 
-
+    console.log("node server loading done");
     io.sockets.on('connection', function (socket) {                 //when somebody connects...
         
         
