@@ -64,43 +64,50 @@ exports.run = function(port, securePort) {
                 res.writeHead(200);
             }
             
-            if(uriPath[0] == "upload"){ // http://129.21.142.18/upload
-                //accept uploaded image
-                console.log(req)
-                res.write("/files/");
-                res.end(); 
-                
-            } else if(uriPath[0] == "file") {
-                var file = fs.readFileSync( "../" + config.database + "hostedFiles/" + lastPathList.join(".") ); //http://129.21.142.18/file/testy.jpg
-                res.write(file);
-                res.end();  
-            } else {
-
-                //console.log(uriPath);
-
-                var html = fs.readFileSync("../" + config.webClientLoc + uriPath.join("/") );
-
-                if(uriPath[0].split(".")[0] == "placeholder"){
-                    var newPage = url.parse(req.url, true).query.newPage;
-                    jsdom.env({
-                            html: html, 
-                            scripts: ["http://code.jquery.com/jquery.js"], 
-                            done: function (errors, window) {
-                                if(errors == null){
-                                    var $ = window.$;
-                                    $("#targetPage").html(newPage);
-                                    var html = /*"<!DOCTYPE HTML>" +*/ $("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>","");
-                                    res.write(html);
-                                    res.end();
-                                }
-                            }
-                    });
-                }
-                else {
-                    res.write(html);
+            switch (uriPath[0]){
+                case "config":
+                    var clientConfig = {};
+                    clientConfig.webSocketServer = getAddresses()[0];
+                    res.write( JSON.stringify(clientConfig) );
+                    res.end(); 
+                break;
+                case "upload":
+                    console.log(req)
+                    res.write("/files/");
+                    res.end(); 
+                break;
+                case "file":
+                    var file = fs.readFileSync( "../" + config.database + "hostedFiles/" + lastPathList.join(".") ); //http://129.21.142.18/file/testy.jpg
+                    res.write(file);
                     res.end();  
-                } 
+                break;
+
+                default:
+                    var html = fs.readFileSync("../" + config.webClientLoc + uriPath.join("/") );
+
+                    if(uriPath[0].split(".")[0] == "placeholder"){
+                        var newPage = url.parse(req.url, true).query.newPage;
+                        jsdom.env({
+                                html: html, 
+                                scripts: ["http://code.jquery.com/jquery.js"], 
+                                done: function (errors, window) {
+                                    if(errors == null){
+                                        var $ = window.$;
+                                        $("#targetPage").html(newPage);
+                                        var html = /*"<!DOCTYPE HTML>" +*/ $("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>","");
+                                        res.write(html);
+                                        res.end();
+                                    }
+                                }
+                        });
+                    }
+                    else {
+                        res.write(html);
+                        res.end();  
+                    } 
+                break;
             }
+
         }
         catch(err){
             res.writeHead(404);
@@ -182,4 +189,22 @@ exports.run = function(port, securePort) {
     
     
     return webServer;
+}
+
+
+function getAddresses(){
+    var os = require('os')
+
+    var interfaces = os.networkInterfaces();
+    var addresses = [];
+    for (k in interfaces) {
+        for (k2 in interfaces[k]) {
+            var address = interfaces[k][k2];
+            if (address.family == 'IPv4' && !address.internal) {
+                addresses.push(address.address)
+            }
+        }
+    }
+
+    return addresses; 
 }

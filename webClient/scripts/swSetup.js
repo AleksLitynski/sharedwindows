@@ -13,7 +13,11 @@ sw.onloadEarly.push(function(){
     //set the name of the "page name" bar
     //document.querySelector("#pageName").value = window.location;
 
-    sw.socket = io.connect('http://'+window.location.host);      //connect to socket io.
+    var req = new XMLHttpRequest();
+    req.open('GET', "http://" + document.location.host + "/config", false); req.send();
+    var socketIP = JSON.parse(req.response).webSocketServer;
+
+    sw.socket = io.connect('http://'+socketIP);      //connect to socket io.  //window.location.host
     sw.post.subbedLists.push(sw.listName);
     navigator.geolocation.getCurrentPosition(function(pos){
         var location = window.location.origin + "/lists/" + sw.listName;

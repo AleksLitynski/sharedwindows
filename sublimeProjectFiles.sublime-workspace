@@ -32,93 +32,18 @@
 	"buffers":
 	[
 		{
-			"file": "webClient/index.html",
+			"file": "/C/Users/inv/Desktop/conf/httpd.conf",
 			"settings":
 			{
-				"buffer_size": 2755,
+				"buffer_size": 18061,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "webClient/scripts/postManipulation/swDragIn.js",
+			"file": "/C/Users/inv/Desktop/conf/extra/httpd-vhosts.conf",
 			"settings":
 			{
-				"buffer_size": 1941,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "server/nodeServer/index.js",
-			"settings":
-			{
-				"buffer_size": 15226,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "server/webServer/index.js",
-			"settings":
-			{
-				"buffer_size": 6283,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "database/readme.MD",
-			"settings":
-			{
-				"buffer_size": 839,
-				"line_ending": "Windows",
-				"name": "Everything there is to know about the server:"
-			}
-		},
-		{
-			"file": "notes/readme.MD",
-			"settings":
-			{
-				"buffer_size": 107,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "tests/readme.MD",
-			"settings":
-			{
-				"buffer_size": 250,
-				"line_ending": "Windows",
-				"name": "These are various test we have done as we approach"
-			}
-		},
-		{
-			"contents": "This is the big web client. When you load the page, this is what you get.\n\n",
-			"settings":
-			{
-				"buffer_size": 75,
-				"line_ending": "Windows",
-				"name": "This is the big web client. When you load the page"
-			}
-		},
-		{
-			"file": "webClient/scripts/swSetup.js",
-			"settings":
-			{
-				"buffer_size": 3350,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/css/main.css",
-			"settings":
-			{
-				"buffer_size": 1676,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/scripts/postManipulation/swPost.js",
-			"settings":
-			{
-				"buffer_size": 6933,
+				"buffer_size": 2405,
 				"line_ending": "Windows"
 			}
 		}
@@ -147,14 +72,23 @@
 	},
 	"file_history":
 	[
+		"/C/Users/inv/Desktop/httpd.conf",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swPost.js",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/main.css",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swSetup.js",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/readme.MD",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/tests/readme.MD",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/notes/readme.MD",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/database/readme.MD",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/server/webServer/index.js",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/server/nodeServer/index.js",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDragIn.js",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/index.html",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/notes/writeUpPrelim.txt",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swResizePage.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/items.css",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/newArea.css",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/options.css",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/main.css",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swSetup.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swPreview.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/helpers.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swIndex.js",
@@ -162,14 +96,9 @@
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swOptions.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swPageTasks.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDelete.js",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDragIn.js",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swPost.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swReorder.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/reset.css",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/README.md",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/index.html",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/server/webServer/index.js",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/server/nodeServer/index.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/tests/hackpadTest/index.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/config.json",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/placeholder.html",
@@ -247,6 +176,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Directory",
+			"vhost",
+			"virtualhost",
 			"jsdom",
 			"100",
 			"preview",
@@ -334,308 +266,61 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "webClient/index.html",
+					"file": "/C/Users/inv/Desktop/conf/httpd.conf",
 					"settings":
 					{
-						"buffer_size": 2755,
+						"buffer_size": 18061,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1888,
-								1888
+								9587,
+								9552
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2778.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "webClient/scripts/postManipulation/swDragIn.js",
+					"file": "/C/Users/inv/Desktop/conf/extra/httpd-vhosts.conf",
 					"settings":
 					{
-						"buffer_size": 1941,
+						"buffer_size": 2405,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								69,
-								69
+								1408,
+								1408
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "server/nodeServer/index.js",
-					"settings":
-					{
-						"buffer_size": 15226,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6802,
-								6802
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1843.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "server/webServer/index.js",
-					"settings":
-					{
-						"buffer_size": 6283,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5093,
-								5093
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1421.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "database/readme.MD",
-					"settings":
-					{
-						"buffer_size": 839,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								839,
-								839
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Everything there is to know about the server:",
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "notes/readme.MD",
-					"settings":
-					{
-						"buffer_size": 107,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "tests/readme.MD",
-					"settings":
-					{
-						"buffer_size": 250,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								250,
-								250
-							]
-						],
-						"settings":
-						{
-							"auto_name": "These are various test we have done as we approach",
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"settings":
-					{
-						"buffer_size": 75,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								75,
-								75
-							]
-						],
-						"settings":
-						{
-							"auto_name": "This is the big web client. When you load the page",
-							"default_dir": "C:\\Users\\inv\\Documents\\GitHub\\sharedwindows\\webClient",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "webClient/scripts/swSetup.js",
-					"settings":
-					{
-						"buffer_size": 3350,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1616,
-								1616
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "webClient/css/main.css",
-					"settings":
-					{
-						"buffer_size": 1676,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								496,
-								496
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "webClient/scripts/postManipulation/swPost.js",
-					"settings":
-					{
-						"buffer_size": 6933,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6510,
-								6510
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1890.0,
+						"translation.y": 435.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
