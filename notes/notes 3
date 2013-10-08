@@ -4,11 +4,9 @@ TODO:
 -drag between lists
 -dragging one item onto another makes a list where both items are a child
 -alert system (when dragging into self, let them know it was refused)
--moving item flashes on top of screen (not on mine because of frame rate?). It waits there until it has permission from the server to move
 -uploading images
 -drag into a "slot" in the tree
 -do some server side checking (don't just put shit user says into the DB)
--remove "zombie" page (when delete, remove )
 
 
 NOPE:
@@ -30,7 +28,8 @@ more obvious indents/"level" different from selection
 -make "new" (new list, not new item) clear and get rid of useless buttons
 -post to many at once: Drag onto parent, auto post to all children
 -sidebar width draggable
-
+-moving item flashes on top of screen (not on mine because of frame rate?). It waits there until it has permission from the server to move
+-remove "zombie" page (when delete, remove )
 
 
 

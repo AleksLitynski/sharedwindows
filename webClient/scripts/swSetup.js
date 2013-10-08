@@ -16,7 +16,7 @@ sw.onloadEarly.push(function(){
     var req = new XMLHttpRequest();
     req.open('GET', "http://" + document.location.host + "/config", false); req.send();
     var socketIP = JSON.parse(req.response).webSocketServer;
-    console.log(socketIP);
+    
     sw.socket = io.connect('http://'+socketIP);      //connect to socket io.  //window.location.host
     //sw.socket = io.connect('http://edgetable.com:9823');      //connect to socket io.  //window.location.host
     sw.post.subbedLists.push(sw.listName);
@@ -52,15 +52,14 @@ sw.onloadEarly.push(function(){
             (navigator.platform.indexOf("iPhone") != -1) ||
             //Detect iPod
             (navigator.platform.indexOf("iPod") != -1)   || 
+            //detect ipad
             (navigator.platform.indexOf("iPad") != -1) 
         );
     }
     if(!isiPhone()){
-        //document.querySelector("#newPageName").value = "fuck";
         window.addEventListener("resize", setPageHeight);
     }
-
-        setPageHeight();
+    setPageHeight();
 
 
     //set alert on disconnect

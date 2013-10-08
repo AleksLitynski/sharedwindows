@@ -1,5 +1,4 @@
 exports.run = function(staticServer){
-
     var path    = require('path');
     var io      = require('socket.io').listen(staticServer, { log: false })  //10303              //require socketio and start it listening
     var fs      = require('fs');
@@ -10,7 +9,6 @@ exports.run = function(staticServer){
     var config  = JSON.parse(fs.readFileSync((path.resolve(__dirname, '../config.json'))));
     var sqlite3 = new require('sqlite3').verbose();
     var db      = new sqlite3.Database('../' + config.databaseFile);
-
 
     io.sockets.on('connection', function (socket) {                 //when somebody connects...
         
@@ -63,6 +61,8 @@ exports.run = function(staticServer){
     var waitingToAdd = [];
     //item.message, 
     function addItem(socket, list, item) {
+            item.message = sql_escape(item.message);
+            item.title = sql_escape(item.title) || undefined;
         //check if entry already exists. If it does, move it to the top. Else, add the new item.
         if(!waitingToAdd.some(function(e,i){return (e.list == list && e.item == item.message)})){
             //console.log(item);

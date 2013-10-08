@@ -1,0 +1,15 @@
+
+DONE:
+first drag may be a little bit funny
+don't use hover for hover indicator. (at least, not on touch)
+not i'm dropnote <- kills database (" and ' killed it. Other escape characters too, probably)
+post to children doesn't work on posting lists
+clear text field after list is posted
+
+
+NOPE:
+can't log into hackpad with google when iframed
+first drag may be a little bit funny
+
+
+

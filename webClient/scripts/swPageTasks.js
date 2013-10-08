@@ -25,7 +25,7 @@ sw.page.create = function(pageName){
         var msg = "http://" + window.location.host + "/lists/" + document.querySelector("#newPageName").value;
         console.log(document.querySelector("#postToCurrent").checked);
         if(document.querySelector("#postToCurrent").checked){
-            sw.post.post(msg, sw.listName, document.querySelector("#newPageName").value);
+            sw.post.send(msg, document.querySelector("#newPageName").value);
         }
         var name = document.querySelector("#newPageName").value;
         sw.socket.emit('pageTask', {
@@ -37,7 +37,9 @@ sw.page.create = function(pageName){
         document.querySelector("#newPageName").classList.remove("invalidName");
         document.querySelector("#newPageName").classList.remove("validName");
         document.querySelector("#listFeedback").value = msg;
-        //document.querySelector("#newPageName").value = "";
+
+
+        document.querySelector("#newPageName").value = "";
     }
 }
 

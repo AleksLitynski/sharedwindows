@@ -34,6 +34,7 @@ sw.onload.push(function(){
 
 
 sw.post.addItem = function(list, item){
+    document.querySelector("#postBox").style.backgroundColor = "white";
 
     sw.post.items[list].push(item);
     sw.post.items[list].sort(function (a, b) {
@@ -85,6 +86,11 @@ sw.post.display = function(nodeName) {
             if(sw.index.current[nodeName] == toDisplay[i].listIndex) {
                 selected = " selectedMessage";
             }
+            var handleTouch = "";
+            if('ontouchstart' in document.documentElement){
+                handleTouch = " touchHandle";
+            }
+
             
             var thumbnail = toDisplay[i].thumbnail;
             if( thumbnail == "about:blank"){
@@ -92,7 +98,7 @@ sw.post.display = function(nodeName) {
             }
             
             newBody+=   "<div class='message"+selected+"'onclick='sw.index.itemClicked(this)'>"
-                    +       "<div class='dragHandle' draggable='true'></div>"
+                    +       "<div class='dragHandle"+handleTouch+"' draggable='true'></div>"
                     +       "<div class='postInfo'>"
                     +           "<button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>"
                     +           "<div class='popOutBtn' onclick='sw.page.popOut(this)'></div>" 
@@ -139,7 +145,7 @@ sw.post.display = function(nodeName) {
 
 
 //submits a new post
-sw.post.send = function(toPost) {
+sw.post.send = function(toPost, title) {
     
     if(toPost != " " && toPost != "\n" && toPost != ""){
 
@@ -148,11 +154,19 @@ sw.post.send = function(toPost) {
                 var item = sw.post.items[sw.listName][i];
                 var list = sw.helpers.isUrlAList(item.url);
                 if( list != false ){
-                    sw.post.post(toPost, list);
+                    if(title){
+                        sw.post.post(toPost, list, title);
+                    } else {
+                        sw.post.post(toPost, list);
+                    }
                 }
             }
         } else {
-            sw.post.post(toPost, sw.listName);
+            if(title){
+                sw.post.post(toPost, sw.listName, title);
+            } else {
+                sw.post.post(toPost, sw.listName);
+            }
         }
 
     }
@@ -160,6 +174,14 @@ sw.post.send = function(toPost) {
     setTimeout(function(){document.querySelector("#postBox").value = "";},1);
 };
 sw.post.post = function(msg, list, title){
+
+    document.querySelector("#postBox").style.backgroundColor = "lightgrey";
+    if(document.querySelector("#postToChildren").checked){ //uncolor box after a little white if posting to children
+        window.setInterval(function(){
+            document.querySelector("#postBox").style.backgroundColor = "white";
+        },500);
+    }
+
     navigator.geolocation.getCurrentPosition(function(pos){
         if(!title) {title = msg;}
         sw.socket.emit('items', {title: title, message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude, page: list }); //post to?        

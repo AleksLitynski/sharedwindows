@@ -1,8 +1,14 @@
 nodes don't always highlight when first opened.
-doesn't pick up on correct name quite often.
+
+IMPROVMENTS:
+match selected item color to color of the page it will generate
+drag between clicking
+pages options should focus on "new list" (for now)
+show url of fakie page in url bar
+better hovertext on items
 
 
-NO:
+NOPE:
 
 able to select item text
 cross browser testing!
@@ -14,12 +20,6 @@ better checking if site is a website (Http vs http)
 
 
 
-Improvments:
-match selected item color to color of the page it will generate
-drag between clicking
-pages options should focus on "new list" (for now)
-show url of fakie page in url bar
-better hovertext on items
 
 
 
@@ -32,3 +32,4 @@ resizing links eat themselves
 fix NYtimes 
 cut off links to hackpad at X characters
 don't submit blank posts
+doesn't pick up on correct name quite often.
