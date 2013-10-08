@@ -29,8 +29,6 @@ Careful! It's fragile!
 <!--[  ]  npm install hackpad
     [  ]  npm install request-->
 
-To clean the database, 
-copy database/dbClean.sqlite over db.sqlite (it should be named db.sqlite)
  
  
 1. Open "sharedwindows/server/" in your command prompt.
@@ -39,9 +37,12 @@ copy database/dbClean.sqlite over db.sqlite (it should be named db.sqlite)
 
 `node server.js 8080`
 
+---------------------------
+#### Issues:
 
+###### Database problems?
+Create a fresh database. Go into `database/` and delete `db.sqlite`. Copy `dbClean.sqlite`, name it `db.sqlite`.
 
 ###### JSDOM issues on windows?
-
 * JSDOM relies on contextify, which relies on node-gyp
 * node-gyp notes: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup
