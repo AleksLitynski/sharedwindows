@@ -18,13 +18,13 @@ require([
         function(){sw.loaded()}
 );
 
-sw = {};
+sw = {}; //the object most of my code is in
 sw.socket;
 sw.listName = "";
-sw.onload = [];
-sw.onloadEarly = [];
+sw.onload = []; //add functions to this list to have them loaded
+sw.onloadEarly = []; //loaded before the other list
 sw.loaded = function() {
-    for(toLoad in sw.onloadEarly){                                   //call all onload functions.
+    for(toLoad in sw.onloadEarly){                                   //call all onloadearly functions.
         sw.onloadEarly[toLoad]();
     }  
     for(toLoad in sw.onload){                                   //call all onload functions.

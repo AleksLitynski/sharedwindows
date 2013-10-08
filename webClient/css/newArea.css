@@ -12,7 +12,7 @@
 
 }
 
-#postBox{
+#postBox{ /* The box you type the page name into*/
     height:27px;
     width: calc(90% - 35px);
 
@@ -30,15 +30,15 @@
     overflow:hidden;
 }
 
-#pageNameBox{
+#pageNameBox{/*Box around the box you post new items from*/
     height:31px;
-    width:calc(100% - 32px);
+    width:calc(100% - 32px); /* Leaves room for the extendedDragHandle. Not nessessary, except the iphone was messing up the z-index.*/
     
     margin:1px;
     background-color:black;
 
     box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.5);
 
-    -webkit-align-self: flex-start;
+    -webkit-align-self: flex-start; /*Comes at the start of the flex box.*/
 
 }

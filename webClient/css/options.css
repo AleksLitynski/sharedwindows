@@ -1,9 +1,13 @@
+/*
+    Most of this isn't used anymore. Some of it may be. Interfere at your own rist.
+*/
+
 #showMoreBtn{
     border-right:1px solid black;
 }
 
 #optionsBar{
-    min-height:200px;
+    min-height:200px; /*! important. Keeps it from shrinking off the page.*/
     /*min-width:150px;
     z-index:-5;*/
 
