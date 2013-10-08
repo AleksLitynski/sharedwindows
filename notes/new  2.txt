@@ -1,4 +1,6 @@
-
+This is the algorithm for moving an item:
+(remember old item id. Shift everything between new location and old location by 1, move remembered item to new location. If moving up, shift down, et visa vera)
+===============----------------------======================----------------------=======================-------------------=====================--------------
 
 
 create temp table oldId (value integer primary key);

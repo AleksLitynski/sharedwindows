@@ -1,35 +1,18 @@
-handle different types of comments differently (link vs text vs file)
-
 mini mode, bottom bar, left bar, Very-large-preview-mode, totally hidden mode
-
 improve the iFrame somehow/somewhat? Use reverse proxy.
 
-dragable side bar width
-
-delete nodes
-
 UI:
--drag and drop onto child list adds to child list!
--adding to parent adds to all children
--make it clear to user what "type" each link is. IE: text vs image vs nested page vs whatever
 
 General:
--give defaults instead of forcing lots of options up front (naming pages)
+-give defaults instead of forcing lots of options up front (naming pages). IE: hide options better
+- have a "create new page button" that opens a dialog
 
-mouseover
-    
-sanatize user input input
-
-support "post to current list" button.
-
-show when new list is valid
-
-improve menus
-
+Database:
+sanatize user input
 
 --- Soon ---
-2) Merge node server (node modules). 
     -> wiki list creation (There is no list here. Want to create one?)
+
 
 
 
@@ -47,15 +30,15 @@ allow reorder of posts.
 add set-radius slider
 http://www.jqwidgets.com/jquery-widgets-demo/demos/jqxtree/index.htm#demos/jqxtree/ajaxloading.htm
 add "create private"
-
-
-
---- Notes ---
-
+2) Merge node server (node modules). 
+mouseover
+support "post to current list" button.
+show when new list is valid
 python -m SimpleHTTPServer
-
-NODE MODULES:
-npm install sqlite3
-npm install socket.io
-npm install jsdom
-
+-adding to parent adds to all children
+-make it clear to user what "type" each link is. IE: text vs image vs nested page vs whatever
+handle different types of comments differently (link vs text vs file)
+dragable side bar width
+delete nodes
+-drag and drop onto child list adds to child list! (no, but irrelevent)
+improve menus (?????)
