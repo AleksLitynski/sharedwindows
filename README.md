@@ -30,6 +30,7 @@ Careful! It's fragile!
 #### How to host your own:
 
 ###### Install prerequisites:
+*  Visual Studio or XCode (sign Xcode's liscense agreement!!!)
 *  npm install sqlite3
 *  npm install socket.io
 *  npm install jsdom
@@ -54,7 +55,8 @@ Careful! It's fragile!
 2. Copy `dbClean.sqlite`
 3. name it `db.sqlite`.
 
-###### JSDOM issues on Windows?
-* JSDOM can be very finiky. If npm cannot install it, work backwords. 
+###### JSDOM issues?
 * JSDOM relies on [contextify](https://github.com/brianmcd/contextify), which relies on [node-gyp](https://github.com/TooTallNate/node-gyp).
-* Helpful hints for node-gyp: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup
+* Node-gyp needs Visual Studio or XCode installed. 
+* Hint for Windows: [node-gyp](https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup)
+* Hints for XCode: [Xcode->Preferences->Downloads and install component named "Command Line Tools"](http://stackoverflow.com/questions/6767481/where-can-i-find-make-program-for-mac-os-x-lion). XCode may ask you to sign a liscense via the command line.
