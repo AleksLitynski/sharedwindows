@@ -1,7 +1,17 @@
-Server structure:
-=================
+Server:
+=======
 
-"Server.js" starts up two secondary servers. It takes a port as an argument.
+"Server.js" starts up two secondary processes. It takes a port as an argument. (ie: `node server.js 8080`)
+
+> ###### Here's a two second overview of web servers:
+
+> 1. Client points web browser to our server.
+> 2. Our "web server" code sends them back the code to run a shared windows client.
+> 3. Their client reaches out to our "node server". They talk back and forth to keep all clients and the database in sync.
+> 4. The database lives in a binary, sqlite file on the server. Talking to the "node server" is what allows the "web client" to populate itself initally.
+
+
+
 
 ### 1. web server.
 Jquery is used to inject different titles into the same page. The certificates aren't used.
@@ -63,14 +73,6 @@ Once the client gets the page, this server keeps in touch. It latches onto the w
 * Not heavily used.
 * Json formatted.
 * Look inside. It has the location of a few resources.
-
-## Structural Notes:
-
-For those of you named Jon, here's a two second overview of web servers:
-1. Client points web browser to our server.
-2. Our "web server" code sends them back the code to run a shared windows client.
-3. Their client reaches out to our "node server". They talk back and forth to keep all clients and the database in sync.
-4. The database lives in a binary, sqlite file on the server. Talking to the "node server" is what allows the "web client" to populate itself initally.
 
 
 
