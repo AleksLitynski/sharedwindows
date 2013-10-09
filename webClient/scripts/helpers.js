@@ -1,6 +1,6 @@
 sw.helpers = {};
 
-
+//gets the Y position of an object
 sw.helpers.ObjectPosition = function(obj) {
     var curtop = 0;
     if (obj.offsetParent) {
@@ -11,6 +11,7 @@ sw.helpers.ObjectPosition = function(obj) {
     return curtop;
 }
 
+//gets an objects numerical index relative to its parent.
 sw.helpers.childIndex = function(node) {
     var i = 1;
     while ((node = node.previousSibling) != null) {
@@ -19,6 +20,7 @@ sw.helpers.childIndex = function(node) {
     return i;
 }
 
+//checks if parameter is a valid list url. Was used when previewing children to know what elements we should subscribe to
 sw.helpers.isUrlAList = function(url){
     var segementPath = url.split("/");
     var newPageName = segementPath.pop().split("\n")[0];
@@ -42,7 +44,7 @@ sw.helpers.getNodesOfList = function(listName){
     return page;
 }
 
-//get the list name of a given node
+//get the list name of a given node. 
 sw.helpers.getListOfNode = function(node){
     function isSubPage(nodeI){
         if(nodeI.className && hasHitMessage >= 2 ){
@@ -99,7 +101,7 @@ sw.helpers.getNodeOfNode = function(node){
     
 }
 
-
+//gets the item of a given element. IE: you have the favicon div and you want to know what item that's a part of
 sw.helpers.getItemOfNode = function(div){
     var node = sw.helpers.getNodeOfNode(div);
     var listOfNode = sw.helpers.getListOfNode( node );
@@ -107,6 +109,7 @@ sw.helpers.getItemOfNode = function(div){
     return ( sw.post.items[listOfNode][ sw.post.items[listOfNode].length - indexOfNode]  );
 }
 
+//convert a string into a valid hackpad url
 sw.helpers.getHPAddress = function(name){
     //123 char max for a hackpad name. Can't end in weird (%, etc) chars. Need to take sub-string before encoding. Encoding will blow up string size, so I play it safe and allow 25 char max.
     return ( "https://sharedwindows.hackpad.com/" + encodeURIComponent(name.substr(0, 25)) );

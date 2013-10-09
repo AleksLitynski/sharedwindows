@@ -1,3 +1,10 @@
+/*
+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~
+~+~+~+~+~+~+~+~+~+~+~+~+~MANY OF THESE CLASSES ARE APPLIED PROGRAMATICALLY INSIDE swPost.js' sw.post.display() function!!!~+~+~+~+~+~+~+~+~+~+~+~+~
+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~
+
+
+ The box around the whole message. All asthetic, except the overflow/whitespace stuff */
 .message{
     border-top:1px solid rgba(0,0,0,0);
     margin:0px;
@@ -15,12 +22,13 @@
     
 }
 
+/* Puts a drop shadow on the postInfo. Post info is the area inside the box with the title and message, and favicon */
 .selectedMessage .postInfo {
     box-shadow: inset 0 0 25px rgba(0, 100, 255, 1);
 }
 
 
-
+/* The speckled thing you can move the post with */
 .dragHandle{
     float:left;
     cursor:move;
@@ -35,19 +43,20 @@
 
 }
 
+/* When you hover, show the grip texture*/
 .message:hover .dragHandle{
     background-image: url("images/grip.png");
     background-repeat: repeat;
     background-size: 50% 100%;
 }
-.touchHandle{
+.touchHandle{ /* This is added when on a touch screen so it always shows the handle. I could just attach it to the above block with a comma, but I didn't*/
     background-image: url("images/grip.png");
     background-repeat: repeat;
     background-size: 50% 100%;
 }
 
 
-
+/* make the message small and grey. This is the copy-able hyperlink */
 .postURL {
     font-size: 65%;
     color:grey;
@@ -55,24 +64,27 @@
 
 .postTitle {}
 
+/* The box around the title and the message */
 .postTextBox {
     position:relative;
     max-width:75%;
     overflow:hidden;
 }
 
+/* Only relevent when trees are enabled */
 .nestedPages{
     clear:both;
     padding-left:20px;
     padding-top:2px;
 }
-
+/* Only relevent when trees are enabled */
 .listMessageOpen{  
     height:auto;
 }
-
+/* Only relevent when trees are enabled */
 .listMessageClosed{}
-    
+
+/*Post info is the area inside the box with the title and message, and favicon */
 .postInfo{
     background-color:white;
     width:auto;
@@ -80,6 +92,7 @@
     padding-bottom:5px;
 }
 
+/*The favicon preview we load. */
 .previewIcon{
     width:20px;
     height:20px;
@@ -90,16 +103,16 @@
     /*margin-left:-16px;*/
     float:left;
 }
-
+/*A box around previewIcon. Only god knows why I needed it. */
 .iconBox{
     float:left;
     width:33px;
 }
-
+/*The button to delete an item. Called closeBtn for some reason.*/
 .closeBtn{
     float:right;
 }
-
+/* The button used to pop out the link. Left of closeBtn */
 .popOutBtn{
 
     float:right;
@@ -115,7 +128,7 @@
     cursor:pointer;
 }
 
-
+/* This allows users to select the text in a div. Probablly used as a toggle somewhere. Forgot where */
 .selectable {
     -moz-user-select: text;
     -khtml-user-select: text;

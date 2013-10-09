@@ -8,7 +8,7 @@ sw.onload.push(function(){
 sw.option = {};
 sw.option.isOpen = false;
 
-sw.option.open = function(e){
+sw.option.open = function(e){ //used to open and close the options. Now defunct!
 	
 	document.querySelector("#newPageName").select();
 	document.querySelector("#newPageName").focus();

@@ -1,31 +1,33 @@
+//exports a run function. Called to start the server.
 exports.run = function(port) {
+    //imports a few things...
     var path = require('path');
     var https = require('https');
     var http = require('http');
     var fs = require('fs');
     var url = require('url');
-    var config  = JSON.parse(fs.readFileSync((path.resolve(__dirname, '../config.json'))));
-    var sqlite3 = new require('sqlite3').verbose();
+    var config  = JSON.parse(fs.readFileSync((path.resolve(__dirname, '../config.json')))); //import the config file
+    var sqlite3 = new require('sqlite3').verbose(); //don't remember what verbose means... Probably better error messages.
     var db      = new sqlite3.Database('../' + config.databaseFile);
 
     var jsdom   = require('jsdom');
-    var jquery  = fs.readFileSync(path.resolve(__dirname, './jquery.js'), "utf-8");
+    var jquery  = fs.readFileSync(path.resolve(__dirname, './jquery.js'), "utf-8"); //loads jquery. Pretty sure it isn't used (loaded from jquery.com)
     var url     = require('url');
 
     var options = {
-      key: fs.readFileSync((path.resolve(__dirname, 'privatekey.pem'))),
+      key: fs.readFileSync((path.resolve(__dirname, 'privatekey.pem'))),    //private keys also aren't used. too bad.
       cert: fs.readFileSync((path.resolve(__dirname, 'certificate.pem')))
     };
 
-    var webServer = http.createServer(handleRequest).listen(port);
+    var webServer = http.createServer(handleRequest).listen(port); //starts the server.
 
 
-    function handleRequest(req, res)  {
+    function handleRequest(req, res)  { //function called every time someone contacts the server
 
-        var uriPath = uriToArray(url.parse(req.url).pathname);
+        var uriPath = uriToArray(url.parse(req.url).pathname);  //the uri path as an array
 
 
-        if( uriPath.length == 0 ) {
+        if( uriPath.length == 0 ) { //if there is no path, send the to the "global" list
             redirectToGlobal(res);
             return;
         }
@@ -33,24 +35,24 @@ exports.run = function(port) {
         
 
         if(uriPath[0] == "lists" && uriPath.length > 1)  {
-            if(uriPath.length == 2) {
-                serveSinglePage(uriPath[1], res);
+            if(uriPath.length == 2) {   //if they are loading a list (ie: lists/something)
+                serveSinglePage(uriPath[1], res);   //serve them the itial html
                 return;
             } else {
-                uriPath.shift();
+                uriPath.shift();    //remove the word "list" from the path. Its a css file or something. It'll be loaded below.
             }
         } else {
-            if(uriPath[0] == "lists") redirectToGlobal(res, req);
+            if(uriPath[0] == "lists") redirectToGlobal(res, req);   //if they only ask for "lists" (with no list name), send them to "global"
         }
 
-        var html = "file not found";
+        var html = "file not found"; //prepare a body message
         try {
             
             var lastPathList = uriPath[uriPath.length-1].split(".");
             var type = lastPathList[lastPathList.length-1];
             
             var n = true;
-            if(type == "js"){
+            if(type == "js"){   //set tghe content types
                 res.writeHead(200, {"Content-Type": "application/javascript"}); n = false;
             }
             if(type == "css"){
@@ -60,29 +62,29 @@ exports.run = function(port) {
                 res.writeHead(200, {"Content-Type": "image/png"}); n = false;
             } 
             if(n){
-                res.writeHead(200);
+                res.writeHead(200); //if a content type wasn't found, write a header anyways.
             }
             //res.setHeader('Access-Control-Allow-Origin','*');
             
-            switch (uriPath[0]){
+            switch (uriPath[0]){    //a few special case url (for uploads, or the config file)
                 case "config":
                     var clientConfig = {};
-                    clientConfig.webSocketServer = getAddresses()[0] + ":" + port;
+                    clientConfig.webSocketServer = getAddresses()[0] + ":" + port; //send back simple json with the machine address
                     res.write( JSON.stringify(clientConfig) );
                     res.end(); 
                 break;
-                case "upload":
+                case "upload":  //doesn't work. It WILL allow users to upload files
                     console.log(req);
                     res.write("/files/");
                     res.end(); 
                 break;
-                case "file":
+                case "file":    //Goes to the hostedFiles folder to return the file the user asked for
                     var file = fs.readFileSync( "../" + config.database + "hostedFiles/" + lastPathList.join(".") ); //http://129.21.142.18/file/testy.jpg
                     res.write(file);
                     res.end();  
                 break;
 
-                default:
+                default: //if its the placeholder page, send them the placeholder.html
                     var html = fs.readFileSync("../" + config.webClientLoc + uriPath.join("/") );
 
                     if(uriPath[0].split(".")[0] == "placeholder"){
@@ -93,15 +95,15 @@ exports.run = function(port) {
                                 done: function (errors, window) {
                                     if(errors == null){
                                         var $ = window.$;
-                                        $("#targetPage").html(newPage);
-                                        var html = /*"<!DOCTYPE HTML>" +*/ $("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>","");
+                                        $("#targetPage").html(newPage); //if they want the placeholder.html page, insert a link to the page it will lead to, so it can auto-open if needed.
+                                        var html = /*"<!DOCTYPE HTML>" +*/ $("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>",""); //remove the jquery dependancy dsdom injects
                                         res.write(html);
                                         res.end();
                                     }
                                 }
                         });
                     }
-                    else {
+                    else { //otherwise, send the exactly what they asked for.
                         res.write(html);
                         res.end();  
                     } 
@@ -109,7 +111,7 @@ exports.run = function(port) {
             }
 
         }
-        catch(err){
+        catch(err){ //if you can't find it, give a sexy 404!
             res.writeHead(404);
             var html = "file not found";
             res.write(html);
@@ -118,7 +120,7 @@ exports.run = function(port) {
       
     };
 
-    function redirectToGlobal(res, req){
+    function redirectToGlobal(res, req){ //sends a 302 redirect to "lists/global" or "/global" if they already have the first part
         var redirectTo = "lists/global";
         if(req){
             var pathname = url.parse(req.url).pathname;
@@ -133,12 +135,12 @@ exports.run = function(port) {
         res.end();
     }
 
-    function serveSinglePage(toServe, res){ //single name -> selected list OR create list page
+    function serveSinglePage(toServe, res){ //Servers the intial HTML for a page or a warning that the "list doesn't exist" Once we have an API, we can create pages "wiki" style
         //lookup page
             
         db.serialize(function() {
             
-            var query = "select id from lists where name = '" + toServe + "';";
+            var query = "select id from lists where name = '" + toServe + "';"; //check if the page they want exists in the database
             db.all(query, function(err, row){
             
                 if(row.length > 0) {
@@ -148,7 +150,7 @@ exports.run = function(port) {
 
                     //replace the title with the name of the page
                     try {
-                        jsdom.env(html, [url.parse("http://code.jquery.com/jquery.js").href],
+                        jsdom.env(html, [url.parse("http://code.jquery.com/jquery.js").href], //Set the title of the page they asked for.
                             function (errors, window) {
                                 window.$("title").html(toServe + " - Shared Windows");
                                 var html = /*"<!DOCTYPE HTML>" +*/ window.$("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>","");
@@ -158,7 +160,7 @@ exports.run = function(port) {
                         );
                     }
                     catch(er){
-                        res.write(html);
+                        res.write(html);    //send them SOMETHING.
                         res.end();
                     }
 
@@ -166,7 +168,7 @@ exports.run = function(port) {
                     
                 } else {
                 
-                    res.writeHead(200);
+                    res.writeHead(200); //if its not in the database, tell them it doesn't exist!~
                     res.write("List doesn't exist yet.");
                     res.end();
                 
@@ -185,7 +187,7 @@ exports.run = function(port) {
         Split a single uri into a list of terms. 
         Also removes "" terms
     */
-    function uriToArray(uri) {
+    function uriToArray(uri) {  //converts a uri to an array? I'm not sure I use this. maybe once?
         var uriPath = uri.split("/");
         var i = 0; while ( i < uriPath.length ) {
             if(uriPath[i] == "") {
@@ -200,7 +202,7 @@ exports.run = function(port) {
 }
 
 
-function getAddresses(){
+function getAddresses(){    //askes the os nicely for the current ip address. Came straight off of stack overflow.
     var os = require('os')
 
     var interfaces = os.networkInterfaces();

@@ -1,8 +1,21 @@
+/*
+    Does a lot of misc. setup actions: 
+        - get the socketio server ip
+        - post to recent
+        - uncheck jump to current & follow leader if in recent
+        - rig keypress and drop for posting new items
+        - sets the background color to a hash of the page name
+        - set the "#page" div to always fill to the bottom of the page. Doesn't get done on iphone, because Ithings will streach it all the way to the bottom of the world
+        - rig a function that checks every 4 seconds if the connection has been lost.
+
+
+*/
+
 sw.setup = {};
 
 sw.onloadEarly.push(function(){
 	
-    var parser = document.createElement('a');
+    var parser = document.createElement('a'); //parse the list name out of the current url
     parser.href = document.URL;
     if(parser.pathname.split("/").length >= 3){
         sw.listName = parser.pathname.split("/")[2];
@@ -13,19 +26,19 @@ sw.onloadEarly.push(function(){
     //set the name of the "page name" bar
     //document.querySelector("#pageName").value = window.location;
 
-    var req = new XMLHttpRequest();
+    var req = new XMLHttpRequest(); //get the config file synchroniously and use the IP address for the socketio connection
     req.open('GET', "http://" + document.location.host + "/config", false); req.send();
     var socketIP = JSON.parse(req.response).webSocketServer;
     
     sw.socket = io.connect('http://'+socketIP);      //connect to socket io.  //window.location.host
     //sw.socket = io.connect('http://edgetable.com:9823');      //connect to socket io.  //window.location.host
     sw.post.subbedLists.push(sw.listName);
-    navigator.geolocation.getCurrentPosition(function(pos){
+    navigator.geolocation.getCurrentPosition(function(pos){ //get the current location and post the fact that you've loaded the page to "recent"
         var location = window.location.origin + "/lists/" + sw.listName;
         sw.socket.emit("subscribe", {list: sw.listName, latitude: pos.coords.latitude, longitude: pos.coords.longitude, post:location, to:"recent"});     
     });
 
-    if(sw.listName == "recent"){
+    if(sw.listName == "recent"){ //if we're on recent, don't follow the leader
         document.querySelector("#followTheLeader").checked = false;
         document.querySelector("#jumpToCurrent").checked = false;
     }
@@ -43,6 +56,7 @@ sw.onloadEarly.push(function(){
     /*console.log(color, color.substring(1,3));
     document.querySelector("#pageName").style.backgroundColor = color;//"lightgrey";*/
 
+    //keeps 
     function setPageHeight(){
         document.querySelector("#page").style.height = window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight + "px";
     };
@@ -82,6 +96,7 @@ sw.onloadEarly.push(function(){
 })
 
 
+//hash any string into a CSS valid color
 var stringToColour = function(str) {
     if(str == "global") {return "rgb(12, 151, 202)";}
     // str to hash
