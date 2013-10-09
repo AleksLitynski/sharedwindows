@@ -31,6 +31,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "webClient/readme.MD",
+			"settings":
+			{
+				"buffer_size": 3568,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/swSetup.js",
+			"settings":
+			{
+				"buffer_size": 4486,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -56,6 +72,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/inv/Desktop/Shared Windows.xmind",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/server/webServer/index.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swSetup.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swIndex.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swResizePage.js",
@@ -78,7 +96,6 @@
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/readme.md",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/README.md",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/nodeServer/index.js",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/server/webServer/index.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/server.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/config.json",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/database/readme.MD",
@@ -275,8 +292,63 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "webClient/readme.MD",
+					"settings":
+					{
+						"buffer_size": 3568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "webClient/scripts/swSetup.js",
+					"settings":
+					{
+						"buffer_size": 4486,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3328,
+								3328
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
