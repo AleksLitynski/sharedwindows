@@ -30,6 +30,7 @@ Careful! It's fragile!
 #### How to host your own:
 
 ###### Install prerequisites:
+*  [nodejs](http://nodejs.org/download/)
 *  npm install sqlite3
 *  npm install socket.io
 *  npm install jsdom
