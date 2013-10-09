@@ -6,14 +6,22 @@ Share a browsing experience.
 
 #### What is it?
 
-* Shared Windows is a list making tool with a few cool additions.
-* Users can make lists and add textual items to lists. 
-* Selecting an item will select that item for all users.
-* If an item is a hyperlink, the content of the link is previewed.
-* This means users can click through a series of images or web pages in unison.
-* Posting one list into another makes for a "file directory"-esq experience.
+* A list making tool,
+* That can show you websites in the list,
+* And synchronize that preview with all your friends!
 
-#### How to use (pre-alpha):
+#### What can you do with it?
+
+* Share the web browser with your friends
+* Present a slideshow over the internet
+* Control what is displayed on many computers from a single computer
+* Post lists to lists for a "file directory"-esq experience.
+
+#### How to use it:
+
+Got to : [Shared Windows Tutorial](https://sharedwindows.hackpad.com/How%2520to%2520Use%2520Shared%2520Windows#How-to-Use-Shared-Windows)
+
+#### How to access it (pre-alpha):
 
 Got to : [Shared Windows](http://www.sharedwindows.com)
 
@@ -35,7 +43,7 @@ Careful! It's fragile!
 2. run "node server.js"
 3. The default port is 80 (http). To change that, use: "node server.js [http port]". 
 
-`node server.js 8080`
+> for example: `node server.js 8080`
 
 ---------------------------
 #### Issues:
@@ -43,6 +51,7 @@ Careful! It's fragile!
 ###### Database problems?
 Create a fresh database. Go into `database/` and delete `db.sqlite`. Copy `dbClean.sqlite`, name it `db.sqlite`.
 
-###### JSDOM issues on windows?
-* JSDOM relies on contextify, which relies on node-gyp
-* node-gyp notes: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup
+###### JSDOM issues on Windows?
+* JSDOM can be very finiky. If npm cannot install it, work backwords. 
+* JSDOM relies on [contextify](https://github.com/brianmcd/contextify), which relies on [node-gyp](https://github.com/TooTallNate/node-gyp).
+* Helpful hints for node-gyp: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup
