@@ -30,6 +30,7 @@ Careful! It's fragile!
 #### How to host your own:
 
 ###### Install prerequisites:
+*  Xcode on mac, visual studio on windows, good luck on linux.
 *  [nodejs](http://nodejs.org/download/)
 *  npm install sqlite3
 *  npm install socket.io
