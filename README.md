@@ -48,8 +48,11 @@ Careful! It's fragile!
 ---------------------------
 #### Issues:
 
-###### Database problems?
-Create a fresh database. Go into `database/` and delete `db.sqlite`. Copy `dbClean.sqlite`, name it `db.sqlite`.
+###### Database problems? Create a fresh database! 
+
+1. Go into `database/` and delete `db.sqlite`. 
+2. Copy `dbClean.sqlite`
+3. name it `db.sqlite`.
 
 ###### JSDOM issues on Windows?
 * JSDOM can be very finiky. If npm cannot install it, work backwords. 
