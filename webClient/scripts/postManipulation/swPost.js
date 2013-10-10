@@ -102,7 +102,7 @@ sw.post.display = function(nodeName) {  //rebuilds the whole list inside "#page"
                 thumbnail = "/sFavicon.PNG";
             }
             //build the new body
-            newBody+=   "<div class='message"+selected+"'onclick='sw.index.itemClicked(this)'>"
+            newBody+=   "<div class='message"+selected+"'onclick='sw.index.itemClicked(this)' title='"+toDisplay[i].title+"\n"+toDisplay[i].url+"' >"
                     +       "<div class='dragHandle"+handleTouch+"' draggable='true'></div>"
                     +       "<div class='postInfo'>"
                     +           "<button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>"
@@ -195,7 +195,7 @@ sw.post.post = function(msg, list, title){//posts whatever its given
         },500);//0.5 seconds, I think?
     }
 
-    navigator.geolocation.getCurrentPosition(function(pos){//get the lat/lng location
+    sw.helpers.getLocation(function(pos){//get the lat/lng location
         if(!title) {title = msg;}//if there is not title, use the message as a title
         sw.socket.emit('items', {title: title, message: msg, latitude: pos.coords.latitude, longitude: pos.coords.longitude, page: list }); //post to?        
     });

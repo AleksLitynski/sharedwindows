@@ -43,7 +43,47 @@
 			"file": "webClient/scripts/swSetup.js",
 			"settings":
 			{
-				"buffer_size": 4486,
+				"buffer_size": 4468,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/postManipulation/swPost.js",
+			"settings":
+			{
+				"buffer_size": 10373,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/helpers.js",
+			"settings":
+			{
+				"buffer_size": 3931,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/css/items.css",
+			"settings":
+			{
+				"buffer_size": 3394,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/swLoader.js",
+			"settings":
+			{
+				"buffer_size": 1665,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/swIndex.js",
+			"settings":
+			{
+				"buffer_size": 5097,
 				"line_ending": "Windows"
 			}
 		}
@@ -185,6 +225,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"getCurrentPosition",
 			"currentY",
 			"!\n",
 			"waitingToAdd",
@@ -292,7 +333,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -326,15 +367,15 @@
 					"file": "webClient/scripts/swSetup.js",
 					"settings":
 					{
-						"buffer_size": 4486,
+						"buffer_size": 4468,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3328,
-								3328
+								1548,
+								1548
 							]
 						],
 						"settings":
@@ -345,6 +386,146 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "webClient/scripts/postManipulation/swPost.js",
+					"settings":
+					{
+						"buffer_size": 10373,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9634,
+								9634
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2655.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "webClient/scripts/helpers.js",
+					"settings":
+					{
+						"buffer_size": 3931,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3676,
+								3694
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1440.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "webClient/css/items.css",
+					"settings":
+					{
+						"buffer_size": 3394,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								746,
+								746
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "webClient/scripts/swLoader.js",
+					"settings":
+					{
+						"buffer_size": 1665,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "webClient/scripts/swIndex.js",
+					"settings":
+					{
+						"buffer_size": 5097,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								167,
+								167
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
