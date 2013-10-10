@@ -40,20 +40,35 @@
     width:32px;
 
 
+    /*These two lines force the handle on top of the image*/
+    margin-right:-30px;
+    position:relative;
+    z-index:1 !important;
+
 
 }
 
+
 /* When you hover, show the grip texture*/
 .message:hover .dragHandle{
+     
     background-image: url("images/grip.png");
     background-repeat: repeat;
     background-size: 50% 100%;
+
+
 }
 .touchHandle{ /* This is added when on a touch screen so it always shows the handle. I could just attach it to the above block with a comma, but I didn't*/
     background-image: url("images/grip.png");
     background-repeat: repeat;
     background-size: 50% 100%;
 }
+
+
+
+
+
+
 
 
 /* make the message small and grey. This is the copy-able hyperlink */
@@ -102,6 +117,7 @@
 
     /*margin-left:-16px;*/
     float:left;
+
 }
 /*A box around previewIcon. Only god knows why I needed it. */
 .iconBox{

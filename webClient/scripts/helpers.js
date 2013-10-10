@@ -114,3 +114,21 @@ sw.helpers.getHPAddress = function(name){
     //123 char max for a hackpad name. Can't end in weird (%, etc) chars. Need to take sub-string before encoding. Encoding will blow up string size, so I play it safe and allow 25 char max.
     return ( "https://sharedwindows.hackpad.com/" + encodeURIComponent(name.substr(0, 25)) );
 }
+
+
+//group all access to location to here so it can be toggled on and off
+sw.trueCoords = false;
+sw.helpers.getLocation = function(callback){
+
+    if(sw.trueCoords){ console.log("hey");
+        navigator.geolocation.getCurrentPosition(function(pos){
+            callback(pos);
+        });
+    } else {
+        var toReturn = {};
+        toReturn.coords = {};
+        toReturn.coords.latitude = 0;
+        toReturn.coords.longitude = 0;
+        callback(toReturn);
+    }
+}

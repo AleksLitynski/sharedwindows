@@ -33,7 +33,7 @@ sw.onloadEarly.push(function(){
     sw.socket = io.connect('http://'+socketIP);      //connect to socket io.  //window.location.host
     //sw.socket = io.connect('http://edgetable.com:9823');      //connect to socket io.  //window.location.host
     sw.post.subbedLists.push(sw.listName);
-    navigator.geolocation.getCurrentPosition(function(pos){ //get the current location and post the fact that you've loaded the page to "recent"
+    sw.helpers.getLocation(function(pos){ //get the current location and post the fact that you've loaded the page to "recent"
         var location = window.location.origin + "/lists/" + sw.listName;
         sw.socket.emit("subscribe", {list: sw.listName, latitude: pos.coords.latitude, longitude: pos.coords.longitude, post:location, to:"recent"});     
     });
