@@ -62,32 +62,26 @@ Careful! It's fragile!
 * Hint for Windows: [node-gyp](https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup)
 * Hints for XCode: [Xcode->Preferences->Downloads and install component named "Command Line Tools"](http://stackoverflow.com/questions/6767481/where-can-i-find-make-program-for-mac-os-x-lion). XCode may ask you to sign a liscense via the command line.
 
-
-
-
-
-
-
+--------------------------
 
 --------------------------
 
 
-#### Extending the code:
+### Extending the code:
 
-This projects consists of a client and a server. 
-Run the server as described above. 
-It'll serve you a copy of the client on port 80.
+* This projects consists of a client and a server. 
+* Run the server as described above. 
+* It'll serve you a copy of the client on port 80.
 
-The server code is in the folder labeled "server".
-The client is in "webClient". 
+The server code is in the folder labeled "server". The client is in "webClient". 
 The server pulls from the "database/db.sqlite" often.
 
 There are read-mes in the client and server folders.
 
-Inside the "notes" folder is a file called `Shared Windows.xmind`. 
-It has a (maybe) helpful diagram of the project. [xmind](http://www.xmind.net/download/) is free.
-If you don't want xmind, `Shared Windows.png` has a rendered version.
-[
+
+`Shared Windows.xmind` is in notes. Get [xmind](http://www.xmind.net/download/), it's free.
+
+![the diagram](https://raw.github.com/tavoe/sharedwindows/prod_2/notes/Shared%20Windows.png)
 
 
 
