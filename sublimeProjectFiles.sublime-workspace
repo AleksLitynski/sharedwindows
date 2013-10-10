@@ -48,14 +48,6 @@
 			}
 		},
 		{
-			"file": "webClient/scripts/postManipulation/swPost.js",
-			"settings":
-			{
-				"buffer_size": 10373,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "webClient/scripts/helpers.js",
 			"settings":
 			{
@@ -80,6 +72,22 @@
 			}
 		},
 		{
+			"file": "webClient/scripts/postManipulation/swPost.js",
+			"settings":
+			{
+				"buffer_size": 10477,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/postManipulation/swReorder.js",
+			"settings":
+			{
+				"buffer_size": 7885,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "webClient/scripts/swIndex.js",
 			"settings":
 			{
@@ -88,10 +96,10 @@
 			}
 		},
 		{
-			"file": "README.md",
+			"file": "webClient/scripts/postManipulation/swDragIn.js",
 			"settings":
 			{
-				"buffer_size": 2111,
+				"buffer_size": 1264,
 				"line_ending": "Windows"
 			}
 		}
@@ -120,6 +128,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/inv/Documents/GitHub/sharedwindows/README.md",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/sublimeProjectFiles.sublime-workspace",
 		"/C/Users/inv/Desktop/Shared Windows.xmind",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/webServer/index.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swSetup.js",
@@ -142,7 +152,6 @@
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/items.css",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/readme.MD",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/readme.md",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/README.md",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/nodeServer/index.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/server.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/config.json",
@@ -180,7 +189,6 @@
 		"/C/Users/inv/Documents/GitHub/sharedwindows/.idea/sharedwindows.iml",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/.idea/modules.xml",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/sublimeProjectFiles.sublime-project",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/sublimeProjectFiles.sublime-workspace",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swPost.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/server/nodeServer/index.js",
 		"/C/Users/MITREBOX/Documents/GitHub/sharedwindows/webClient/scripts/swPageTasks.js",
@@ -341,7 +349,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -400,34 +408,6 @@
 				},
 				{
 					"buffer": 2,
-					"file": "webClient/scripts/postManipulation/swPost.js",
-					"settings":
-					{
-						"buffer_size": 10373,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9634,
-								9634
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2655.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "webClient/scripts/helpers.js",
 					"settings":
 					{
@@ -455,7 +435,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "webClient/css/items.css",
 					"settings":
 					{
@@ -483,7 +463,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 4,
 					"file": "webClient/scripts/swLoader.js",
 					"settings":
 					{
@@ -511,7 +491,63 @@
 					"type": "text"
 				},
 				{
+					"buffer": 5,
+					"file": "webClient/scripts/postManipulation/swPost.js",
+					"settings":
+					{
+						"buffer_size": 10477,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3317,
+								3317
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 900.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
 					"buffer": 6,
+					"file": "webClient/scripts/postManipulation/swReorder.js",
+					"settings":
+					{
+						"buffer_size": 7885,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5492,
+								5492
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1624.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"file": "webClient/scripts/swIndex.js",
 					"settings":
 					{
@@ -522,8 +558,8 @@
 						"selection":
 						[
 							[
-								167,
-								167
+								1403,
+								1403
 							]
 						],
 						"settings":
@@ -539,24 +575,26 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "README.md",
+					"buffer": 8,
+					"file": "webClient/scripts/postManipulation/swDragIn.js",
 					"settings":
 					{
-						"buffer_size": 2111,
+						"buffer_size": 1264,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								517,
-								517
+								1196,
+								1196
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

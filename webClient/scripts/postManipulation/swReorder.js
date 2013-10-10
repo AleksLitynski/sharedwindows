@@ -8,7 +8,7 @@ sw.drag.dragTo = {};
 sw.drag.dragTo.current = 0;  //weird hack. It always puts the item on top of the scroll area in as the "current" 
 sw.drag.dragTo.previous = 0; //when done dragging, so I store the previous element as the "move to" target.
 sw.drag.startedDrag = 0;
-sw.drag.currentDragged;
+sw.drag.currentDragged = undefined;
 
 sw.onload.push(function(){ //add a few listeners
 
@@ -116,12 +116,17 @@ sw.drag.start = function(node, e) {//when you start dragging, be it touch or mou
         sw.drag.draggyMoved(newE); //drag one so we can force the placeholder into the right place.
     }
 
+    sw.drag.endedEarly = false; //we haven't ended early
+
     
     
 }
 sw.drag.end = function() {//when the drag is over
     var e = window.event;
-    if(e.srcElement.classList.contains("dragHandle")){//if we were dragging an element around and not dragging a new element into the thing (that's handled elsewhere)
+    console.log("outside end");
+    //make sure we haven't ended early (because someone else updated the list)
+    if(!sw.drag.endedEarly && (sw.drag.currentDragged != undefined) && e.srcElement.classList.contains("dragHandle")){//if we were dragging an element around and not dragging a new element into the thing (that's handled elsewhere)
+        console.log("inside end");
         e.stopPropagation();
         e.preventDefault();
         var node = sw.helpers.getNodeOfNode(e.srcElement);
@@ -136,8 +141,28 @@ sw.drag.end = function() {//when the drag is over
         var from = childLength - sw.drag.startedDrag + 1;
         
         sw.socket.emit('moveItem', { currentIndex: from, newIndex: to, page: sw.helpers.getListOfNode(node) }); //send the message with the directions for where to move it, move it
+        
+        sw.drag.currentDragged = undefined;
+
     }
 }
+
+//if someone else makes a move, cancel the current move
+sw.drag.endedEarly = false;
+sw.drag.endEarly = function() {
+    if(sw.drag.currentDragged != undefined){
+        sw.drag.endedEarly = true;
+        placeholder.style.display = "none";//hide placeholder
+        placeholder.classList.remove("draggedMessage");
+        sw.drag.currentDragged = undefined;
+
+        console.log('endedEarly');
+        sw.drag.end();
+    }
+        
+}
+
+
 
 sw.drag.touchdragstarted = false; //drack if the item is being "touch dragged??". Probably like mouse down/up, but for touch, I would guess. 
 sw.drag.touchstart = function(node, e){
