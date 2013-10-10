@@ -15,11 +15,11 @@ Share a browsing experience.
 * Share the web browser with your friends
 * Present a slideshow over the internet
 * Control what is displayed on many computers from a single computer
-* Post lists to lists for a "file directory"-esq experience.
+* Post lists to lists for a "file directory"-esq experience
 
 #### How to use it:
 
-Got to : [Shared Windows Tutorial](https://sharedwindows.hackpad.com/How%2520to%2520Use%2520Shared%2520Windows#How-to-Use-Shared-Windows)
+Go to : [Shared Windows Tutorial](https://sharedwindows.hackpad.com/How%2520to%2520Use%2520Shared%2520Windows#How-to-Use-Shared-Windows)
 
 #### How to access it (pre-alpha):
 
@@ -30,7 +30,7 @@ Careful! It's fragile!
 #### How to host your own:
 
 ###### Install prerequisites:
-*  Visual Studio or XCode (sign Xcode's liscense agreement!!!)
+*  Visual Studio or XCode (sign Xcode's license agreement!!!)
 *  npm install sqlite3
 *  npm install socket.io
 *  npm install jsdom
