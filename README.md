@@ -30,12 +30,8 @@ Careful! It's fragile!
 #### How to host your own:
 
 ###### Install prerequisites:
-<<<<<<< HEAD
 *  Visual Studio or XCode (sign Xcode's license agreement!!!)
-=======
-*  Xcode on mac, visual studio on windows, good luck on linux.
 *  [nodejs](http://nodejs.org/download/)
->>>>>>> prod_1_b
 *  npm install sqlite3
 *  npm install socket.io
 *  npm install jsdom
