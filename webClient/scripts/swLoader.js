@@ -11,7 +11,8 @@ require([
             'scripts/postManipulation/swReorder.js',
             'scripts/postManipulation/swDelete.js',
             'scripts/postManipulation/swPost.js',
-            'scripts/postManipulation/swDragIn.js'
+            'scripts/postManipulation/swDragIn.js',
+            'scripts/libraries/dropzone.js'
 
 
         ], 

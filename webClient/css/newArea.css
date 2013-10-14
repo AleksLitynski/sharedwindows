@@ -12,7 +12,7 @@
 
 }
 
-#postBox{ /* The box you type the page name into*/
+#postBox{ /* The box you type the page name into*//*
     height:27px;
     width: calc(90% - 35px);
 
@@ -28,7 +28,7 @@
 
 
     overflow:hidden;
-}
+}*/
 
 #pageNameBox{/*Box around the box you post new items from*/
     height:31px;

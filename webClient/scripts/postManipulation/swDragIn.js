@@ -21,6 +21,8 @@ document.querySelector("#page").ondragleave = function(e){
 
 
 document.querySelector("#page").ondrop = function(e){
+
+
     e.stopPropagation();
     e.preventDefault();
 
@@ -42,8 +44,61 @@ document.querySelector("#page").ondrop = function(e){
         if(text != ""){
             sw.post.post(text, list);
         }
+
+        //read in the image if it was drag + dropped
+        //sw.dragIn.getImageData(e.dataTransfer.files[0]);
         
 
     }
 
 };
+
+/*
+document.querySelector("#uploadFile").onchange = function(e){
+    sw.dragIn.getImageData(e.srcElement.files[0]);
+}
+
+
+sw.dragIn.getImageData = function(src){
+
+
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var imageBinary = event.target.result;
+        sw.dragIn.uploadImage(imageBinary, src.name);
+    };
+    reader.readAsBinaryString(src); //readAsDataURL readAsBinaryString readAsArrayBuffer
+
+
+   
+        //var img = document.createElement("img");
+        //img.src = imageUri;
+        //document.body.appendChild(img);
+}
+
+
+sw.dragIn.uploadImage = function(fileData, name){
+    
+
+    
+
+    
+    var target = window.location.protocol + "//" + window.location.host + "/upload";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function(){
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+            console.log(xmlhttp.responseText);
+        }
+    }
+    xmlhttp.open("POST", target, true);
+
+    //var formData = new FormData();
+    //var blob = new Blob([fileData], {type: 'application/octet-stream'});
+
+    //formData.append("file", fileData);
+    //formData.append("name", name);
+
+    console.log(fileData);
+    
+    xmlhttp.send(fileData);
+}*/

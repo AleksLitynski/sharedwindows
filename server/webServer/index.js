@@ -4,6 +4,7 @@ exports.run = function(port) {
     var path = require('path');
     var https = require('https');
     var http = require('http');
+    var querystring = require('querystring');
     var fs = require('fs');
     var url = require('url');
     var config  = JSON.parse(fs.readFileSync((path.resolve(__dirname, '../config.json')))); //import the config file
@@ -74,9 +75,19 @@ exports.run = function(port) {
                     res.end(); 
                 break;
                 case "upload":  //doesn't work. It WILL allow users to upload files
-                    console.log(req);
-                    res.write("/files/");
-                    res.end(); 
+                    
+                    postRequest(req, res, function(data) {
+                        var name = querystring.parse(data).name;
+                        console.log(name);
+                        fs.writeFile("testytesty.jpg", data, {encoding:'binary' }, function(err) {}); 
+
+                        res.writeHead(200, "OK", {'Content-Type': 'text/plain'});
+                        res.write("doing it");
+                        res.end();
+
+                    });
+
+                    
                 break;
                 case "file":    //Goes to the hostedFiles folder to return the file the user asked for
                     var file = fs.readFileSync( "../" + config.database + "hostedFiles/" + lastPathList.join(".") ); //http://129.21.142.18/file/testy.jpg
@@ -217,4 +228,24 @@ function getAddresses(){    //askes the os nicely for the current ip address. Ca
     }
 
     return addresses; 
+}
+
+
+function postRequest(request, response, callback) {
+    var queryData = "";
+    if(typeof callback !== 'function') return null;
+
+    if(request.method == 'POST') {
+        request.on('data', function(data) {
+            queryData += data;
+        });
+
+        request.on('end', function() {
+            callback(queryData);
+        });
+
+    } else {
+        response.writeHead(405, {'Content-Type': 'text/plain'});
+        response.end();
+    }
 }
