@@ -46,59 +46,61 @@ document.querySelector("#page").ondrop = function(e){
         }
 
         //read in the image if it was drag + dropped
-        //sw.dragIn.getImageData(e.dataTransfer.files[0]);
+        sw.dragIn.getImageData(e.dataTransfer.files[0]);
         
 
     }
 
 };
 
-/*
+
 document.querySelector("#uploadFile").onchange = function(e){
+    //document.querySelector(".cabinet").innerHTML = ' <input id="uploadFile" type="file"></input>';
+    //console.log("?");
     sw.dragIn.getImageData(e.srcElement.files[0]);
+
 }
 
 
 sw.dragIn.getImageData = function(src){
 
+    sw.dragIn.uploadImage(src);
 
-    var reader = new FileReader();
+    /*var reader = new FileReader();
     reader.onload = function(event) {
         var imageBinary = event.target.result;
-        sw.dragIn.uploadImage(imageBinary, src.name);
+        sw.dragIn.uploadImage(imageBinary, src.name, src);
     };
-    reader.readAsBinaryString(src); //readAsDataURL readAsBinaryString readAsArrayBuffer
-
-
+    reader.readAsBinaryString(src); //readAsDataURL readAsBinaryString readAsArrayBuffer*/
    
-        //var img = document.createElement("img");
-        //img.src = imageUri;
-        //document.body.appendChild(img);
+    //var img = document.createElement("img");
+    //img.src = imageUri;
+    //document.body.appendChild(img);
 }
 
 
-sw.dragIn.uploadImage = function(fileData, name){
-    
-
-    
-
+sw.dragIn.uploadImage = function(src){//fileData, name, 
     
     var target = window.location.protocol + "//" + window.location.host + "/upload";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function(){
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-            console.log(xmlhttp.responseText);
+            var imageUrl = window.location.protocol + "//" + window.location.host + xmlhttp.responseText;
+            var _text    = xmlhttp.responseText.split("/");
+            var padUrl   = sw.helpers.getHPAddress(_text[_text.length-1]);
+            var netUrl   = window.location.protocol + "//" + window.location.host + "/imageWrapper.html?pad=" + padUrl + "&image=" + imageUrl;
+            console.log(netUrl);
+            
+            sw.post.send(netUrl, _text[_text.length-1]);
         }
     }
     xmlhttp.open("POST", target, true);
 
-    //var formData = new FormData();
-    //var blob = new Blob([fileData], {type: 'application/octet-stream'});
 
-    //formData.append("file", fileData);
-    //formData.append("name", name);
+    if(src != undefined){
+        var formData = new FormData();
+        formData.append("file", src);
+        xmlhttp.send(formData);
+    }
 
-    console.log(fileData);
-    
-    xmlhttp.send(fileData);
-}*/
+}

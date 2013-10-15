@@ -12,7 +12,7 @@ require([
             'scripts/postManipulation/swDelete.js',
             'scripts/postManipulation/swPost.js',
             'scripts/postManipulation/swDragIn.js',
-            'scripts/libraries/dropzone.js'
+            //'scripts/libraries/dropzone.js'
 
 
         ], 
@@ -35,33 +35,6 @@ sw.loaded = function() {
    
    
 
-
-
-/*
-function uploadImg(){
-    console.log(document.querySelector("img"));
-}
-
-
-
-xmlhttp.open("POST","ajax_test.asp",true);
-xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-xmlhttp.send("fname=Henry&lname=Ford");
-
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-    }
-  }
-xmlhttp.open("GET","ajax_info.txt",true);
-
-var fd = new FormData();
-fd.append("image", document.querySelector("img"))
-
-xmlhttp.send();
-*/
 
 
 

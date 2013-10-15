@@ -35,6 +35,7 @@ Careful! It's fragile!
 *  npm install sqlite3
 *  npm install socket.io
 *  npm install jsdom
+*  npm install multiparty
 
 <!--[  ]  npm install hackpad
     [  ]  npm install request-->

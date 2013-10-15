@@ -4,7 +4,7 @@ exports.run = function(port) {
     var path = require('path');
     var https = require('https');
     var http = require('http');
-    var querystring = require('querystring');
+    var multiparty = require('multiparty');
     var fs = require('fs');
     var url = require('url');
     var config  = JSON.parse(fs.readFileSync((path.resolve(__dirname, '../config.json')))); //import the config file
@@ -76,15 +76,69 @@ exports.run = function(port) {
                 break;
                 case "upload":  //doesn't work. It WILL allow users to upload files
                     
-                    postRequest(req, res, function(data) {
-                        var name = querystring.parse(data).name;
-                        console.log(name);
-                        fs.writeFile("testytesty.jpg", data, {encoding:'binary' }, function(err) {}); 
+                    var form = new multiparty.Form();
 
-                        res.writeHead(200, "OK", {'Content-Type': 'text/plain'});
-                        res.write("doing it");
-                        res.end();
+                    form.parse(req, function(err, fields, files) { //download the file
 
+                        var fileName = files.file.originalFilename; //store file name and data here
+                        var data = "";
+                        var done = 0;
+                        function updateDone(){ //we do two async actions. Load the data from a temp file and get a unique name by scanning the directory.
+                            done++;
+                            if(done >= 2){ //incriment this by one for each async action
+                                writeAndSend();
+                            }
+                        }
+
+                        fs.readFile(files.file.path, function(err, readData){ //get the file from temp holding
+                        
+                            data = readData;
+                            //check if file exists
+                            updateDone();
+                            
+                        })
+
+                        //we want to number all files. IE: oneTwo.png -> oneTwo-0.png. If there is already a oneTwo-0.png, we call it oneTwo-1.png, etc
+                        fs.readdir("../" + config.database + "hostedFiles/", function(err, files){ //come up with a unique file name for the object
+                            var _SplitName = fileName.split("/"); //get the last part of the file path, in case someone is trying to write onto our system in a ../../.. sort of way
+                            fileName = _SplitName[_SplitName.length-1]; 
+
+
+                            var file = fileName.split(".")[0]; //get the file's name we are trying to write
+                            var type  = fileName.split(".")[1]; //get its type
+                            var count = -1; //assume it will be #0
+                            for(currentFile in files){ currentFileName = files[currentFile]; //go over each file in the directory
+
+                                currentFileName = currentFileName.split("-"); 
+                                var currentNumberAndType = currentFileName.pop();
+                                var currentNumber = parseFloat(currentNumberAndType.split(".")[0]); //string manip to get number
+                                var currentType = currentNumberAndType.split(".")[1]; //get type
+                                currentFileName = currentFileName.join("-"); //get name
+
+                                if(file == currentFileName && type == currentType){ //if name and type match
+                                    if(currentNumber > count) { //store the highest number
+                                        count = currentNumber;
+                                    }
+                                }
+                            }
+
+                            count = count + 1; //one higher than the highest number
+                            //console.log(file + "-" + count + "." + type);
+                            fileName = file + "-" + count + "." + type; //note the file name
+
+                            updateDone(); //if both async actions are done, write to disk and report
+                        });
+
+                        function writeAndSend(){ //we have good names and data file. Write them and send the location to the server
+
+                            var path = "../" + config.database + "hostedFiles/" + fileName;
+                            fs.writeFile(path, data, function(){}) //save the file
+
+                            res.writeHead(200, "OK", {'Content-Type': 'text/plain'});
+                            res.write("/file/" + fileName); //tell the client the filename
+                            res.end();
+                        }
+                        
                     });
 
                     
@@ -95,29 +149,51 @@ exports.run = function(port) {
                     res.end();  
                 break;
 
-                default: //if its the placeholder page, send them the placeholder.html
+                default: //they don't want a special directory, 
                     var html = fs.readFileSync("../" + config.webClientLoc + uriPath.join("/") );
-
-                    if(uriPath[0].split(".")[0] == "placeholder"){
-                        var newPage = url.parse(req.url, true).query.newPage;
-                        jsdom.env({
-                                html: html, 
-                                scripts: ["http://code.jquery.com/jquery.js"], 
-                                done: function (errors, window) {
-                                    if(errors == null){
-                                        var $ = window.$;
-                                        $("#targetPage").html(newPage); //if they want the placeholder.html page, insert a link to the page it will lead to, so it can auto-open if needed.
-                                        var html = /*"<!DOCTYPE HTML>" +*/ $("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>",""); //remove the jquery dependancy dsdom injects
-                                        res.write(html);
-                                        res.end();
+                    switch(uriPath[0].split(".")[0]){
+                        case "placeholder":
+                            var newPage = url.parse(req.url, true).query.newPage;
+                            jsdom.env({
+                                    html: html, 
+                                    scripts: ["http://code.jquery.com/jquery.js"], 
+                                    done: function (errors, window) {
+                                        if(errors == null){
+                                            var $ = window.$;
+                                            $("#targetPage").attr(newPage); //if they want the placeholder.html page, insert a link to the page it will lead to, so it can auto-open if needed.
+                                            var html = /*"<!DOCTYPE HTML>" +*/ $("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>",""); //remove the jquery dependancy dsdom injects
+                                            res.write(html);
+                                            res.end();
+                                        }
                                     }
-                                }
-                        });
+                            });
+                        break;
+                        case "imageWrapper":
+                            
+                            var query = url.parse(req.url, true).query;
+                            jsdom.env({
+                                    html: html, 
+                                    scripts: ["http://code.jquery.com/jquery.js"], 
+                                    done: function (errors, window) {
+                                        if(errors == null){
+                                            window.$("#image").attr("src", query.image); 
+                                            window.$("#imageLink").attr("href", query.image); 
+                                            window.$("#imageLink").html(query.image); 
+                                            window.$("#hackpadScript").attr("src", query.pad + ".js"); 
+                                            var html = window.$("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>",""); //remove the jquery dependancy dsdom injects
+                                            res.write(html);
+                                            res.end();
+                                        }
+                                    }
+                            });
+
+                        break;
+
+                        default: //otherwise, send the exactly what they asked for.
+                            res.write(html);
+                            res.end(); 
+                        break;
                     }
-                    else { //otherwise, send the exactly what they asked for.
-                        res.write(html);
-                        res.end();  
-                    } 
                 break;
             }
 
@@ -228,24 +304,4 @@ function getAddresses(){    //askes the os nicely for the current ip address. Ca
     }
 
     return addresses; 
-}
-
-
-function postRequest(request, response, callback) {
-    var queryData = "";
-    if(typeof callback !== 'function') return null;
-
-    if(request.method == 'POST') {
-        request.on('data', function(data) {
-            queryData += data;
-        });
-
-        request.on('end', function() {
-            callback(queryData);
-        });
-
-    } else {
-        response.writeHead(405, {'Content-Type': 'text/plain'});
-        response.end();
-    }
 }

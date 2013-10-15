@@ -74,9 +74,12 @@ exports.run = function(staticServer){
     //all items "waiting to be added". A holding cell for network traffic while waiting on the DB.
     var waitingToAdd = []; //global. 
     function addItem(socket, list, item) {
+       
         //escape the message. This is what breaks certain urls. Also, keeps server from crashing on sqlite
         item.message = sql_escape(item.message);
         item.title = sql_escape(item.title) || undefined;
+ 
+       
 
         //check if entry already exists. If it does, move it to the top. Else, add the new item.
         if(!waitingToAdd.some(function(e,i){return (e.list == list && e.item == item.message)})){ //if waitingToAdd doesn't contain this item
@@ -107,14 +110,17 @@ exports.run = function(staticServer){
 
         //from here on, its another function. The "true" add function.
         function addNewItem(socket, list, item) {
+
             //detect and prevent user from posting list to itself. If "lists" in in the message and the next term matches var list, it will reject the whole shenangan.
-            var itemAsUrl = item.message.split("/");
+            var prequery = item.message.split("?")[0]; //only take things before the query (sometimes, the current list could be a parameter of the post, but not the target)
+            var itemAsUrl = prequery.split("/");
             if(itemAsUrl.length > 3){
                 var iii = itemAsUrl.indexOf("lists");
                 if(iii > -1){
                     var ii = iii + 1;
                     if(itemAsUrl.length >= ii){
                         if(list == itemAsUrl[ii].split("\n")[0]){
+                            console.log(item.message);
                             return false;
                         }
                     }
@@ -125,6 +131,8 @@ exports.run = function(staticServer){
             function addItemFromParams(user, title, icon) { //relies on closure to collect the item values like longitude, etc.
             
                 var time  = new Date().getTime(); //get the time.
+                
+
                 db.serialize(function() {
                     var query = "insert into items(createdOn, createdBy, latitude, longitude, url, title, thumbnail, listId, listIndex) values (" +
                                         time+","+
@@ -159,15 +167,12 @@ exports.run = function(staticServer){
                 jsdom.env(
                     url.parse(item.message.replace("\n", ""), true).href, [url.parse("http://code.jquery.com/jquery.js").href], //get the url and inject jquery.
                     function (errors, window) {
-                        var title = "" + item.message + ""; //set the title to the message
+                        var title = "" + item.title + ""; //set the title to the message
                         var icon = "about:blank";           //set the icon to blank
 
                         if(window != undefined){ if(window.$ != undefined){ if(window.$("title").html() != undefined) { //if here is an html body and jquery loaded correctly
-                            console.log(item.title);
                             if(!item.title || item.title == item.message){ //if there is not title, or the title is just the message...
-                                console.log(sql_escape(window.$("title").html()));
                                 title = sql_escape(window.$("title").html());
-                                console.log(title);
                             } else {
                                 title = item.title; //if there is a title, keep the title
                             }
@@ -184,7 +189,7 @@ exports.run = function(staticServer){
                     }
                 );
             }
-            catch(er){
+            catch(er){ 
                 var title = "" + item.message + ""; //error? Just use defaults
                 if(item.title){
                     title = item.title;
@@ -278,6 +283,17 @@ exports.run = function(staticServer){
                                 socket.emit('pageTask', {type:data.type, //tell the user it was created. Only tell the user who asked for it.
                                                             created:true,
                                                             pageName:data.pageName} );
+                                //add the starter two posts (about and qr code)
+
+                                var hackpadAddress = "https://sharedwindows.hackpad.com/about-" + data.pageName ;
+                                var qrAddress = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" + data.domainName.split("lists/")[0] + "lists/" + encodeURIComponent(data.pageName) ;
+                                allOverTown = qrAddress;
+                                serverAddItem(hackpadAddress, "About");
+                                serverAddItem(qrAddress, "QR Code");
+                                function serverAddItem(_msg, _title){
+                                    var item = {latitude: 0, longitude: 0, message: _msg, title: _title};
+                                    addItem(socket, data.pageName, item);
+                                }
                             });
                         });
                     });

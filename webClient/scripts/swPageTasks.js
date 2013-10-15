@@ -35,7 +35,8 @@ sw.page.create = function(pageName){ //the request to create
         sw.socket.emit('pageTask', { //request the page get made
                                         pageName: name,
                                         type: "create",
-                                        page: sw.listName
+                                        page: sw.listName,
+                                        domainName: window.location.href
                                     } );
 
         document.querySelector("#newPageName").classList.remove("invalidName"); //clean up.
@@ -55,7 +56,7 @@ sw.page.touch = function(pageName){//sends off the touch. triggered by keydown o
                                 } );
 }
 
-
+//open in new tab
 //this is the "pop out" item function. Don't know why its in here, but I guess it works. 
 sw.page.popOut = function(divToPop){
     var toPop = sw.helpers.getItemOfNode(divToPop).url; //popout as a web link
