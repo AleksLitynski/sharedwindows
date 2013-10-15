@@ -144,6 +144,13 @@ exports.run = function(port) {
                     
                 break;
                 case "file":    //Goes to the hostedFiles folder to return the file the user asked for
+                    if( uriPath.indexOf("qrCodes") > -1 && uriPath.indexOf("..") <= -1){
+                        uriPath.splice(0,1).join("/");
+                        var file = fs.readFileSync( "../" + config.database + "hostedFiles/" + uriPath.join("/") ); //http://129.21.142.18/file/testy.jpg
+                        res.write(file);
+                        res.end();  
+                        return;
+                    }
                     var file = fs.readFileSync( "../" + config.database + "hostedFiles/" + lastPathList.join(".") ); //http://129.21.142.18/file/testy.jpg
                     res.write(file);
                     res.end();  
@@ -169,8 +176,7 @@ exports.run = function(port) {
                             });
                         break;
                         case "imageWrapper":
-                            
-                            var query = url.parse(req.url, true).query;
+                            var query   = url.parse(req.url, true).query;
                             jsdom.env({
                                     html: html, 
                                     scripts: ["http://code.jquery.com/jquery.js"], 

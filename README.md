@@ -36,6 +36,7 @@ Careful! It's fragile!
 *  npm install socket.io
 *  npm install jsdom
 *  npm install multiparty
+*  npm install http-get
 
 <!--[  ]  npm install hackpad
     [  ]  npm install request-->

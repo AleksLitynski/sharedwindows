@@ -6,6 +6,7 @@ exports.run = function(staticServer){
     var jsdom   = require('jsdom');
     var jquery  = fs.readFileSync(path.resolve(__dirname, './jquery.js'), "utf-8"); //not used. Didn't work. Had to load from jquery.com
     var url     = require('url');
+    var httpGetter = require('http-get');
     
     var config  = JSON.parse(fs.readFileSync((path.resolve(__dirname, '../config.json')))); //config file
     var sqlite3 = new require('sqlite3').verbose(); //sqlite lite errors will be verbose or something
@@ -120,7 +121,6 @@ exports.run = function(staticServer){
                     var ii = iii + 1;
                     if(itemAsUrl.length >= ii){
                         if(list == itemAsUrl[ii].split("\n")[0]){
-                            console.log(item.message);
                             return false;
                         }
                     }
@@ -285,11 +285,24 @@ exports.run = function(staticServer){
                                                             pageName:data.pageName} );
                                 //add the starter two posts (about and qr code)
 
+                                //where the client thinks we are
+                                var host = socket.handshake.headers.referer.split("lists/")[0];
+                                //address of a hackpad for this page
                                 var hackpadAddress = "https://sharedwindows.hackpad.com/about-" + data.pageName ;
-                                var qrAddress = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" + data.domainName.split("lists/")[0] + "lists/" + encodeURIComponent(data.pageName) ;
-                                allOverTown = qrAddress;
-                                serverAddItem(hackpadAddress, "About");
-                                serverAddItem(qrAddress, "QR Code");
+                                //address of a page that has both of them on it. Has the qr code as a local link, even though it hasn't been downloaded yet. yolo
+                                var imageWrapperUrl = host + "/imageWrapper.html?pad=" + hackpadAddress + "&image=" + host + "file/qrCodes/" + data.pageName + ".png";
+                                
+                                //post the post
+                                serverAddItem(imageWrapperUrl, "About");
+
+
+                                //download the image to our local machine
+                                //address of qrCode for this page
+                                var qrAddress = "http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=" + host + "lists/" + data.pageName;
+                                httpGetter.get(qrAddress, '../' + config.database + "hostedFiles/qrCodes/"+data.pageName+".png", function (error, result) {});
+
+
+                                //function for posting
                                 function serverAddItem(_msg, _title){
                                     var item = {latitude: 0, longitude: 0, message: _msg, title: _title};
                                     addItem(socket, data.pageName, item);

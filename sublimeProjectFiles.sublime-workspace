@@ -51,32 +51,17 @@
 			"file": "server/nodeServer/index.js",
 			"settings":
 			{
-				"buffer_size": 20777,
+				"buffer_size": 21586,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "webClient/scripts/swPageTasks.js",
+			"file": "database/hostedFiles/qrCodes/hey.png",
 			"settings":
 			{
-				"buffer_size": 3143,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/css/newArea.css",
-			"settings":
-			{
-				"buffer_size": 1534,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "webClient/scripts/helpers.js",
-			"settings":
-			{
-				"buffer_size": 3931,
-				"line_ending": "Windows"
+				"buffer_size": 7,
+				"line_ending": "Windows",
+				"name": "hey.png"
 			}
 		},
 		{
@@ -84,6 +69,22 @@
 			"settings":
 			{
 				"buffer_size": 2375,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "webClient/scripts/postManipulation/swDragIn.js",
+			"settings":
+			{
+				"buffer_size": 3079,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "server/webServer/index.js",
+			"settings":
+			{
+				"buffer_size": 14727,
 				"line_ending": "Windows"
 			}
 		}
@@ -112,13 +113,17 @@
 	},
 	"file_history":
 	[
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/README.md",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/README.md",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swPageTasks.js",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swPreview.js",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/helpers.js",
+		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/newArea.css",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/webServer/index.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/index.html",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDragIn.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swPost.js",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/newArea.css",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/items.css",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/helpers.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/imageWrapper.html",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/nodeServer/index.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/placeholder.html",
@@ -127,7 +132,6 @@
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/libraries/dropzone.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swLoader.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/tests/expressjs/server.js",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/README.md",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/onePixel.png",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/tests/expressjs/index.html",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/server/testytesty.png",
@@ -141,8 +145,6 @@
 		"/C/Users/inv/Documents/GitHub/sharedwindows/sublimeProjectFiles.sublime-workspace",
 		"/C/Users/inv/Desktop/Shared Windows.xmind",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swResizePage.js",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swPageTasks.js",
-		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swPreview.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/swOptions.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/scripts/postManipulation/swDelete.js",
 		"/C/Users/inv/Documents/GitHub/sharedwindows/webClient/css/reset.css",
@@ -235,6 +237,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"hackpadAddress",
+			"lastPathList",
+			"allOverTown",
 			"console.log",
 			"conso",
 			"console.log",
@@ -368,7 +373,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -376,15 +381,15 @@
 					"file": "server/nodeServer/index.js",
 					"settings":
 					{
-						"buffer_size": 20777,
+						"buffer_size": 21586,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5439,
-								5439
+								17135,
+								17135
 							]
 						],
 						"settings":
@@ -393,98 +398,41 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 1101.0,
+						"translation.x": 100.0,
+						"translation.y": 3974.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "webClient/scripts/swPageTasks.js",
+					"file": "database/hostedFiles/qrCodes/hey.png",
 					"settings":
 					{
-						"buffer_size": 3143,
+						"buffer_size": 7,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2630,
-								2630
+								7,
+								7
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"auto_name": "hey.png",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "webClient/css/newArea.css",
-					"settings":
-					{
-						"buffer_size": 1534,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								937,
-								937
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 45.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "webClient/scripts/helpers.js",
-					"settings":
-					{
-						"buffer_size": 3931,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3154,
-								3154
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1305.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "webClient/scripts/swPreview.js",
 					"settings":
 					{
@@ -495,8 +443,8 @@
 						"selection":
 						[
 							[
-								1885,
-								1885
+								0,
+								0
 							]
 						],
 						"settings":
@@ -507,6 +455,62 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "webClient/scripts/postManipulation/swDragIn.js",
+					"settings":
+					{
+						"buffer_size": 3079,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2402,
+								2876
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 990.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "server/webServer/index.js",
+					"settings":
+					{
+						"buffer_size": 14727,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7634,
+								7634
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1829.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -570,6 +574,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 316.0,
+	"side_bar_width": 214.0,
 	"status_bar_visible": true
 }
