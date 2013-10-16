@@ -23,6 +23,8 @@ sw.onloadEarly.push(function(){
         sw.listName = "global";
     }
     
+    document.querySelector("#pageName").innerHTML = "<span style='z-index:1000;'><span style='font-weight:bold;'>"+sw.listName +"</span>:" + document.URL +"</span>";
+
     //set the name of the "page name" bar
     //document.querySelector("#pageName").value = window.location;
 
@@ -50,16 +52,10 @@ sw.onloadEarly.push(function(){
 
     //set background color based on list name
     var color = stringToColour(sw.listName);
-    document.querySelector("#page").style.backgroundColor = color;
-    document.querySelector("#pageNameBox").style.backgroundColor = color;
-    //document.querySelector("#postLink").style.backgroundColor = color;
-    /*console.log(color, color.substring(1,3));
-    document.querySelector("#pageName").style.backgroundColor = color;//"lightgrey";*/
+    //document.querySelector("#page").style.backgroundColor = "rgba(0,0,0,1)";
+    //document.querySelector("#pageNameBox").style.backgroundColor = "rgba(0,0,0,1)";
 
     //keeps 
-    function setPageHeight(){
-        document.querySelector("#page").style.height = window.innerHeight - document.querySelector("#pageNameBox").clientHeight - document.querySelector("#optionsBar").clientHeight + "px";
-    };
     function isiPhone(){
         return (
             //Detect iPhone
@@ -71,9 +67,9 @@ sw.onloadEarly.push(function(){
         );
     }
     if(!isiPhone()){
-        window.addEventListener("resize", setPageHeight);
+        window.addEventListener("resize", sw.setPageHeight);
     }
-    setPageHeight();
+    sw.setPageHeight();
 
 
     //set alert on disconnect
@@ -94,6 +90,11 @@ sw.onloadEarly.push(function(){
     }count();
 
 })
+
+sw.setPageHeight = function(){
+    document.querySelector("#page").style.height = window.innerHeight - document.querySelector("#pageNameBox").clientHeight /*- document.querySelector("#optionsBar").clientHeight*/ + "px";
+
+};
 
 
 //hash any string into a CSS valid color

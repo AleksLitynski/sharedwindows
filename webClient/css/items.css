@@ -10,21 +10,26 @@
     margin:0px;
     height:30px;
 
-    padding-top:0px;
-    padding-bottom:0px;
-
-    padding-left:1px;
-    padding-right:1px;
-        
     white-space: nowrap;
     overflow: hidden;
-        
+
+    margin:3px;
+    border-radius:5px;
+    border: 1px solid grey;
+
     
 }
 
 /* Puts a drop shadow on the postInfo. Post info is the area inside the box with the title and message, and favicon */
 .selectedMessage .postInfo {
-    box-shadow: inset 0 0 25px rgba(0, 100, 255, 1);
+    /*box-shadow: inset 0px 0px 20px rgba(0,20,30,0.4);*/
+    background-color: rgba(150,170,250,1);
+}
+.selectedMessage {
+    box-shadow: 0px 0px 20px rgba(50,70,150,1);
+
+    /*margin-right:-5px;
+    z-index:10;*/
 }
 
 
@@ -51,7 +56,7 @@
 
 /* When you hover, show the grip texture*/
 .message:hover .dragHandle{
-     
+
     background-image: url("images/grip.png");
     background-repeat: repeat;
     background-size: 50% 100%;
@@ -109,40 +114,69 @@
 
 /*The favicon preview we load. */
 .previewIcon{
-    width:20px;
-    height:20px;
+    width:23px;
+    height:23px;
 
-    padding-left:5px;
-    padding-top:5px;
+    margin-left:2px;
+    margin-top:2px;
 
-    /*margin-left:-16px;*/
     float:left;
+
+    border-radius:100px;
+    border:1px solid black;
+    background-color:white;
+
 
 }
 /*A box around previewIcon. Only god knows why I needed it. */
 .iconBox{
     float:left;
     width:33px;
+
+    border-right:1px dotted grey;
+    margin-right:5px;
+    height:125%;
+
 }
 /*The button to delete an item. Called closeBtn for some reason.*/
 .closeBtn{
-    float:right;
+    background-image:url(images/x2.png); 
+    background-size: 15px;
+    height:25px;
+    width:25px;
 }
 /* The button used to pop out the link. Left of closeBtn */
 .popOutBtn{
-
-    float:right;
-    background-image:url("images/popOut.png");
-    background-repeat: no-repeat;
-    background-size: 100%;
-
-    width:15px;
-    height:15px;
-
-    margin-left:5px;
-    margin-top:5px;
-    cursor:pointer;
+    background-image:url(images/bopOut.png);
+    background-size: 10px;
+    height:23px;
+    width:23px;
 }
+.closeBtn:active, .popOutBtn:active{
+    box-shadow: inset 0px 0px 30px black, 0px 0px 30px black;
+}
+.closeBtn:hover, .popOutBtn:hover{
+    background-color:grey;
+}
+
+.popOutBtn, .closeBtn{
+    float:right;
+    background-color:white;
+    background-repeat: no-repeat;
+    background-position:center;
+    border-radius:100px;
+
+
+    border:1px solid black;
+    cursor:pointer;
+
+    padding:0px;
+
+    margin-top:2px;
+    margin-right:2px;
+    margin-left:2px;
+}
+
 
 /* This allows users to select the text in a div. Probablly used as a toggle somewhere. Forgot where */
 .selectable {

@@ -58,6 +58,7 @@ sw.page.touch = function(pageName){//sends off the touch. triggered by keydown o
 
 //open in new tab
 //this is the "pop out" item function. Don't know why its in here, but I guess it works. 
+//IT IS NOW UNUSED> THE FUNCTION BELOW IS USED
 sw.page.popOut = function(divToPop){
     var toPop = sw.helpers.getItemOfNode(divToPop).url; //popout as a web link
     if(!(toPop.substr(0, 7) == "http://" || toPop.substr(0, 8) == "https://")){
@@ -69,4 +70,14 @@ sw.page.popOut = function(divToPop){
     win.focus();
 
 
+}
+
+
+sw.page.getPopOutLink = function(message){
+    var toPop = message;
+    if(!(toPop.substr(0, 7) == "http://" || toPop.substr(0, 8) == "https://")){
+        toPop = sw.helpers.getHPAddress(toPop); //pop out as a hackpad
+    }
+    
+    return toPop;
 }

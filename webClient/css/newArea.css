@@ -7,8 +7,8 @@
 
 #postBox{ /* The box you type the page name into*/
     float:left;
-    height:27px;
-    width: calc(100% - 100px);
+    height:29px;
+    width: calc(100% - 132px);
 
     border:0px;
     border-radius:5px;
@@ -17,16 +17,21 @@
     padding-right:10px;
 
 
-    margin-top:2px;
-    margin-left:2px;
+    margin-top:1px;
+    margin-left:1px;
+    margin-right:1px;
 
 
     overflow:hidden;
+
+    border:1px solid grey;
+
 }
 
 /*http://www.shauninman.com/archive/2007/09/10/styling_file_inputs_with_css_and_the_dom*/
 label.cabinet
 {
+    float:left;
     width: 86px;
     height: 21px;
     display: block;
@@ -44,8 +49,6 @@ label.cabinet
 
     margin:0 auto;
     margin-top:1px;
-
-
 }
 label.cabinet:active{
     box-shadow: inset 0px 0px 100px #001040 !important;
@@ -67,14 +70,17 @@ label.cabinet input[type="file"]
 
 
 #pageNameBox{/*Box around the box you post new items from*/
-    height:31px;
-    width:calc(100% - 32px); /* Leaves room for the extendedDragHandle. Not nessessary, except the iphone was messing up the z-index.*/
+    height:33px;
+    width:calc(100%); /* Leaves room for the extendedDragHandle. Not nessessary, except the iphone was messing up the z-index.*/
     
     margin:1px;
-    background-color:black;
+    background-color:rgba(0,0,0,0);
 
     box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.5);
 
     -webkit-align-self: flex-start; /*Comes at the start of the flex box.*/
+
+    padding-bottom:3px;
+
 
 }

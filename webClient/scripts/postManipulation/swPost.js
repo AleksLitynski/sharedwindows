@@ -39,7 +39,6 @@ sw.onload.push(function(){
 
 
 sw.post.addItem = function(list, item){ //add an item to the sw.post.items array. Sort the array afterwards.
-    document.querySelector("#postBox").style.backgroundColor = "white"; //unset the background color that told people something was happening
 
     sw.post.items[list].push(item); //adds the item
     sw.post.items[list].sort(function (a, b) { //sorts
@@ -66,7 +65,7 @@ sw.post.addItem = function(list, item){ //add an item to the sw.post.items array
 }
 
 sw.post.display = function(nodeName) {  //rebuilds the whole list inside "#page" every time it is called. Way to expensive. In need of fixing up.
-
+    document.querySelector("#postBox").style.backgroundColor = "white"; //unset the background color that told people something was happening
     sw.drag.endEarly();//if anything is being dragged, just drop it. Not the best solution, but it prevents grivious errors
 
     var nodes = sw.helpers.getNodesOfList(nodeName); //the node the items should be attached to
@@ -101,12 +100,19 @@ sw.post.display = function(nodeName) {  //rebuilds the whole list inside "#page"
             if( thumbnail == "about:blank"){
                 thumbnail = "/sFavicon.PNG";
             }
+
+            //if its a list, use the list icon
+            if(toDisplay[i].url.split("lists").length > 1){
+
+                thumbnail = "/favicon.ico";
+            }
+
             //build the new body
             newBody+=   "<div class='message"+selected+"'onclick='sw.index.itemClicked(this)' title='"+toDisplay[i].title+"\n"+toDisplay[i].url+"' >"
                     +       "<div class='dragHandle"+handleTouch+"' draggable='true'></div>"
                     +       "<div class='postInfo'>"
-                    +           "<button class='closeBtn' onclick='sw.delete.requestDelete(this)'>X</button>"
-                    +           "<div class='popOutBtn' onclick='sw.page.popOut(this)'></div>" 
+                    +           "<button class='closeBtn' onclick='sw.delete.requestDelete(this)'></button>"
+                    +           "<a href='"+sw.page.getPopOutLink(toDisplay[i].url)+"'><div class='popOutBtn'></div></a>" 
                     +           "<div class='iconBox'>"
                     +               "<image class='previewIcon' src='"+thumbnail+"'></image>"
                     +           "</div>"

@@ -20,7 +20,7 @@
     -webkit-overflow-scrolling: touch
     
     
-    background-color:lightgrey;
+    background-color: lightgrey;
 }
 
 #preview{ /* The iframe on the right */
@@ -41,19 +41,31 @@
 
 
 body{ /*Sets the background. Couldn't get the font to set, I think.*/
-    font-family: sans-serif;
+    font-family: Georgia, sans-serif !important;
+    font-size:15px !important;
     overflow:hidden;
-    background-color: #FDFFE7;
-    background-image: url(bkgs/sandpaper.jpg); /*url(bkgs/sandpaper.jpg);*/
-    background-size:150px 150px;
 }
+#backgroundImage{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    z-index:-5000;
+    width:100%;
+    height:100%;
+    background-image: url(bkgs/sandpaper.jpg); /*url(bkgs/sandpaper.jpg);*/
+    -webkit-filter:  blur(1px);
+    background-size:150px 150px;
+    
 
+}
 
 .invalidName{ /* Changes the color to tell the user if the list name they have entered is valid or not.*/
     background-color:rgba(255,100,0,0.5);
 }
 .validName{
-    background-color:rgba(0,255,0,0.5)
+    background-color:rgba(0,255,0,0.5);
 }
 
 .handle{ /*The hand to drag the width of the left/right divide*/
@@ -77,6 +89,7 @@ body{ /*Sets the background. Couldn't get the font to set, I think.*/
 
     box-shadow: -2px 0px 3px 0px rgba(0, 0, 0, 0.5);
     z-index:10;
+    margin-top:90vh;
 }
 
 .activeDrag { /* Toggle to show if the drag handle is in use. Helpful on old, laggy machines. */
@@ -92,4 +105,9 @@ body{ /*Sets the background. Couldn't get the font to set, I think.*/
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+#pageName{
+    margin:0 auto;
+    size:50px;
 }

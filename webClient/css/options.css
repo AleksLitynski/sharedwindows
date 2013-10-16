@@ -7,14 +7,13 @@
 }
 
 #optionsBar{
-    min-height:200px; /*! important. Keeps it from shrinking off the page.*/
-    /*min-width:150px;
-    z-index:-5;*/
+    height:25px; /*! important. Keeps it from shrinking off the page.*/
+    overflow:hidden;
 
     background-color:white;
     
 
-    box-shadow: 0px -2px 1px 1px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0px -2px 1px 1px rgba(0, 0, 0, 0.5);*/
 
     /*-webkit-align-self: flex-end;*/
 
@@ -33,8 +32,166 @@ h2{
 
 
 #newPageName, .listFeedback{
-    width:100%;
+    max-width:100%;
 }
+
+
+
 .listFeedback{
     background-color: lightgrey;
 }
+
+.recentLists{
+    /*background-color:lightgrey;
+    border:1px dotted grey;*/
+}
+
+.openOptions{
+    height:75px !important;
+    -webkit-animation: openOpts 0.3s; /* Safari and Chrome */
+
+    margin-top:5px;
+
+    box-shadow: inset 0px -2px 2px lightgrey, inset 0px 2px 2px lightgrey;
+}
+.closeOptions{
+    height:0px !important;
+    -webkit-animation: closeOpts 0.3s; /* Safari and Chrome */
+
+    box-shadow: inset 0px -2px 2px lightgrey, inset 0px 2px 2px lightgrey;
+}
+
+@-webkit-keyframes openOpts /* Safari and Chrome */
+{
+    from {height: 0px;
+    margin-top:0px;}
+    to {height: 75px;
+    margin-top:5px;}
+}
+
+@-webkit-keyframes closeOpts /* Safari and Chrome */
+{
+    from {height: 75px;
+    margin-top:5px;}
+    to {height: 0px;
+    margin-top:0px;}
+}
+
+.toggleOptionsBtn{
+    float:left;
+    width:30px;
+    height:29px;
+    overflow:hidden;
+    background-image:url(images/gear.png);
+
+    background-color: white;/*rgba(255,255,255,0);*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:90%;
+    border:1px solid grey;
+
+    cursor:pointer;
+
+    border-radius:5px;
+
+    margin-left:2px;
+    margin-top:1px;
+}
+.toggleOptionsBtn:hover{
+    box-shadow: inset 0px 0px 3px #001040;
+}
+.toggleOptionsBtn:active{
+    box-shadow: inset 0px 0px 10px #001040 !important;
+}
+
+
+#createNewCanvasBtn{
+    float:right;
+    width: 127px;
+    height: 29px;
+    display: block;
+    overflow: hidden;
+
+
+    border:1px solid grey;
+    padding:3px;
+    border-radius:3px;
+    border-radius:5px;
+
+    margin-top:1px;
+    margin-right:2px;
+}
+#createNewCanvasBtn:hover{
+    box-shadow: inset 0px 0px 3px #001040;
+}
+#createNewCanvasBtn:active{
+    box-shadow: inset 0px 0px 30px #001040;
+}
+
+#newPageName{
+    float:left;
+    height:29px;
+    width: calc(100% - 132px);
+
+    border:0px;
+    border-radius:5px;
+
+    padding-left:5px;
+    padding-right:10px;
+
+
+    margin-top:1px;
+    margin-left:1px;
+    margin-right:1px;
+
+    overflow:hidden;
+
+    border:1px solid grey;
+
+
+
+
+}
+
+
+
+#postOptionsBar{
+    background-color:white;
+    overflow:hidden;
+}
+
+#cancelPost{
+    float:right;
+}
+
+#cancelPost:active{
+    box-shadow: inset 0px 0px 30px black, 0px 0px 30px black;
+}
+#cancelPost:hover{
+    background-color:grey;
+}
+
+
+/*
+input[type="button"]{
+    float:right;
+    width: 127px;
+    height: 29px;
+    display: block;
+    overflow: hidden;
+
+
+    border:1px solid grey;
+    padding:3px;
+    border-radius:3px;
+    border-radius:5px;
+
+    margin-top:1px;
+    margin-right:2px;
+}
+input[type="button"]:hover{
+    box-shadow: inset 0px 0px 3px #001040;
+}
+input[type="button"]:active{
+    box-shadow: inset 0px 0px 30px #001040;
+}*/

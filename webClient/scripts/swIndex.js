@@ -63,6 +63,12 @@ sw.index.moveItem = function(page, from, to){
 
 
     if((from - 1) >= 0 && sw.post.items[page]){ //shift all between by one and jump the main item to its new place
+
+        console.log(sw.index.current[page]);
+         sw.index.current[page] = sw.index.current[page] == 0 ? 1 : sw.index.current[page];
+        sw.index.current[page] = sw.index.current[page] > sw.post.items[page].length ? sw.post.items[page].length : sw.index.current[page];
+        
+
         var oldUrl = sw.post.items[page][ sw.index.current[page]-1 ].url;
 
         var toMoveId = sw.post.items[page][from - 1].id;

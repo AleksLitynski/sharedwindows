@@ -142,6 +142,7 @@ sw.drag.end = function() {//when the drag is over
         
         sw.socket.emit('moveItem', { currentIndex: from, newIndex: to, page: sw.helpers.getListOfNode(node) }); //send the message with the directions for where to move it, move it
         
+        
         sw.drag.currentDragged = undefined;
 
     }

@@ -167,7 +167,8 @@ exports.run = function(port) {
                                     done: function (errors, window) {
                                         if(errors == null){
                                             var $ = window.$;
-                                            $("#targetPage").attr(newPage); //if they want the placeholder.html page, insert a link to the page it will lead to, so it can auto-open if needed.
+                                            console.log(newPage);
+                                            $("#targetPage").html(newPage); //if they want the placeholder.html page, insert a link to the page it will lead to, so it can auto-open if needed.
                                             var html = /*"<!DOCTYPE HTML>" +*/ $("html").html().replace("<script class=\"jsdom\" src=\"http://code.jquery.com/jquery.js\"></script>",""); //remove the jquery dependancy dsdom injects
                                             res.write(html);
                                             res.end();

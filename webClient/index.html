@@ -17,7 +17,7 @@
 
     </head>
 	
-	<body>
+	<body><div id="backgroundImage"></div>
 
         
         <div id="controlPanel">
@@ -25,34 +25,58 @@
             <!--div id="uploading" style="position:absolute; top:50px;left:50px; width:50px; height:50px; background-color:red; display:none;">.</div-->
 
             <!--script src="https://sharedwindows.hackpad.com/temp.js"></script><noscript><div>View <a href="https://sharedwindows.hackpad.com/temp">temp</a> on Hackpad.</div></noscript-->
-            
+            <div id="pageName" onclick="Javscript: this.hidden=true;"></div>
+
             <div id="pageNameBox">
-                <input id="postBox" onclick="Javascript: this.focus(); this.select();" placeholder="http://your_URL_here or drop files below"></input>
+
+
+                <input id="postBox" onclick="Javascript: this.focus(); this.select();" placeholder="URL or Message"></input>
+                <input id="newPageName" placeholder="New List Name"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()" style="display:none"></input>
+
+
                 <label class="cabinet">
                     <input id="uploadFile" type="file"></input>
                 </label>
+                <button class="toggleOptionsBtn"></button>
+            </div>
+            
+            
+            <div id="optionsBar" class="closeOptions">
+                
+                <input type='button' id="cancelOptions" class="closeBtn"></input>
+
+                <div style="float:left;">
+                    <div><input type="checkbox" id="followTheLeader" value="Follow the leader?" >Follow Others</input></div>
+
+                    <!--HIDDEN ELEMENTS ARE STILL REFERENCED BY THE CODE. DO NOT REMOVE UNTIL YOU UPDATE THE JAVASCRIPT-->
+                    <!--div>Range: <input type="range" title="Caution: This slider does nothing!!"></input> (does nothing)</div-->
+                    <input type="checkbox" id="jumpToCurrent" value="Always load most recent?"> Load most recent</input>
+                    <input placeholder="New List link will appear here" id="listFeedback" readonly="readonly" onclick="Javascript: this.focus(); this.select();" class="listFeedback" hidden></input>
+                </div>
+
+                <div style="float:right">
+                    <div><a href="/lists/recent" class="recentLists">Recent Lists</a></div>
+                    <div><a href="/lists/global" class="recentLists">Global List</a></div>
+                </div>
+            </div>
+
+            <div id="postOptionsBar" class="closeOptions">
+
+
+                <input type='button' id="cancelPost" class="closeBtn"></input>
+                <button onclick="sw.page.create()" id="createNewCanvasBtn" style="display:none;">Create</button>
+
+
+                <div><input type="checkbox" id="postAsList" value="Post as list?">Post as List?</input></div>
+                <div><input type="checkbox" id="postToChildren" value="Post to childen instead?">Post to Childen?</input></div>
+                <div><input type="checkbox" id="postToCurrent" value="post to current?" checked="checked" hidden> <!--post new list to current list?--></input></div>
+
+
+
+                
             </div>
             
             <div id="page"></div>
-            
-            <div id="optionsBar">
-                <h2>Create A New List:</h2>
-                <input id="newPageName" placeholder="Type New List Name Here"  onkeydown="Javascript: if (event.keyCode==13) sw.page.create()" oninput="Javascript: sw.page.touch()"></input></br>
-                               
-                <input placeholder="New List link will appear here" id="listFeedback" readonly="readonly" onclick="Javascript: this.focus(); this.select();" class="listFeedback"></input>
-
-                <input type="checkbox" id="postToCurrent" value="post to current?" checked="checked"> post new list to current list?</input>
-                <button onclick="sw.page.create()" id="createNewCanvasBtn">Create List</button><div>-----</div>
-
-                <input type="checkbox" id="followTheLeader" value="Follow the leader?" checked>Follow other participants?</input> </br>
-                <input type="checkbox" id="jumpToCurrent" value="Always load most recent?" checked>Always load most recent?</input> </br>
-                <input type="checkbox" id="postToChildren" value="Post to childen instead?">Post to childen instead?</input> </br>
-
-                <div>Range: <input type="range" title="Caution: This slider does nothing!!"></input> (does nothing)</div>
-
-                <a href="/lists/recent">>>>Recent Lists</a>
-            </div>
-            
             
         </div>
         
