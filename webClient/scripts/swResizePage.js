@@ -60,17 +60,11 @@ sw.onload.push(function(){
 
 
 sw.resizePage.updateFold = function(x){ //moves the left and right sides of the fold. Can't off the left side, can go off the right side.
-	if(x < 16.5){x = 16.5;}
-	/*if(x < 0) {x = 1;}
-	if(x > window.innerWidth) {
-		x = window.innerWidth - 10; 
-		if(x < screen.width) {
-			x = window.innerWidth - 10;
-		}
-		document.querySelector("#controlPanel").style.width = x + "px";
-		document.querySelector("#preview").style.left = (x + 3) + "px";}*/
-
+	
 	if(sw.resizePage.isDragging){ //only resize if its actually being dragged
+
+		if(x < 16.5){x = 16.5;}
+
 		document.querySelector("#controlPanel").style.width = x + "px";
 		document.querySelector("#previewPane").style.left = (x + 3) + "px";
 	}

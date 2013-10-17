@@ -266,6 +266,8 @@ exports.run = function(staticServer){
 
     //this bundles two opperations into a single socket action.
     function pageTask(socket, data) {
+        data.pageName = data.pageName.replace(/ /g, "_");//replace all spaces with underscores
+
         if(data.type == "touch") {  //touch means "touch the name", check if it is going to be a valid name, but don't do anything with it.
             isNameSafe(data.pageName, function(isSafe){ 
                         socket.emit('pageTask', {type: data.type,
@@ -293,7 +295,7 @@ exports.run = function(staticServer){
                                 var imageWrapperUrl = host + "/imageWrapper.html?pad=" + hackpadAddress + "&image=" + host + "file/qrCodes/" + data.pageName + ".png";
                                 
                                 //post the post
-                                serverAddItem(imageWrapperUrl, "About");
+                                serverAddItem(imageWrapperUrl, "About " + data.pageName);
 
 
                                 //download the image to our local machine
@@ -320,7 +322,7 @@ exports.run = function(staticServer){
 
     //the callback is pass a string "safe" or "unsafe". Is the transaction safe?
     function isNameSafe(name, callback) {
-        if(  /^[a-z0-9]+$/i.test( name ) ){ //make sure it has valid characters
+        if(  /^[a-z0-9_!~-]+$/i.test( name ) ){ //make sure it has valid characters
             db.serialize(function() {
                 db.all("select * from lists where name = '" + name + "';", function(err, databaseReply){ //make sure it doesn't already exist
                     var replyData = "safe";

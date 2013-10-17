@@ -10,6 +10,8 @@ sw.drag.dragTo.previous = 0; //when done dragging, so I store the previous eleme
 sw.drag.startedDrag = 0;
 sw.drag.currentDragged = undefined;
 
+sw.drag.currentDragWidth = 0;
+
 sw.onload.push(function(){ //add a few listeners
 
     sw.drag.addDragSupport( document.querySelector("#page") ); //it was possable to add drag support to other divs (child elements)
@@ -33,15 +35,15 @@ sw.drag.addDragSupport = function(toSupport){ //add a few listeners to whatever 
 sw.drag.draggyMoved = function(event){ //the function that is called when an element may be being dragged
 
 
-    if(event.touches && event.touches.length >= 1){ //use the first touch as the "correct" touch
-        
-        event.x = event.touches[0].clientX;
-        event.y = event.touches[0].clientY;
-    }
+    
 
     if(event.y != sw.drag.currentY && sw.drag.currentDragged && event.srcElement.classList.contains("dragHandle")){// if it has moved and if its really being dragged (as opposed to the mouse just moving)
    
-        if(event.touches && event.touches.length >= 1){ //stop event bubbing if its a touch event, otherwise you drag the page around when you want to drag the element around
+
+        if(event.touches && event.touches.length >= 1){ //use the first touch as the "correct" touch //stop event bubbing if its a touch event, otherwise you drag the page around when you want to drag the element around
+        
+            event.x = event.touches[0].clientX;
+            event.y = event.touches[0].clientY;
             event.stopPropagation();
             event.preventDefault();
         }
@@ -49,8 +51,8 @@ sw.drag.draggyMoved = function(event){ //the function that is called when an ele
         placeholder.style.left = event.x + "px"; //move the place holder to the mouse position
         placeholder.style.top = event.y + "px";
 
-        placeholder.style.width = (sw.drag.currentDragged.offsetWidth) + "px"; //set the placeholder's width to the width of the main element
-        
+        console.log(placeholder.style.height);
+
 
         var children = sw.helpers.getNodeOfNode(event.srcElement).parentElement.children;
         for(var i = 0; i < children.length; i++) {
@@ -104,10 +106,14 @@ sw.drag.start = function(node, e) {//when you start dragging, be it touch or mou
     placeholder.innerHTML = node.innerHTML;
     placeholder.ondrag = placeholder.ondragstart = placeholder.ondragend = placeholder.onclick = placeholder.ontouchstart = placeholder.ontouchend = placeholder.ontouchmove = function(){};
     placeholder.classList.add("draggedMessage"); //make it look like its being dragged
+    
+    placeholder.style.height = (sw.drag.currentDragged.offsetHeight) + "px"; //set the placeholder's width to the width of the main element
+
+    placeholder.style.width = (sw.drag.currentDragged.offsetWidth) + "px"; //set the placeholder's width to the width of the main element
 
     
-    node.classList.add("draggedMessage");//I think this is for signaling, not style.
-    node.style.opacity = 0; //hide it
+    node.classList.add("draggedMessage");//Used for signaling, also used to set it invisable
+    node.style.opacity = 0;
 
     if(e.x && e.y){ //if we know where the drag started...
         var newE = {};

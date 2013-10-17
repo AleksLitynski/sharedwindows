@@ -13,11 +13,25 @@
     white-space: nowrap;
     overflow: hidden;
 
-    margin:3px;
-    border-radius:5px;
-    border: 1px solid grey;
+    /*margin:3px;*/
+    /*border-radius:5px;*/
 
-    
+    border-top: 1px solid grey;
+
+
+    padding-bottom:9px;
+}
+
+/*Post info is the area inside the box with the title and message, and favicon */
+.postInfo{
+    background-color:white;
+    width:auto;
+    height:30px;
+
+    padding-bottom:9px;
+    padding-top:5px;
+
+    /*padding:5px;*/
 }
 
 /* Puts a drop shadow on the postInfo. Post info is the area inside the box with the title and message, and favicon */
@@ -25,8 +39,10 @@
     /*box-shadow: inset 0px 0px 20px rgba(0,20,30,0.4);*/
     background-color: rgba(150,170,250,1);
 }
+
+
 .selectedMessage {
-    box-shadow: 0px 0px 20px rgba(50,70,150,1);
+    /*box-shadow: 0px 0px 20px rgba(50,70,150,1);*/
 
     /*margin-right:-5px;
     z-index:10;*/
@@ -40,13 +56,12 @@
 
     
 
-    height:100%;
-    width:16px;
-    width:32px;
+    height:40px;
+    width:40px;
 
 
     /*These two lines force the handle on top of the image*/
-    margin-right:-30px;
+    margin-right:-35px;
     position:relative;
     z-index:1 !important;
 
@@ -54,19 +69,14 @@
 }
 
 
-/* When you hover, show the grip texture*/
-.message:hover .dragHandle{
+/* When you hover, show the grip texture*/  /* This is added when on a touch screen so it always shows the handle. I could just attach it to the above block with a comma, but I didn't*/
+.message:hover .dragHandle, .touchHandle{
 
     background-image: url("images/grip.png");
     background-repeat: repeat;
-    background-size: 50% 100%;
+    /*background-size: 25% 80%;*/
 
 
-}
-.touchHandle{ /* This is added when on a touch screen so it always shows the handle. I could just attach it to the above block with a comma, but I didn't*/
-    background-image: url("images/grip.png");
-    background-repeat: repeat;
-    background-size: 50% 100%;
 }
 
 
@@ -104,13 +114,7 @@
 /* Only relevent when trees are enabled */
 .listMessageClosed{}
 
-/*Post info is the area inside the box with the title and message, and favicon */
-.postInfo{
-    background-color:white;
-    width:auto;
-    height:25px;
-    padding-bottom:5px;
-}
+
 
 /*The favicon preview we load. */
 .previewIcon{
@@ -135,7 +139,7 @@
 
     border-right:1px dotted grey;
     margin-right:5px;
-    height:125%;
+    height:100%;
 
 }
 /*The button to delete an item. Called closeBtn for some reason.*/
@@ -187,3 +191,6 @@
     user-select: text;
 }
 
+.draggedMessage{
+    border: 1px solid grey;
+}

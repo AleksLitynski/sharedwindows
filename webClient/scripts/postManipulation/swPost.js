@@ -65,6 +65,9 @@ sw.post.addItem = function(list, item){ //add an item to the sw.post.items array
 }
 
 sw.post.display = function(nodeName) {  //rebuilds the whole list inside "#page" every time it is called. Way to expensive. In need of fixing up.
+
+    console.log("redraw called on " + sw.listName);
+
     document.querySelector("#postBox").style.backgroundColor = "white"; //unset the background color that told people something was happening
     sw.drag.endEarly();//if anything is being dragged, just drop it. Not the best solution, but it prevents grivious errors
 

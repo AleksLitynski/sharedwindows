@@ -16,7 +16,7 @@ document.querySelector(".toggleOptionsBtn").onclick = function(){
 	}
 
 
-	sw.setPageHeight();
+	//sw.setPageHeight();
 }
 
 

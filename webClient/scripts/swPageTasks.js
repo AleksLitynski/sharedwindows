@@ -18,7 +18,13 @@ sw.onload.push(function(){
                 document.querySelector("#newPageName").classList.remove("validName");
                 sw.page.lastWasValid = false;
             }
-        } 
+        }  else {
+
+            if(document.querySelector("#postToCurrent").checked){ //post the name based on what the server says it ended up naming it
+                sw.post.send("http://" + window.location.host + "/lists/" + data.pageName, data.pageName); //post back to current page, or to child pages, based on post.send function.
+            }
+
+        }
     });
 
 
@@ -27,10 +33,7 @@ sw.onload.push(function(){
 sw.page.create = function(pageName){ //the request to create
     if(sw.page.lastWasValid){
         var msg = "http://" + window.location.host + "/lists/" + document.querySelector("#newPageName").value; //put the name together from a few facts
-        console.log(document.querySelector("#postToCurrent").checked);
-        if(document.querySelector("#postToCurrent").checked){
-            sw.post.send(msg, document.querySelector("#newPageName").value); //post back to current page, or to child pages, based on post.send function.
-        }
+        
         var name = document.querySelector("#newPageName").value; 
         sw.socket.emit('pageTask', { //request the page get made
                                         pageName: name,
@@ -49,6 +52,7 @@ sw.page.create = function(pageName){ //the request to create
 }
 
 sw.page.touch = function(pageName){//sends off the touch. triggered by keydown on entry box. "#newPageName" page
+    //document.querySelector("#newPageName").value = encodeURIComponent(document.querySelector("#newPageName").value);
     sw.socket.emit('pageTask', {
                                     pageName: document.querySelector("#newPageName").value,
                                     type: "touch",
